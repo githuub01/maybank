@@ -1,0 +1,46 @@
+(select 'TOTALUSERS' as name, cast(count(*) as char(20)) as value from LSW_USR_XREF)
+UNION(select 'ACTIVEPCUSERS' as name, cast(count(distinct LUX.USER_ID) as char(20)) as value from lsw_snapshot ls, LSW_USR_XREF lux where LS.LAST_MODIFIED_BY_USER_ID = LUX.USER_ID and LS.LAST_MODIFIED > TRUNC(CURRENT TIMESTAMP) and LS.LAST_MODIFIED < TRUNC(CURRENT TIMESTAMP+1 DAY))
+UNION(select 'ACTIVEPORTALUSERS' as name, cast(count(distinct USER_ID) as char(20)) as value from BPM_USR_RUNTIME_PROPS where ONLINE_STATUS = 'T')
+UNION(select 'ACTIVEBPDS' as name, cast(count(distinct bpd_instance_id) as char(20)) as value from LSW_BPD_INSTANCE where execution_status = 1)
+UNION(select 'ACTIVETASKS' as name, cast(count(distinct task_id) as char(20)) as value from LSW_TASK where status = 12  and activity_task_type = 1 and execution_status = 3) 
+UNION(select 'ACTIVEACTIVITIES' as name, cast(count(distinct task_id) as char(20)) as value from LSW_TASK where execution_status = 3 and activity_task_type != 1)
+
+
+--------------------
+
+select 'TOTALUSERS' as name, count(*) as value from LSW_USR_XREF
+UNION
+select 'ACTIVEPCUSERS' as name, count(distinct LUX.USER_ID) as value from lsw_snapshot ls, LSW_USR_XREF lux where LS.LAST_MODIFIED_BY_USER_ID = LUX.USER_ID and LS.LAST_MODIFIED > TRUNC(SYSDATE) and LS.LAST_MODIFIED < TRUNC(SYSDATE+1)
+UNION 
+select 'ACTIVEPORTALUSERS' as name, count(distinct USER_ID) as value from BPM_USR_RUNTIME_PROPS where ONLINE_STATUS = 'T'
+UNION
+select 'ACTIVEBPDS' as name, count(distinct bpd_instance_id) as value from LSW_BPD_INSTANCE where execution_status = 1
+UNION
+select 'ACTIVETASKS' as name, count(distinct task_id) as value from LSW_TASK where status=12  and activity_task_type = 1 and execution_status = 3 
+UNION
+select 'ACTIVEACTIVITIES' as name, count(distinct task_id) as value from LSW_TASK where execution_status = 3 and activity_task_type != 1
+
+
+--------------------
+
+select 'TOTALUSERS' as name, cast(count(*) as varchar(10)) as value from LSW_USR_XREF
+
+UNION
+
+select 'ACTIVEPCUSERS' as name, cast(count(distinct LUX.USER_ID) as varchar(10)) as value from lsw_snapshot ls, LSW_USR_XREF lux where LS.LAST_MODIFIED_BY_USER_ID = LUX.USER_ID and LS.LAST_MODIFIED > CONVERT(DATETIME, CONVERT(DATE, GETDATE())) and LS.LAST_MODIFIED < dateadd(day,1,GetDate())
+
+UNION 
+
+select 'ACTIVEPORTALUSERS' as name, cast(count(distinct USER_ID) as varchar(10)) as value from BPM_USR_RUNTIME_PROPS where ONLINE_STATUS = 'T'
+
+UNION
+
+select 'ACTIVEBPDS' as name, cast(count(distinct bpd_instance_id) as varchar(10)) as value from LSW_BPD_INSTANCE where execution_status = 1
+
+UNION
+
+select 'ACTIVETASKS' as name, cast(count(distinct task_id) as varchar(10)) as value from LSW_TASK where status = 12  and activity_task_type = 1 and execution_status = 3 
+
+UNION
+
+select 'ACTIVEACTIVITIES' as name, cast(count(distinct task_id) as varchar(10)) as value from LSW_TASK where execution_status = 3 and activity_task_type != 1
