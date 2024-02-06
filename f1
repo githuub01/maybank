@@ -1,0 +1,112 @@
+// List - load()
+//
+
+//debugger;
+var kolbantkCommon = new KolbanTKCommon(this.context);
+
+// Get the DOM node that represents the label element
+var labelNode = query("label", this.context.element)[0];
+
+if (this.context.options._metadata.label != undefined && this.context.options._metadata.label.get("value") != "") {
+	labelNode.innerHTML = this.context.htmlEscape(this.context.options._metadata.label.get("value"));
+}
+var labelDivDomNode = this.context.element.querySelector(".textLabel");
+if (this.context.options._metadata.label == undefined ||
+    this.context.options._metadata.label.get("value") == "" ||
+    (this.context.options._metadata.labelVisibility != undefined &&
+     this.context.options._metadata.labelVisibility.get("value") == "HIDE")) {
+	// hide the label div
+	this.context.setDisplay(false, labelDivDomNode);
+} else {
+	// show the label div
+	this.context.setDisplay(true, labelDivDomNode);
+}
+
+// Get the DOM node that represents the select element
+var selectNode = query("select", this.context.element)[0];
+	
+//
+// Define a function that will refresh the visible list
+//
+this.refreshList = function() {
+	if (this.context.binding != null) {
+		var listData = this.context.binding.get("value");
+		//var items = listData.items;
+		
+		// Remove existing <options>
+		var optionNodeList = query("option", selectNode);
+		// orphan() is a Dojo NodeList function that walks the list and for each element, removes it from the DOM tree
+		optionNodeList.orphan();
+
+		var selectedArray = listData.get("listAllSelectedIndices");
+		for (var i=0; i<listData.length(); i++) {
+			//console.log("Item: " + i);
+			var optionNode = domConstruct.create("option");
+			if (selectedArray.indexOf(i) != -1) {
+				domAttr.set(optionNode, "selected", true);
+			}
+			var textNode = win.doc.createTextNode(listData.get(i).name);
+			domConstruct.place(textNode, optionNode, "only");
+		// Now we add a new <option>
+			domConstruct.place(optionNode, selectNode, "last");
+		}
+	} // Check that we had data
+}
+
+this.refreshBind = function()
+{
+	if (this.bindHandle != undefined) {
+		this.bindHandle.unbind();
+	}
+	var listData = this.context.binding.get("value");
+	this.bindHandle = listData.bindAll(function() {
+		this.refreshList();
+	}, this);
+}
+
+// Populate the <select> with <options> for each of the supplied items
+if (this.context.binding != null) {
+	
+	// Handle the size of the shown list
+	var size = kolbantkCommon.getOptionValue("size", 5);
+	domAttr.set(selectNode, "size", size);
+	
+	// Handle the width option
+	var width = kolbantkCommon.getOptionValue("width");
+	if (width != null) {
+		domStyle.set(selectNode, "width", width);
+	}
+	
+	// Handle the multiple option
+	var multiple = kolbantkCommon.getOptionValue("multiple", false);
+	if (multiple == true) {
+		domAttr.set(selectNode, "multiple", "multiple");
+	}
+	
+	var listData = this.context.binding.get("value");
+	
+	// Create a handler for selection change processing
+	var handle = on(selectNode, "change", lang.hitch(this, function(e) {
+		// Let us see what is selected!
+		var optionNodeList = query("option", selectNode);
+		var selectedArray = [];
+		for (var i=0; i<optionNodeList.length; i++) {
+			if (optionNodeList[i].selected == true) {
+				selectedArray.push(i);
+			}
+		}
+		var listData = this.context.binding.get("value");
+		listData.set("listAllSelectedIndices", selectedArray);
+	}));
+	
+	listData.bind("listAllSelectedIndices", this.refreshList, this);
+	
+	this.refreshBind();
+
+	// Add the items to the <select> list
+	this.refreshList();
+} // End if binding is not null
+else {
+	console.log("!!! Warning !!! - List control has no data bound");
+}
+// End of File
