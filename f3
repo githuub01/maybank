@@ -1,0 +1,104 @@
+
+var colInstanceId = new TWSearchColumn();
+colInstanceId.name = TWSearchColumn.ProcessInstanceColumns.ID;
+colInstanceId.type = TWSearchColumn.Types.ProcessInstance;
+
+var colInstanceName = new TWSearchColumn();
+colInstanceName.type = TWSearchColumn.Types.ProcessInstance;
+colInstanceName.name = TWSearchColumn.ProcessInstanceColumns.Name; // name of BPD
+
+var condInstanceName = new TWSearchCondition;
+condInstanceName.column = colInstanceName;
+condInstanceName.operator = TWSearchCondition.Operations.StartsWith;
+condInstanceName.value = "Service Order Fulfillment:";
+
+var colInstanceStatus = new TWSearchColumn(); 
+colInstanceStatus.type = TWSearchColumn.Types.ProcessInstance; 
+colInstanceStatus.name = TWSearchColumn.ProcessInstanceColumns.Status; 
+
+var condInstanceStatus = new TWSearchCondition; 
+condInstanceStatus.column = colInstanceStatus; 
+condInstanceStatus.operator = TWSearchCondition.Operations.Equals; 
+condInstanceStatus.value = "Active"; 
+
+var colTaskId = new TWSearchColumn();
+colTaskId.type = TWSearchColumn.Types.Task;
+colTaskId.name = TWSearchColumn.TaskColumns.ID;
+
+var colTaskStatus = new TWSearchColumn(); 
+colTaskStatus.type = TWSearchColumn.Types.Task; 
+//colTaskStatus.name = TWSearchColumn.TaskColumns.Status 
+colTaskStatus.name = TWSearchColumn.TaskColumns.Priority 
+
+var condTaskStatus = new TWSearchCondition; 
+condTaskStatus.column = colTaskStatus; 
+condTaskStatus.operator = TWSearchCondition.Operations.NotEquals
+condTaskStatus.value = "Closed"; 
+
+var colClosedDateTime = new TWSearchColumn;
+colClosedDateTime.type = TWSearchColumn.Types.Task;
+colClosedDateTime.name = TWSearchColumn.TaskColumns.ClosedDate;
+
+var colDueDateTime = new TWSearchColumn;
+colDueDateTime.type = TWSearchColumn.Types.Task;
+colDueDateTime.name = TWSearchColumn.TaskColumns.DueDate;
+
+var condDueDateTimeBefore = new TWSearchCondition;
+condDueDateTimeBefore.column = colDueDateTime;
+condDueDateTimeBefore.operator = TWSearchCondition.Operations.LessThan;
+condDueDateTimeBefore.value = tw.local.dueDateBefore.format("MM/dd/yyyy HH:mm:ss", "PST");
+
+var colServiceOrderNumber = new TWSearchColumn;
+colServiceOrderNumber.type = TWSearchColumn.Types.BusinessData;
+colServiceOrderNumber.name = "serviceOrderNumber";
+
+
+var order1 = new TWSearchOrdering();
+order1.column = colInstanceId;
+order1.order = TWSearchOrdering.Orders.Ascending;
+
+
+var search = new TWSearch();
+search.columns = 
+new Array(
+  colInstanceStatus
+, colInstanceId
+, colInstanceName
+, colTaskId
+, colTaskStatus
+, colClosedDateTime
+, colDueDateTime
+);
+
+
+var conditions = new Array(condInstanceName, condDueDateTimeBefore); //, condInstanceStatus, condTaskStatus);
+//if(tw.local.fieldRepIdentifier != "All") {
+//  conditions.push(condFieldRepIdentifier);
+//}
+search.conditions = conditions;
+
+
+search.organizedBy = TWSearch.OrganizeByTypes.Task;
+search.orderBy = new Array(order1 );
+//search.orderBy = new Array(orderFieldRep, orderSequenceNumber, order1 );
+
+tw.local.serviceOrderTasks = new tw.object.listOf.ServiceOrderTask();
+var results = search.execute();
+for(var i = 0; i < results.rows.length; i++) {
+  var row = results.rows[i];
+  tw.local.serviceOrderTasks[i] = new tw.object.ServiceOrderTask();
+
+  tw.local.serviceOrderTasks[i].processInstanceId = row.values[1].toString();
+  tw.local.serviceOrderTasks[i].processInstanceName = row.values[2].toString();
+  tw.local.serviceOrderTasks[i].taskId = row.values[3].toString();
+  tw.local.serviceOrderTasks[i].taskStatus = row.values[4].toString();
+if(row.values[5] != null)
+{  
+  tw.local.serviceOrderTasks[i].closedDate = row.values[5].toString();
+}
+if(row.values[6] != null)
+{  
+  tw.local.serviceOrderTasks[i].dueDate = row.values[6].toString();
+}
+
+}
