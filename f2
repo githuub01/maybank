@@ -1,0 +1,109 @@
+var colInstanceName = new TWSearchColumn();
+colInstanceName.type = TWSearchColumn.Types.ProcessInstance;
+colInstanceName.name = TWSearchColumn.ProcessInstanceColumns.Name; // name of BPD
+
+var condInstanceName = new TWSearchCondition;
+condInstanceName.column = colInstanceName;
+condInstanceName.operator = TWSearchCondition.Operations.StartsWith;
+condInstanceName.value = tw.local.processInstanceNameStartsWith;
+
+var colInstanceId = new TWSearchColumn();
+colInstanceId.name = TWSearchColumn.ProcessInstanceColumns.ID;
+colInstanceId.type = TWSearchColumn.Types.ProcessInstance;
+
+var colInstanceStatus = new TWSearchColumn(); 
+colInstanceStatus.type = TWSearchColumn.Types.ProcessInstance; 
+colInstanceStatus.name = TWSearchColumn.ProcessInstanceColumns.Status; 
+
+var condInstanceStatus = new TWSearchCondition; 
+condInstanceStatus.column = colInstanceStatus; 
+condInstanceStatus.operator = TWSearchCondition.Operations.Equals; 
+condInstanceStatus.value = "Active"; 
+
+var colTaskId = new TWSearchColumn();
+colTaskId.type = TWSearchColumn.Types.Task;
+colTaskId.name = TWSearchColumn.TaskColumns.ID;
+
+var colTaskStatus = new TWSearchColumn(); 
+colTaskStatus.type = TWSearchColumn.Types.Task; 
+colTaskStatus.name = TWSearchColumn.TaskColumns.Status 
+
+var condTaskStatus = new TWSearchCondition; 
+condTaskStatus.column = colTaskStatus; 
+condTaskStatus.operator = TWSearchCondition.Operations.NotEquals
+condTaskStatus.value = "Closed"; 
+
+
+//var colScheduleDateTime = new TWSearchColumn;
+//colScheduleDateTime.type = TWSearchColumn.Types.BusinessData;
+//colScheduleDateTime.name = "scheduleDateTime";
+// Date conditions cause a null pointer
+//var condScheduleDateTimeStart = new TWSearchCondition;
+//condScheduleDateTimeStart.column = colScheduleDateTime;
+//condScheduleDateTimeStart.operator = TWSearchCondition.Operations.GreaterThan;
+//condScheduleDateTimeStart.value = tw.local.startDate.format("MM/dd/yyyy HH:mm:ss", "PST");
+
+//var colServiceOrderNumber = new TWSearchColumn;
+//colServiceOrderNumber.type = TWSearchColumn.Types.BusinessData;
+//colServiceOrderNumber.name = "serviceOrderNumber";
+
+var colTaskSubject = new TWSearchColumn;
+colTaskSubject.type = TWSearchColumn.Types.Task;
+colTaskSubject.name = TWSearchColumn.TaskColumns.Subject;
+
+var colTaskAssignedTo = new TWSearchColumn;
+colTaskAssignedTo.type = TWSearchColumn.Types.Task;
+colTaskAssignedTo.name = TWSearchColumn.TaskColumns.AssignedToUser;
+
+var condTaskAssignedTo = new TWSearchCondition; 
+condTaskAssignedTo.column = colTaskAssignedTo; 
+condTaskAssignedTo.operator = TWSearchCondition.Operations.Equals
+condTaskAssignedTo.value = tw.local.user; 
+
+var order1 = new TWSearchOrdering();
+order1.column = colInstanceId;
+order1.order = TWSearchOrdering.Orders.Ascending;
+
+
+var search = new TWSearch();
+search.columns = 
+new Array(
+  colInstanceStatus
+, colInstanceId
+, colInstanceName
+, colTaskId
+, colTaskStatus
+, colTaskSubject
+, colTaskAssignedTo
+);
+
+var conditions = new Array(condInstanceName, condInstanceStatus, condTaskStatus);
+if(tw.local.user.length > 0) {
+  conditions.push(condTaskAssignedTo);
+}
+//if(tw.local.fieldRepIdentifier != "All") {
+//  conditions.push(condFieldRepIdentifier);
+//}
+search.conditions = conditions;
+
+
+search.organizedBy = TWSearch.OrganizeByTypes.Task;
+search.orderBy = new Array(order1 );
+//search.orderBy = new Array(orderFieldRep, orderSequenceNumber, order1 );
+
+tw.local.serviceOrderTasks = new tw.object.listOf.ServiceOrderTask();
+var results = search.execute();
+
+for(var i = 0; i < results.rows.length; i++) {
+  var row = results.rows[i];
+  tw.local.serviceOrderTasks[i] = new tw.object.ServiceOrderTask();
+
+  tw.local.serviceOrderTasks[i].processInstanceId = row.values[1].toString();
+  tw.local.serviceOrderTasks[i].processInstanceName = row.values[2].toString();
+  tw.local.serviceOrderTasks[i].taskId = row.values[3].toString();
+  tw.local.serviceOrderTasks[i].taskStatus = row.values[4].toString();
+  tw.local.serviceOrderTasks[i].taskSubject = row.values[5].toString();
+if(row.values[6] != null) {
+  tw.local.serviceOrderTasks[i].assignedTo = row.values[6].toString();
+}
+}
