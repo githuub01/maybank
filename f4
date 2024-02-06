@@ -1,0 +1,53 @@
+
+// Convert from String to "JSON Object"...
+// Alt?: JSON.parst(te.local.RESTOutput);
+var jsonObject = eval('(' + tw.local.JSONOutputString + ')');
+//var jsonObject =JSON.parse(tw.local.JSONOutputString)
+
+// Set top level response status...
+tw.local.taskResponseObj = new tw.object.SearchHTTPResponseObj();
+log.info("*** REST Status = '" + jsonObject.status + "'");
+tw.local.taskResponseObj.httpStatus = jsonObject.status;
+
+// Populate all TASK details...
+tw.local.taskResponseObj.bpmSearchObjects = new tw.object.listOf.SearchInfoBPMObj();
+
+if (jsonObject.data.data == null)
+{
+   log.info("**** jsonObject.data.data is null");
+   log.info("*** You are querying for process instances but none exist!");
+   tw.local.tasks = null;
+}
+else
+{
+   for (i=0; i<jsonObject.data.data.length; i++)
+   {
+     log.info("*** #" + i);
+     //log.info("*** 1 ");
+     //log.info("*** 2 ");
+     //log.info("*** 3 "); 
+
+     tw.local.taskResponseObj.bpmSearchObjects[i] = new tw.object.SearchInfoBPMObj();
+     tw.local.taskResponseObj.bpmSearchObjects[i].assignedToRole = jsonObject.data.data[i].assignedToRole;
+     tw.local.taskResponseObj.bpmSearchObjects[i].taskAssignedToType = jsonObject.data.data[i].taskAssignedTo.type;
+     tw.local.taskResponseObj.bpmSearchObjects[i].taskAssignedToWho = jsonObject.data.data[i].taskAssignedTo.who;
+         //log.info("*** Task Id = '" + jsonObject.data.data[i].taskId + "'");
+     tw.local.taskResponseObj.bpmSearchObjects[i].taskId = jsonObject.data.data[i].taskId;
+         //log.info("*** Task Id = '" + tw.local.taskResponseObj.tasks[i].taskId + "'");
+     tw.local.taskResponseObj.bpmSearchObjects[i].taskSubject = jsonObject.data.data[i].taskSubject;
+     tw.local.taskResponseObj.bpmSearchObjects[i].bpdName = jsonObject.data.data[i].bpdName;
+     tw.local.taskResponseObj.bpmSearchObjects[i].taskDueDate = jsonObject.data.data[i].taskDueDate;
+     tw.local.taskResponseObj.bpmSearchObjects[i].taskPriority= jsonObject.data.data[i].taskPriority;
+     tw.local.taskResponseObj.bpmSearchObjects[i].taskStatus = jsonObject.data.data[i].taskStatus;
+     tw.local.taskResponseObj.bpmSearchObjects[i].instanceCreateDate = jsonObject.data.data[i].instanceCreateDate;
+     tw.local.taskResponseObj.bpmSearchObjects[i].instanceDueDate = jsonObject.data.data[i].instanceDueDate;
+     tw.local.taskResponseObj.bpmSearchObjects[i].instanceId = jsonObject.data.data[i].instanceId;
+     tw.local.taskResponseObj.bpmSearchObjects[i].instanceModifyDate = jsonObject.data.data[i].instanceModifyDate;
+     tw.local.taskResponseObj.bpmSearchObjects[i].instanceName = jsonObject.data.data[i].instanceName;
+     tw.local.taskResponseObj.bpmSearchObjects[i].instanceStatus = jsonObject.data.data[i].instanceStatus;
+     //log.info("*** Task Subject = '" + jsonObject.data.data[i].taskSubject + "'");
+     //log.info("*** Task Subject = '" + tw.local.taskResponseObj.bpmSearchObjects[i].taskSubject + "'");
+  }
+
+  tw.local.tasks = tw.local.taskResponseObj.bpmSearchObjects;
+}
