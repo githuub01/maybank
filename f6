@@ -1,0 +1,70 @@
+if (tw.local.restColumns == null)
+    tw.local.restColumns = "";
+    
+if (tw.local.restConditions == null)
+    tw.local.restConditions = "";
+
+if (tw.local.restOrganization == null)
+    tw.local.restOrganization = "";
+
+tw.local.restURL =  "http://" + tw.local.bpmHostName + 
+                    ":" + tw.local.bpmPortNumber + 
+                    tw.local.restResourceURI;
+
+log.info("*** URL base = " + tw.local.restURL);
+
+// All Three Set
+if (tw.local.restColumns != "" &&
+    tw.local.restConditions != "" &&
+    tw.local.restOrganization != "")
+{
+    log.info("*** All 3 Set");
+    tw.local.restURL += "?columns=" + tw.local.restColumns +
+                        "&condition=" + tw.local.restConditions +
+                        "&organization=" + tw.local.restOrganization;
+}
+
+// Columns NOT Set
+if (tw.local.restColumns == "" &&
+    tw.local.restConditions != "" &&
+    tw.local.restOrganization != "")
+{
+    log.info("*** Columns NOT Set");
+    tw.local.restURL += "?condition=" + tw.local.restConditions +
+                        "&organization=" + tw.local.restOrganization;
+}
+
+// Conditions NOT Set
+if (tw.local.restColumns != "" &&
+    tw.local.restConditions == "" &&
+    tw.local.restOrganization != "")
+{
+    log.info("*** Condition NOT Set");
+    tw.local.restURL += "?columns=" + tw.local.restColumns +
+                        "&organization=" + tw.local.restOrganization;
+}
+
+// Organization NOT Set
+if (tw.local.restColumns != "" &&
+    tw.local.restConditions != "" &&
+    tw.local.restOrganization == "")
+{
+    log.info("*** Organization NOT Set");
+    tw.local.restURL += "?columns=" + tw.local.restColumns +
+                        "&condition=" + tw.local.restConditions;
+}
+
+// Columns AND Conditions NOT Set
+if (tw.local.restColumns == "" &&
+    tw.local.restConditions == "" &&
+    tw.local.restOrganization != "")
+{
+    log.info("*** Columns AND Conditions NOT Set");
+    tw.local.restURL += "?organization=" + tw.local.restOrganization;
+}
+
+log.info("*** Full URL (not encoded) = " + tw.local.restURL);
+tw.local.restEncodedURL = encodeURI(tw.local.restURL);
+tw.local.restURL = "" + tw.local.restMethod + "\n"+ tw.local.restURL
+
+                        
