@@ -1,0 +1,419 @@
+/*
+ * This file contains utilities and classes for use with IBM BPM, version 7.5.1 and above.
+ */
+
+/**
+ * Indicates the current version of the Professional Services JavaScript Library.
+ *
+ * @type String
+ */
+PS_JS_LIBRARY_VERSION = "7.5.1.0";
+
+/**
+ * PS root package, assigned below to a variable named <b>ps</b> so the functions and packages can be accessed
+ * using ps.xxx.yyy().
+ *
+ * @param {String} packageName The name of the package
+ *
+ * @author mnorman
+ * @since 1.0
+ *
+ * @constructor
+ */
+// Using the ps.util structure made famous by M Norman.
+
+PSPackage = function(packageName) {
+  /** @private */
+  this.m_version = PS_JS_LIBRARY_VERSION;
+
+  log.debug("Setting up PS Package " + this.m_version + " as " + packageName);
+
+  /** @private */
+  this.m_packageName = packageName;
+
+  /**
+   * Returns the version of the PS JavaScript Utilities.
+   *
+   * @return The PS JavaScript Utilities version
+   * @type String
+   */
+  this.getVersion = function() {
+    return this.m_version;
+  }
+
+  /**
+   * Returns the name of the package.
+   *
+   * @return The package name
+   * @type String
+   */
+  this.getPackageName = function() {
+    return this.m_packageName != null ? this.m_packageName : "";
+  }
+
+  /**
+   * The utility package
+   * @type PSUtilityPackage
+   */
+  this.util = new PSUtilityPackage("" + this.getPackageName() + ".util");
+
+  /**
+   * Returns the string representation of this package.
+   *
+   * @return The string representation of this package.
+   * @type String
+   */
+  this.toString = function() {
+    return "PS JavaScript Package (" + this.getPackageName() + "): " + this.getVersion();
+  };
+}; // end PSPackage
+
+/**
+ * PS Utility package, by default ps.util.
+ *
+ * @param {String} packageName The name of the package
+ *
+ * @author mnorman, gdharley
+ * @since 1.0
+ *
+ * @constructor
+ */
+PSUtilityPackage = function(packageName) {
+  log.debug("Setting up PS Utility Package as " + packageName);
+
+  /** @private */
+  this.m_packageName = packageName;
+
+  /**
+   * Returns the name of the package.
+   *
+   * @return The package name
+   * @type String
+   */
+  this.getPackageName = function() {
+    return this.m_packageName != null ? this.m_packageName : "";
+  }
+
+  /**
+   * The SavedSearchUtils package
+   * @type PSSavedSearchUtilsPackage
+   */
+  this.SavedSearchUtils = new PSSavedSearchUtilsPackage(this.getPackageName() + ".SavedSearchUtils");
+ 
+}; // end PSUtiltyPackage 
+
+
+/**
+ * PS SavedSearch Utils package.  By default, ps.util.SavedSearchUtils.
+ *
+ * @param {String} packageName The name of the package
+ *
+ * @author gdharley
+ * @since 1.0
+ *
+ * @constructor
+ */
+ 
+PSSavedSearchUtilsPackage = function(packageName) {
+  log.debug("Setting up PS Saved Search Utils Package as " + packageName);
+
+  /** @private */
+  this.m_packageName = packageName;
+
+  /**
+   * Returns the name of the package.
+   *
+   * @return The package name
+   * @type String
+   */
+  this.getPackageName = function() {
+    return this.m_packageName != null ? this.m_packageName : "";
+  }
+
+  /**
+   * Returns the string representation of this package.
+   *
+   * @return The string representation of this package.
+   * @type String
+   */
+  this.toString = function() {
+    return "PS JavaScript Saved Search Utils Package (" + this.getPackageName() + ")";
+  };
+
+  /**
+   * Gets the list of available saved searches.
+   *
+   * @return A list of tw.object.SavedSearch
+   * @type SavedSearch[]
+   */
+  this.getSavedSearches = function() {
+	
+	var savedSearchList = Packages.com.lombardisoftware.client.delegate.SearchAPIFacadeDelegateFactory.getInstance().newInstance().getSavedSearches();
+	var numSearches = savedSearchList.size();
+    var loss = new tw.object.listOf.SavedSearch();
+    for(var i = 0; i < numSearches ; i++) {
+      var ssl = savedSearchList.get(i);
+      loss[i] = new tw.object.SavedSearch();
+      loss[i].name = ssl.getName();
+      loss[i].ID = ssl.getSearchID();
+      loss[i].query = ssl.getQuery();
+      loss[i].userid = ssl.getUserID();
+      loss[i].shared = ssl.isShared();
+      
+    }	
+	return loss;
+  }
+  
+  this.queryToTWSearch = function(query) {
+	var search = new TWSearch();
+	
+	// Add the organized by value
+	var ob = query.xpath("/query").item(0).getAttribute("organization").toString();
+	search.organizedBy = (ob == 'byInstance'?TWSearch.OrganizeByTypes.ProcessInstance:TWSearch.OrganizeByTypes.Task);
+
+	// Add the columns
+	var task_columns = new Array();
+
+	var colTasks = query.xpath("/query/task-results/column");
+	for(var i=0; i< colTasks.length; i++){
+		task_columns[i] = Qry2SrchCols(colTasks.item(i).getAttribute("name").toString());
+	}
+
+	var instance_columns = new Array();
+
+	var colInst = query.xpath("/query/instance-results/column");
+	for(var i=0; i< colInst.length; i++){
+		instance_columns[i] = Qry2SrchCols(colInst.item(i).getAttribute("name").toString());
+	}
+
+	var bd_columns = new Array();
+
+	var colBd = query.xpath("/query/business-data-results/column");
+	for(var i=0; i< colBd.length; i++){
+		bd_columns[i] = new TWSearchColumn();
+		bd_columns[i].type = TWSearchColumn.Types.BusinessData;
+		bd_columns[i].name = colBd.item(i).getAttribute("name").toString();
+	}	
+	
+	var general_columns = new Array();
+
+	var colGen = query.xpath("/query/results/column");
+	for(var i=0; i< colGen.length; i++){
+		general_columns[i] = Qry2SrchCols(colGen.item(i).getAttribute("name").toString());
+	}
+
+	search.columns = task_columns.concat(instance_columns, bd_columns, general_columns);
+
+	//Add the constraints
+	var conditions = new Array();
+
+	var cond = query.xpath("/query/constraints/constraint");
+	for(var i=0; i< cond.length; i++){
+		conditions[i] = new TWSearchCondition();
+		conditions[i].column = Qry2SrchCols(cond.item(i).getAttribute("column").toString());
+		conditions[i].operator = cond.item(i).getAttribute("operator").toString();
+		conditions[i].value = cond.item(i).getAttribute("value").toString();
+	}
+
+	search.conditions = conditions;
+
+	//Add the orderBy
+	var orderBy = new Array();
+
+	var fs = query.xpath("/query").item(0).getAttribute("first-sort");
+	var fso = query.xpath("/query").item(0).getAttribute("first-sort-order");
+	var ss = query.xpath("/query").item(0).getAttribute("second-sort");
+	var sso = query.xpath("/query").item(0).getAttribute("second-sort-order");
+
+	if(fs != null){
+		var sortOrder = new Array();
+		var f = new TWSearchOrdering();
+		f.column = Qry2SrchCols(fs);
+		f.order = fso.toString();
+		sortOrder[0] = f;
+		if(ss != null){
+			var s = new TWSearchOrdering();
+			s.column = Qry2SrchCols(ss);
+			s.order = sso.toString();
+			sortOrder[1] = s;
+		}
+		search.sortOrder = sortOrder;
+	}
+	return search;
+  }
+  
+  this.TWSearchToQuery = function(search) {
+	var xmlQuery = new tw.object.XMLElement('query');
+	
+	// Add organizedeBy
+	xmlQuery.setAttribute("max-rows", 20);
+	xmlQuery.setAttribute("organization", (search.organizedBy == "Task"?"byTask":"byInstance") );
+
+	// Add sortOrder
+	var sortOrder = search.orderBy;
+	if(sortOrder != null){
+		var cname = this.Srch2QryCols(sortOrder[0].column.type, sortOrder[0].column.name);
+		xmlQuery.setAttribute("first-sort", cname);
+		xmlQuery.setAttribute("first-sort-order", (sortOrder[0].order == "Descending"?"DESC":"ASC"));
+		if(sortOrder.length >= 2){
+		var cname2 = this.Srch2QryCols(sortOrder[1].column.type, sortOrder[1].column.name);
+			xmlQuery.setAttribute("second-sort", cname2);
+			xmlQuery.setAttribute("second-sort-order", (sortOrder[1].order == "Descending"?"DESC":"ASC"));
+		}
+	}
+	// Add Columns
+	var columns = search.columns;
+	var taskCols = new Array();
+	var instCols = new Array();
+	var bdCols = new Array();
+	var psCols = new Array();
+
+	for(var i=0;i<columns.length;i++){
+		var cname = this.Srch2QryCols(columns[i].type, columns[i].name);
+		switch(columns[i].type) {
+		case TWSearchColumn.Types.Task:taskCols.push(cname);break;
+		case TWSearchColumn.Types.ProcessInstance:instCols.push(cname);break;
+		case TWSearchColumn.Types.BusinessData:bdCols.push(cname);break;
+		case TWSearchColumn.Types.Process:psCols.push(cname);break;
+		default:
+		}
+	}
+
+	var tc = new tw.object.XMLElement('results');
+	
+	for(var i=0;i<taskCols.length;i++){
+		var c = new tw.object.XMLElement('column');
+		c.setAttribute("name", taskCols[i]);
+		c.setAttribute("column-type", "task");
+		tc.apendChild(c);
+	}
+	for(var i=0;i<instCols.length;i++){
+		var c = new tw.object.XMLElement('column');
+		c.setAttribute("name", instCols[i]);
+		c.setAttribute("column-type", "instance");
+		tc.appendChild(c);
+	}
+	for(var i=0;i<bdCols.length;i++){
+		var c = new tw.object.XMLElement('column');
+		c.setAttribute("alias", bdCols[i]);
+		c.setAttribute("column-type", "bpd");
+		c.setAttribute("name", bdCols[i] + "@String");
+		tc.appendChild(c);
+	}
+	for(var i=0;i<psCols.length;i++){
+		var c = new tw.object.XMLElement('column');
+		c.setAttribute("name", psCols[i]);
+		c.setAttribute("column-type", TWSearchColumn.Types.Process);
+		tc.appendChild(c);
+	}
+	
+	xmlQuery.appendChild(tc);
+
+	// Finally add constraints
+
+	var cs = new tw.object.XMLElement('constraints');
+	var css = search.conditions;
+	for(var i=0;i<css.length;i++){
+		var c = new tw.object.XMLElement('constraint');
+		c.setAttribute("column", this.Srch2QryCols(css[i].column.type, css[i].column.name));
+		c.setAttribute("operator", css[i].operator);
+		c.setAttribute("value", css[i].value);
+		cs.appendChild(c);
+	}
+
+	xmlQuery.appendChild(cs);
+	return xmlQuery;
+  }
+  
+  this.saveSavedSearches = function(name, query, userId, shared) {
+	// Get the search Facade
+	var sf = Packages.com.lombardisoftware.client.delegate.SearchAPIFacadeDelegateFactory.getInstance().newInstance();
+	//Save the search
+	sf.saveSavedSearch(name, query, java.lang.Long.parseLong(userId), shared);
+	return;
+  }
+  
+  this.deleteSavedSearch = function(ID) {
+    var searchId = java.lang.Long.parseLong(ID);
+	var savedSrch = new Packages.com.lombardisoftware.server.psapi.dao.SavedSearchDAOImpl();
+	//
+	// @TODO Need to add some protection to ensure the searchi is either owned by the user or the user is a portal admin
+	//
+	savedSrch.deleteSavedSearch(searchId);
+  }
+  
+  this.getAvailableBusinessData = function() {
+  
+  }
+  
+  this.Srch2QryCols = function(type, col){
+      if(type == TWSearchColumn.Types.Task){
+        switch(col) {
+		    case TWSearchColumn.TaskColumns.Activity: return "taskActivityName";
+	    	case TWSearchColumn.TaskColumns.AssignedToRole:return "assignedToRole";
+		    case TWSearchColumn.TaskColumns.AssignedToUser:return "assignedToUser";
+		    case TWSearchColumn.TaskColumns.ClosedBy:return "taskClosedBy";
+		    case TWSearchColumn.TaskColumns.ClosedDate:return "taskClosedDate";
+		    case TWSearchColumn.TaskColumns.DueDate:return "taskDueDate";
+		    case TWSearchColumn.TaskColumns.Priority:return "taskPriority";
+		    case TWSearchColumn.TaskColumns.ReadDate:return "taskReadTime";
+		    case TWSearchColumn.TaskColumns.ReceivedDate:return "taskReceivedDate";
+		    case TWSearchColumn.TaskColumns.ReceivedFrom:return "taskReceivedFrom";
+		    case TWSearchColumn.TaskColumns.SentDate:return "taskSentTime";
+		    case TWSearchColumn.TaskColumns.Status:return "taskStatus";
+		    case TWSearchColumn.TaskColumns.Subject:return "taskSubject";
+		    default:return col;
+	    }
+	} else if (type == TWSearchColumn.Types.ProcessInstance){
+		switch(col) {
+		    case TWSearchColumn.ProcessInstanceColumns.DueDate: return "instanceDueDate";
+	    	case TWSearchColumn.ProcessInstanceColumns.ID:return "instanceId";
+		    case TWSearchColumn.ProcessInstanceColumns.Name:return "instanceName";
+		    case TWSearchColumn.ProcessInstanceColumns.Status:return "instanceStatus";
+		    case TWSearchColumn.ProcessInstanceColumns.ProcessApp:return "instanceProcessApp";
+		    case TWSearchColumn.ProcessInstanceColumns.Snapshot:return "instanceSnapshot";
+		    default:return col;
+	    }
+	
+	} else {
+	// Must be business Data
+	return col;
+	}
+  }
+  
+  this.Qry2SrchCols = function(column){
+	var col = new TWSearchColumn();
+	switch(column) {
+	    case "taskActivityName":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.Activity;break;
+	   	case "assignedToRole":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.AssignedToRole;break;
+	    case "assignedToUser":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.AssignedToUser;break;
+	    case "taskClosedBy":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.ClosedBy;break;
+	    case "taskClosedDate":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.ClosedDate;break;
+	    case "taskDueDate":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.DueDate;break;
+	    case "taskPriority":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.Priority;break;
+	    case "taskReadTime":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.ReadDate;break;
+	    case "taskReceivedDate":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.ReceivedDate;break;
+	    case "taskReceivedFrom":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.ReceivedFrom;break;
+	    case "taskSentTime":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.SentDate;break;
+	    case "taskStatus":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.Status;break;
+	    case "taskSubject":col.type = TWSearchColumn.Types.Task;col.name = TWSearchColumn.TaskColumns.Subject;break;
+		case "instanceDueDate":col.type = TWSearchColumn.Types.ProcessInstance;col.name = TWSearchColumn.ProcessInstanceColumns.DueDate;break;
+	    case "instanceId":col.type = TWSearchColumn.Types.ProcessInstance;col.name = TWSearchColumn.ProcessInstanceColumns.ID;break;
+		case "instanceName":col.type = TWSearchColumn.Types.ProcessInstance;col.name = TWSearchColumn.ProcessInstanceColumns.Name;break;
+		case "instanceStatus":col.type = TWSearchColumn.Types.ProcessInstance;col.name = TWSearchColumn.ProcessInstanceColumns.Status;break;
+		case "instanceProcessApp":col.type = TWSearchColumn.Types.ProcessInstance;col.name = TWSearchColumn.ProcessInstanceColumns.ProcessApp;break;
+		case "instanceSnapshot":col.type = TWSearchColumn.Types.ProcessInstance;col.name = TWSearchColumn.ProcessInstanceColumns.Snapshot;break;
+	    default:
+		// Everything else must be business data
+		col.type = TWSearchColumn.Types.BusinessData;
+		col.name = column;
+		break;
+	}
+	return col;
+  }
+
+ 
+} // end PSSavedSearchUtilsPackage
+
+// Create the ps instance -- must be created every time so eval functions work
+var ps = new PSPackage("ps");
