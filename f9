@@ -1,0 +1,1190 @@
+1.what is BPM ?
+
+  Business process is a sequence of activities which is designed to achieve the Objectives of an organization.
+
+  BPM stands for Business process Management or Business Process Modelling.Every organization has different processes and each
+  process involves different work flow.BPM automates the workflow of an organization to manage the business process more effectively and efficiently.
+====================================================================================================================================================================
+
+2.What are the advantages of BPM
+
+  Advantages of BPM are:
+  a) Less Duration   : BPM tool contains inbuilt components.So that we can simply drag and drop the components where ever it is required.
+                       So it will take less time to complete the project when compared to other programming languages.
+  b) Reduce Manpower : As BPM Automates most of the workflow, it reduces manual intervention.
+                       So organization can reduce the head count.
+  c) User Friendly   : Busines users can easily understand the tasks they have to work on it.
+                       
+  d) Reduce Cost     : As organization is reducing manpower so the cost of achieving the goals is also reduces
+ 
+  e) BPM Transfers power of IT Managers to Business Users
+
+====================================================================================================================================================================
+  
+3.What are various BPM Products that are available in the Market
+
+  There are many BPM products that are available in the market.some of them are:
+     a)IBM BPM
+     b)PEGA
+     c)Appian
+     d)Savvion
+     e)Oracle BPM
+     f)TIBCO BPM
+     g)MyEayISO
+     h)Process Street
+     i)ProcessMaker BPM
+     j)Laserfiche
+     k)Mykosmos
+     l)AuraPortal
+     m)BPM Suite ...etc.,
+=====================================================================================================================================================================
+
+4.What are the differences between IBM BM 7.x and 8.x
+
+
+   a) Saved Search : In 7.x , Saved Search option is present in Process Portal
+                     In 8.x , Saved Search option is present in Process Admin Console.
+
+   b) Teams        : In 7.x , we have Participant Groups to assign Participant Group to a lane or activity.
+                              Team Manager option is present in Process Admin Console
+                              Teams can can be created by selecting standard members/using expression/using system
+                     In 8.x , Participant Group name is changed to teams.
+                              Team Manager option is present in Teams only
+                              Teams can be created only by selecting standard members.Using expression and using system are deprecated in 8.x
+
+   c) Coaches      : In 7.x , Only coaches are present for building human task
+                     In 8.x , New coaches has been introduced with rich look and feel and 7.x coaches are renamed as heritage coaches.
+                              From 8.5.5 onwards, client side human service is introduced.
+
+   d) Assignments  : In 7.x , Inorder to assign a lane or activity to particular group of people or user Routing is used. It has various routing options:
+                              Lane,Team,Last User in Lane,routing policy,list of users,custom
+                     In 8.x , Routing is renamed as assignments, and 7.x routing options Last User in Lane,routing policy,list of users,custom deprecated.
+                              Instead of that in 8.x, Team Filtered Service is introduced.Team Filter Service has default input and outputs.
+                              Original Team which is of variable type Team as input and Filtered Team which is of variable type Team as output is introduced.
+                              Using this you can create your own adhoc/dynamic group.
+
+   e)Adhoc Event   : In 7.x , Adhoc event is present, which is of Start Event.This event is used to initiate an alernative flow.This can be started from Process
+                              Portal.
+                     In 8.x , This Adhoc Event is present till 8.5. From 8.5.5 onwards Adhoc Event is deprecated and in place of that unwired activity is introduced.
+                              When an activity is placed in Team or System Lane(No sequence lines to be connected), in the properties implementation you can provide                               the activity behaviour options.
+
+   f) ECM          : In 7.x , Inorder to handle the documents we have to go with ECM(Enterprise Content Management/Filenet)Integration
+                     In 8.x , 8.5 has inbuild ECM Integration 
+
+   g) UCA          : In 7.x , For UCA you have an option to attach a General System Service only.
+                     In 8.x , For UCA you have two options to select a service (i) Variable  (ii) General System Service
+
+   h) Mobile       : In 7.x , we don't have any Mobile application implementation
+                     In 8.x , You can also develop mobile applications
+   
+   
+
+=====================================================================================================================================================================
+
+5.What is blueworks live how it can be imported into IBM BPM.
+
+  1. Blueworks Live  : It is developed mainly for non technical people/ Business people to model the business process.
+                       It is used by Business Analyst to model the process while in discussion with client.
+
+  2. SAAS Based Tool : Blue works live is SAAS Based tool.SAAS Stands for Software As A Service.
+                       Softwares which can be accessed via URL are called SAAS Based tools
+
+  3. Blue Print      : Older Name of Blueworks live is called Lombardi Blue Print
+
+  4. Import to PD    : The process which is developed in blueworks live can be easily to process designer.
+                       Steps : a) Open PD b) Goto File at top left---> Preferences--->IBM BPM---->Blueworks Live
+                       enter the Blueworks Live server URL https://www.blueworkslive.com and the email address that you use
+                       as your user ID to log into Blueworks Live c) In the library items, you can see blueworks live from there you can import it.
+                       You have to provide valid credentials                                  
+======================================================================================================================================================================
+
+
+6.In how many editions IBM BPM Software available
+
+  IBM BPM software is available in 3 editions.They are:
+ 
+  a)EXPRESS EDITION :  1)In this edition only process designer(Authoring Environment in Teamworks 6.x and 7.0, WLE7.2) is available.
+                         It will not contain Integration Designer.
+                       2)It will work only in standalone machine.Generally used for training purpose
+                       3)Supports only web sphere application server (WAS) 
+                       4)Supports IBM DB2 Database
+
+  b)STANDARD EDITION:  1)In this edition also only Process Designer is available.It does'nt have integration designer.
+                       2)This edition can be used in clustered Environment
+                       3)Supports servers like WAS/Weblogic 
+                       4)It is compatible with database like IBM DB2,Oracle,sql
+
+  c)ADVANCED EDITION:1)It contains both process designer(WLE)+Integration designer(WPS)
+                     2)This edition can be used in clustered environment
+                     3)Supports servers like WAS/Weblogic
+                     4)It is compatible with database like IBM DB2,Oracle,sql
+                     
+IBM BPM Supports Windows and Linux Operating Systems
+
+=====================================================================================================================================================================
+
+7.what are the differences between process designer and integration designer.
+  
+  The differences between process designer and integration designer are:
+
+   1)IBM Process designer is used to model and build high level business processes which often involes human interactions,
+    whereas IBM integration designer is used to develop and implement applications that are fully automated.
+
+   2)Process Designer(wle) doesnot contain adapters to integrate with external systems whereas Integration designer(WPS) developed
+    on the basis of SOA(service oriented architecture) contains rich set of adapters to integrate with external systems over a network.
+
+   3)Process Designer is more customer friendly compared to Integration designer.
+
+   4)Process designer is using BPMN(Business process modeling notation) version 2.0 for developing business process model in a business process whereas integration
+    designer is using BPEL(Business Process Execution Language).
+=====================================================================================================================================================================
+
+8.Explain all the components of BPM Life  
+
+  The BPM life cycle consists of Modelling,Analysis,Development,Integration,Deployment,Monitoring.
+
+  MODEL: In this phase the client will give wireframes to the Busines analyst.The wireframes consists of the screenshots of how the User interface should look like. 
+         The business analyst should understand the client requirement and model the business process.The BA will model the Business processs using Blueworks.In the 
+         Earlier days UML diagrams are used to model the business process.Later IBM has provided a tool called "Blueworks Live" to model the business process.Business 
+         process is the pictorial representation of how the project has to work.
+
+ ANALYZE: In this phase the process analyst who is from the technical background analyze the business process paralley along with the BA to find 
+          the issues/bottlenecks in the business process with BPM.After finalizing the workflow in blue works live BA will present to the client.
+          When we get sign off/ Approval from the client.
+          What ever the BRD(Business Requirement Document)/ User Stories created by BA will be sent to Development Team.
+          Designer/Process Architect will create Design Document and Interface Document. All these documents will be sent to development Team.         
+         
+ 
+ DEVELOP AND INTEGRATE: In this phase the business process model is converted into practical solution that can be deployed.The developers will refer to the
+                        process design document and interface document.Parrlelly testing team will create the test cases 
+                                                                  
+
+                         In a BPM Project this phase includes.
+                        
+                             a.service deinition and implementation
+                             b.process configuration
+                             c.rule implementation
+                             d.user interface implementation
+                             e.analytics configuration
+                             f.role/group creation.
+                             g.Integration
+
+ DEPLOY: This phase begins when the busness process has completed.This phase allows the users to interact with the business process through the user interface
+         and allows them to perform different operations and manage their tasks.
+         Your code has to complete the Testing in 
+
+          a)SIT - System Integration Testing
+          b)UAT - User Acceptance Testing
+          c)Prod - Production/Live Environment
+
+ MONITOR: During this phase, BPM systems use their reporting capabilities to
+          capture process metrics that can be analyzed. Business owners will monitor the business process using various reporting tools.
+          
+======================================================================================================================================================================
+ 
+9.What is SOA,BPEL,BPMN
+  
+  BPMN Stands for Business Process Modeling Notation which will provide you the capability of understanding the business process in a standard 
+  graphical notation.Current BPMN notation which is using by all BPM's is BPMN2.0
+
+
+  BPEL stands for Business Process Execution Language.It is also a notation like BPMN which is used in Integration Designer.
+  BPEL notations are different from  BPMN notations. 
+  BPMN Used in Process Designer.BPEL used in Integration Designer.
+
+  SOA(Service Oriented Architecture) is an architectural design in computer software design in which application components provides services to other
+  components via communication protocol over a network.
+  IBM BPM Advanced edition contains Integration designer.Integration designer is using SOA Architecture so that it can easily interct with external systems like
+  database.
+
+=======================================================================================================================================================================
+
+10.Name BPMN 2.0 Elements?
+   The elements of BPMN 2.0 includes:
+                                      1.FLOW OBJECTS
+                                        a)events
+                                        b)activities
+                                        c)gateways
+
+                                      2.CONNECTING OBJECTS
+                                        a)sequence flow
+                                        b)message flow
+                                        c)association
+
+                                      3.SWIM LANES (Pools and Lanes)
+
+                                      4.ARTIFACTS
+                                        a)data object
+                                        b)text annotation
+                                        c)grouping
+
+       
+1.What is the difference between Process Center  and Process Server?
+   
+   Process center server: It is a 'development server'.Whatever we run or debug any BPD/service in the process designer it will execute in the process center server                           only (Dev)
+   
+   Process Server       : It is a 'runtime server'.When the testing team is executing or business user is executing any process/service/task it will execute in the 
+                          process server.(SIT/UAT/Production)
+
+=======================================================================================================================================================================
+2.What is the purpose of User Management and Group Management in Process Admin Console
+
+  
+   
+   whenever new employees has onboarded in an organization the admin has to create some username and password for them to access the IBM BPM.
+   
+   USER MANAGEMENT:user management is to maintain the user settings.using user management an admin can do the following tasks
+   1.ADD new users to access the IBM BPM.
+   2.UPDATE username,fullname,password of existing users.
+   3.Delete users
+
+    In General, Organizations use LDAP Integration instead of user management
+    
+    
+   GROUP MANAGEMENT:Group management creates groups for security
+
+   1)Admin can add new groups using group management.
+   The developers who are working  under a project has a group and the admin add this group to "tw_authors".When a new developer has onboarded to this
+   project admin add him directly to the tw_authors group.Instead of adding to the tw_authors admin can him to the group working on that project.
+   2)As per business.We can request the administrator to add new groups.
+   3)Admin can create/Delete groups.
+  
+  NOTE:Inorder to access the process designer to develop a project the developer must be a part of "tw_authors" group.This is an IBM provided group .
+       Organizations may use User Directory / Integrate with LDAP (Light weight Access Protocol)
+  
+
+   
+=======================================================================================================================================================================
+3.Where Admin can see most expensive process/Services.How admin can halt long running service
+
+   when a developer had written a bad logic the process or service keep on executing.this should not happen because this will down the server.so the admin has to halt    execution of this process or a service.
+   1.admin has to login to the process admin console.
+
+   2.then we find "IBM BPM admin","user management","monitoring","event manger","admin tools","Saved search tools".
+
+   3.click on the "monitoring".then we find a drop down list "instrumentation","process monitor".
+
+   4.click on "process monitor".we can see the most expensive services,most expensive processes and how much time the process or service has taken to execute.
+
+   5.if a process or service is keep on executing click on the process or service name directly it will take to process or services tab.here there is an option "HALT"      to halt the process or service.
+   
+=======================================================================================================================================================================
+4.What is the purpose of Monitor and blackout period in EM of Process Admin Console
+   The purpose of monitor is to check the status of EM(event manager) job.
+   when the BPM is receiving information from external system the status is in green color.
+   when the admin click on "paused" BPM will not receive data until clicks on "resume".
+   
+
+   Blackout periods:Whenever we are deploying the snapshot into the higher environment we need to migrate the instances.While migrating the instances no system tasks      should execute.
+   If anything is executing parallely then instance migration will get fail.so what the adminstrator has to set some blackout period.During this blackout period    no system tasks will execute.
+
+=======================================================================================================================================================================
+5.How Admin can deploy/Install snapshot(.twx) in online and offline server
+   
+   INSTALLING A SNAPSHOT IN ONLINE SERVER:
+   1.ADMIN has to login to the "PROCESS CENTER CONSOLE" OR "PROCESS CENTER".
+   2.In the "process apps" tab it will display the list of process apps.
+   3.Click on the process app name 
+   4.Go to "SNAPSHOT"option.It will display the list of snapshots related to that process app.
+   5.Go to required snapshot and click on "INSTALL".
+   6.After clicking on install it will show the list of servers.select anyone of the online servers.
+   7.If the previous version of the snapshot is installed instances should migrate.Select "MIGRATE INSTANCES" OR u can select "LEAVE" OR "DELETE".
+   8.select "MIGRATE INSTANCES" If want to migrate the instances.
+   9.Click on "INSTALLATION PACKAGE".It will create an installation package
+    
+   note:a)when we use "migrate instances" the older snapshot is deacivated by the system and the installed snapshot will be active,default.
+        b)If we "leave" the instances the older snapshot is in "active,default" state and admin has to make the newer version of the snapshot as "active,default" and "deactivate" the older one manually.   
+   
+   INSTALLING A SNAPSHOT IN OFFLINE SERVER:
+   1.ADMIN has to login to the "PROCESS CENTER CONSOLE" OR "PROCESS CENTER".
+   2.In the "process apps" tab it will display the list of process apps.
+   3.Click on the process app name 
+   4.Go to "SNAPSHOT"option.It will display the list of snapshots related to that process app.
+   5.Go to required snapshot and click on "INSTALL".
+   6.After clicking on install it will show the list of servers.select anyone of the Offline server.
+   7.If the previous version of the snapshot is installed it will dropdown.Select "MIGRATE INSTANCES" OR u can select "LEAVE" OR "DELETE".
+   8.select "MIGRATE INSTANCES" If want to migrate the instances.
+   9.Click on "INSTALLATION PACKAGE".
+     Because of a offine server only the pacakge is created.To install in the Offline server admin has to run some script based commands using a tool called "PUTTY"(if      BPM Installed on Linux Environment or admin will run scripts in Command promt if BPM is installed on Windows OS).
+     
+=======================================================================================================================================================================
+6.How many active default snapshots exist for a perticular process app in process server
+   
+   For a process app there will be only "ONE" active,default snapshot.
+   There may be many active snapshots for a process app.But only active default snapshot only running in Process Server (SIT/UAT/Prod)
+
+=======================================================================================================================================================================
+7.How can you create a process app.Can you import a process app which has same acronym which already exist
+
+   Steps to create a process app:
+   1.Login to process center console.
+   2.on the right hand side there is a option "CREATE NEW PROCESS APP".Click on it.
+   3.In the create new process app window give "name" for the process app,"acronym" and "description."
+   4.The "acronym" of the process app should not match with other process apps acronyms.The acronym takes   7 characters only.The process app name may with other    process app name.It does not create any issue.
+   5.Click on create.
+     
+   we cannot import a process app which has the same acronym.In Process Center Console or Process Center at right hand side we have an otpion to import the process 
+   app.It expects .twx,.zip format.
+  
+   we can create the process app from process center also.
+  
+=======================================================================================================================================================================
+8.How can you archive a process appp. Can a process app be deleted?
+    
+   Only admin can archive a process app because as a developer we cannot see the "MANAGE" tab.
+
+   1.Login to the process center console or go to process center from process designer.
+   2.Click on the process app that is to be archived from the list of process apps.
+   3.Go to the "MANAGE" option.
+   4.On the right hand side there is an option "ARCHIVE PROCESS APP" and click on it.
+   5.The process app will be archived.
+
+Once a process app is archived.It is eligible for deletion.This feature is not available before 7.5 Product
+In process Center/Process Center console if we go to archived tab you can see archived process apps.They are two options either you can restore or delete a proces app
+   
+=======================================================================================================================================================================
+9.can a snapshot be archived?
+   
+   A snapshot can be archived.
+   1.Login to the process center console or go to process center from process designer.
+   2.Click on the process app related to the snapshot that is to be archived.
+   3.Go to the "SNAPSHOTS".It will display the list of snapshots.
+   4.From the list goto the snapshot that is to be archived.On the right side of the snapshot name there is a dropdown is there.click on the dropdown.
+   5.In the dropdown list clickon "ARCHIVE".
+   6.You cannot delete a named snapshot from process center/process center console. Admin will set up some cron jobs at backend to delete named snapshot.
+
+=======================================================================================================================================================================
+10.How can you provide read/write access to a process app
+   
+   1.Admin has to login in the process center console.
+   2.click on the required process app.
+   3.Goto "MANAGE" option.
+   4.on the bottom there is "ADD USER","ADD GROUP".
+   5.click on "ADD USER".A window will open.In that enter the name in "search for name" text field and click on add.
+   6.By default "READ" access is provided.
+   7.Check on "WRITE" to provide write access.
+   
+=======================================================================================================================================================================
+
+1.For conditional/unconditional split and join which type of gateway is used
+   
+   CONDITIONAL SPLIT:For conditional split and Join "inclusive gateway" is used.
+   UNCONDITIONAL SPLIT:For unconditional split and join "PARALLEL GATEWAY" is used.
+   
+   NOTE:For join it is better to use inclusive gateway.
+=====================================================================================================================================================================================
+2.In what scenarios you will use Event Gateway
+
+    Whenever there is a requirement like during the execution of a process the BPD has to
+    receive a message within given time.If the message is not received within timer will fire.
+=====================================================================================================================================================================================
+3.What is the purpose of Event Subprocess.
+  A Event Subprocess is an independent activity that can be placed in anywhere in the BPD.
+  Event Suprocess starts with Message,Error Event and Timer Event (all are intermediate Events).
+  
+========================================================================================================================================================================================
+14.How can you change due date of instance and task
+   
+   CHANGING INSTANCE DUE DATE: Goto the overview tab.On the right hand side there is advanced.
+                               Under instance name there is a text field "DUE IN".
+                               Goto due in and set with respect to hours,days,minutes as per the requirement.
+   CHANGING DUE DATE OF TASK: In the BPD select the activity to which the timer is attached.
+                              Goto implementation.In the priority settings goto due in and set the due date or else we can map with the variables.
+=========================================================================================================================================================================================
+5.How Timer Event can be used.
+   Timer event is used to set a delay between the activities.A timer event can be used as a stand alone between the activities.
+   It can be attached to a particular activity.Custom date is disabled for after start of process or sub process.
+=============================================================================================================================================================================================
+6.When a timer is attached to activity.What is purpose of interrupt activity and repeatable options
+
+  INTERRUPT ACTIVITY:Let us suppose i have attached a timer event to an activity and the that activity has a coach.If i want the user to work on the task even the timer has fired
+                     i should uncheck the interrupt activity.That means the task will be in the user inbox even if he did not work within time.
+
+  REPEATABLE:If i check the repeatable checkbox,suppose the user did not work on a task the system task or some other back end team will send a notification to the user 
+             that there is a task is pending in his inbox in regular intervals of time.
+====================================================================================================================================================================================             
+7.How can you fire a timer by configuring custom date.What are the various options you can see in timers
+   CONFIGURING CUSTOM DATE: 1)Take an activity in the BPD and convert into script.
+                            2)In the Implemantation of the script Initialize the date.
+                              tw.local.todate=new tw.local.Date(); or
+                              tw.local.todate=new TWDate();----It will get the current system date
+                            3)tw.local.todate.setHours(hours); in the hours we have to set the hours.
+                              tw.local.todate.setHours(tw.local.toDate.getHours()+24);----will get tomorrow date.
+                            4)select the timer and goto implementation.In the timer properties select the "before custom date" or "after custom date"
+                            5)Before custom date means the timer will trigger before the data has changed.In the before difference give the time before how much
+                              time the timer should fire before the date going to change.if before custom date is selected.
+                            6)After custom date means the timer will trigger after the date has changed.In the after difference give the time after how much
+                              time the timer should fire after the date has changed.if after custom date is selected.
+
+   TIMER OPTIONS:After the start of parent process or sub process
+                 Before custom date
+                 After custom date
+                 Before  due date
+                 After due date
+                 After start of step.
+                          
+===============================================================================================================================================================
+8.What is the purpose of Pre and Post Assignment
+
+   PRE ASSIGNMENT: It is used to change the value of a variable before the execution of activity/script etc.
+   
+   POST ASSIGNMENT: It is used to change the value of a variable after the execution of a activiey/script
+==============================================================================================================================================================
+                 
+9.What are the various types of activities
+   The various types of activities are:
+   
+   1)USER TASK: User task is used to perform a user task using a human interface
+   2)SYSTEM TASK: System task is performed by the system itself without any human interversion.
+   3)LINKED PROCESS: It is used to call a BPD from another BPD.
+   4)DYNAMIC SUB PROCESS: It is used to call the Different BPD's from another BPD based on a condition.
+   5)SCRIPT: It is used to execute a java script.
+   6)DECISION TASK: A task that returns the results of a decision,as implemented by a rule.
+   7)NONE: A task which has no specific implementation or performer.At runtime it will execute immediately after starts.
+   8)EVENT SUB PROCESS: This will be enabled when there is no connections between the activities.This is used for event handling.
+==========================================================================================================================================================		
+10.What are various types of event you can see in IBM BPM
+   
+   1)START EVENT:Used to model the start of a process.we can manually start a process or by using an incomin message also we can start the process.
+     The start event can be used as:
+     a)NONE
+     b)START MESSAGE EVENT(SME)
+     c)CONTENT-------------------------It is not present in V7.X
+     d)ADHOC
+   
+   2)INTERMMEDIATE EVENT:This is used in between two activities.This is used in "receiving" and "sending" options.
+     a)INTERMMEDIATE MESSAGE EVENT.
+     b)CONTENT.
+     c)TIMER.
+     d)TRACKING.
+   
+   3)END EVENT:This is used to terminate the process and the running instances.
+     a)NONE
+     b)END MESSAGE EVENT
+     c)ERROR
+     d)TERMINATE.
+==========================================================================================================================================================
+
+1.What are the differences between sub process and Linked Process
+   Subprocess:
+   1.Inorder to reduce complexity in view of a BPD We are going to subprocess
+   2.Subprocess is not reusable
+   3.Input and output variables created for parent process are accessable to child process.
+     But child process cannot create any input and output variable.So Subproces don't have any datamapping
+   4.The private variables created for parent process are accessable to child process but private variables created for child process
+     are not accessable to parent process.
+   5.EPV's linked in parent process are not reflected in child process. If you need EPV in child process you have to link EPV Explicitly
+   
+   Linked Process:
+   1.Inorder to call one bpd to other bpd we go for linked process
+   2.Linked process is reusable
+   3.Linked Process has datamapping
+==============================================================================================================================================================
+2.What is the purpose of Dynamic sub process
+  
+  DYNAMIC SUB PROCESS: It is used call one BPD to another BPD dynamically(I can call BPD Randomly based on some condition)
+===============================================================================================================================================================
+3.What is UCA.Types of UCA.
+  
+  UCA: 1)UCA stands for undercover agent.
+       2)UCA is used to send and receive messages within teamworks.
+       
+  TYPES OF UCA's:
+       1)On event
+       2)Time Elapsed
+=================================================================================================================================================================
+       
+4.How can you use SME in your BPD
+  
+ When a BPD Starts with SME, to that SME UCA to be attached (Time Elapsed/On Event).
+ Whenever UCA Triggers BPD will be started.
+===================================================================================================================================================================
+5.Difference between consume message and durable subscription
+  
+  durable subscription: In IME(Intermediate Message Event) durable suscription will come into the picture.
+                        (i) If you uncheck the durable subscription: If UCA runs first and later BPD runs.Token will be still waiting at IME.
+                            Again waiting for UCA to trigger
+
+                        (ii)If you check durable subscription: If UCA Runs first and later BPD Runs.Event Manager will hld the correlation key.
+                            So when token comes to IME it will automatically move forward
+                        
+                      
+  consume message:
+
+        let us suppose a BPD has two message events,say start message event and intermmediate message event and these message events are attached with the 
+         same UCA. If we check the consume message then the UCA will trigger only once at the first message event and the second one will not trigger.
+         If we don't check consume message both the UCA's will trigger
+=================================================================================================================================================================================
+
+6.How can you use IME in your BPD for Sending and receiving messages.Concept of correlation key
+
+  INTERMEDIATE MESSAGE EVENT(ime):1)IME must be used between two activities(stand alone) or
+                                   2)It can be attached to a particular activity 
+                                  
+  IME for sending messages:Inorder to start another BPD during the intermediate stage of a process IME is used in sending mode.
+  IME for receiving messages:It is used to receive messages from an external system during the process execution.
+  
+  CORRELATION KEY:1)The concept of correlation key comes into picture when IME is used in the BPD.
+                  2)Correlation key is like a password.
+                  3)Whatever the correlation key which we have defined in the UCA it shold match with the correlation key which we have taken
+                    in the BPD.Otherwise UCA will not trigger  
+
+=================================================================================================================================================================================
+7.How can you configure End message Event in your BPD
+  
+ End Message Event is used at end of a BPD.If other BPD starting with SME listening to the UCA.
+ After the execution of 1st BPD, 2nd BPD will start.For the both BPD's two instances will be created.
+ From BPD1 you can pass Data to BPD2  
+
+  
+=================================================================================================================================================================================
+8.When an IME Attached to activity what is the purpose of interrupt activity and repeatable checkbox
+  
+If we attach IME to an activity, we can found two options interrupt or repeatable
+
+1.Interrupt - If we check the interrupt activity. Whenever UCA runs with correct correlationkey. It will close the task and token will be moved to IME path.
+              If we don't check the interrupt activity.Whenever UCA runs with correct correlation key.It will not close the current task but token will
+              be moved to IME Path.
+2.Repeatable - If this checked this wil repeatedly trigger the UCA.Using Time elapsed UCA you can configure the time
+
+======================================================================================================================================================================================
+
+9.What is the purpose of Time based UCA?
+  
+  Whenever we configure time based UCA.It will trigger based on the timer UCA configuration.
+  Minimum configured time is 5min.
+  
+====================================================================================================================================================================================
+10.What are various types of Gateways.
+   
+   1.EXCLUSIVE GATEWAY:Exclusive Gateway will evaluate the condition and gives only one outcome.
+   2.INCLUSIVE GATEWAY:It has multiple outcomes.It will check all the the paths that are satisfying the given condition.
+                       It can be used as a conditional split and conditional join.It is also caleed as OR gateway.
+   3.PARALLEL GATEWAY:Multiple outcomes without any condition.This is also called as AND gateway.
+                      It can be used as split and join.When it is used as a join it will wait for all the tasks to be completed.Otherwise it doesnt goto end.
+   4.EVENT GATEWAY:   Event gateway is by default comes with IME and TIMER event.Any one path is  followed
+====================================================================================================================================================================================
+                   
+
+1.How tracks can be enabled? How can you create track/workspace for a process App
+Ans) Tracks allow you to create parallel development workspace.In Process Center Console/process Center on clicking on the manage tab
+     you can enable the tracks.After enabling the track you can create the track for the snapshot which you want.
+
+   
+======================================================================================================================================================================  
+2.In which scenario you will go with creation of tracks
+       
+   Tracks allow parallel developement. If phase1 of the project is completed. If phase 1 project went to production.Mean if you extended your project as per phase2 requirement.say for example 80% of phase 2 implementation completed. If you get an incident from prod team to fix it.
+At that point of time we can create track for production fixes.
+
+=======================================================================================================================================================================
+
+3.What are the various ways of doing instances migration during deployment?Purpose of instance migration?
+   
+   There are 2 ways to migrate the instances.
+
+   1.USING MIGRATE OPTION:
+     While installing/creating installation package  there is an option "MIGRATE","LEAVE","DELETE".click on "MIGRATE",it will migrate all the running instances from 
+     older snapshot to newer snapshot and system will make the newer snapshot as "active,default" and deactivate older snapshot
+  
+   2.MIGRATE INFLIGHT DATA:
+     when we leave the instances while installing a newer version of the snapshot the running instances will not migrate to the newer version of snapshot.
+     If we want the instances of the older snapshot  to migrate into newer snapshot there is an option called "MIGRATE INFLIGHT DATA."
+     ADMIN has to login to the process admin console..
+     goto the installed apps.
+     Make the newer snapshot Active,default.    
+     click on the newer snapshot.Select the option "migrate inflight data" 
+     It will display the list of older snapshots.From that list select the snapshot from which we want migrate the instances and click on migrate.
+     After all instances are migrated admin will deactivate the older snapshot.
+=======================================================================================================================================================================
+4.What are toolkits? How can you add toolkit as a dependency to your process app
+   Toolkits are reusable components. IBM Provided toolkits are 1.System Data 2. Coaches
+   we can create our own toolkits for general exception handling,logging,common services etc.So that all the process apps can directly use this
+   by adding as dependency.This will reduce the project duration and projects can be completed in less time
+   
+   Toolkits enable mutiple process apps to share process and service components.
+   The sharing of a toolkit’s components with a process app or another toolkit is known as a dependency
+   
+   adding toolkit as a dependency to the process app:
+   
+   1.login to the process designer.
+   2.go to process center.
+   3.select the process app and open in designer.
+   4.go to tolkits tab and click on "+" button.
+   5.From the Add Dependency window, click to select the snapshot of the toolkit that you want.
+
+=======================================================================================================================================================================
+25.When ever new changes done in toolkit how it can reflected in your process app 
+   
+   Whenever new snapshot is taken in toolkit. This will be reflected in your process app with yellow color triangle symbol.
+   If you want new features of toolkit you can upgrade to latest version.If you don't want you can ignore the new version of toolkit 
+
+=======================================================================================================================================================================
+26.What is the purpose of view statastics in performance admin console
+  
+   View statistics shows the number of rows in each of the physical table and views in the business performance server database.we an the number of tracking             groups,tracking fields and tracking points.
+
+=======================================================================================================================================================================
+27.What is the purpose of process portal.
+   Process portal is end user interface.
+
+   The end user login into the process portal and if any tasks are there to complete,he will do his task and submit to the another team.
+   The team leader or manager can monitor the team performance and process performance using process portal.
+
+=======================================================================================================================================================================
+28.What is the purose of LSW Tables.Can you please explain about some of the LSW Tables like LSW_BPD_INSTNCE, LSW_TASK 
+   
+   LSW tables are nothing but Lombardi software tables which are predefined tables.these tables are present in BPMDB & PDWDB of the process center/Process Server.
+   
+   LSW_BPD_INSTANCE: when we run a BPD it will make an entry in the LSW_BPD_INSTANCE table .The instance id,instance name,status,snapshot,last modified,date of        creation,due date such information is stored in this table.
+                     when we run the BPD the instance id,snapshot,status,instance name are fetched from this table. 
+    
+   LSW_TASK:This is also an internal table in the BPMDB.Whenever a task is created for an instance, BPM will insert the task details in this table.The TASK_ID,due    
+               date,priority,under which snapshot it is runing,status,manager_id,group_id,user_id all such information is stored in this table.
+=======================================================================================================================================================================
+29.How can you expose your BPD to process portal in launch pad
+
+   Go to the overview tab of he BPD
+   On the bottom of the right hand side there is "exposing".Under that goto "EXPOSING TO START".
+   click on the "SELECT" BUTTON.It will display the list of teams.
+   Select the team for which we want to expose the BPD in Launch pad of the proces portal.
+
+=======================================================================================================================================================================
+30.Why you are disabling auto tracking in BPD
+
+   If we enable auto tracking,Whenever a process or service is executing in the process center server/Process server the Performance dataware house server(PDW Server)    will parallely track the data for generating        reports.As PDWDB is parallely tracking the data there will be some load on th server and will create some performance issues.So it is always recommended to uncheck     the auto tracking.
+
+=======================================================================================================================================================================
+31.What are the differences between EPV's and Environment variables.
+
+   1.EPV stands for Exposed process variable or value               | 1.ENV stands for environmental variable
+   2.EPV's are business related constants which may change          | 2.ENV's are non business related constants whenever the code is moving from one environment to 
+     in future                                                      |   another environment some variables might change such variables are kept in ENV's                                                                                    |
+   3.EPV can be changed through process admin console and it can be | 3.ENV's can also be changed through process admin console or via code.
+     changed via code                                               | 
+   4.EPV's can be scheduled.                                        | 4.ENV's cannot be scheduled. 
+   5.Inorder to access the the EPv we should 'link' epv             | 5.ENV's are directly accessible.                              
+=======================================================================================================================================================================
+32.How admin can EPV and Environment variables from process admin console
+
+   CHANGING EPV FROM PROCES ADMIN CONSOLE:
+
+   1.Login to the process admin console.
+   2.Click on "server admin".
+   3.Go to "admin tools".A dropdown will appear contains "manage EPV's".
+   4.Click on "MANAGE EPV's".
+   5.click on the "SELECT SNAPSHOT" option.It will display the list of snapshots.From list select the desired snapshot.
+   6.Under that select snapshot "SELECT EPV" is there.click on "select epv".it will display list of EPV's related to that snapshot.select the to be change.
+   7.On clicking the required EPV it will display the name of the EPv and current value.
+   8.To change the EPV value click on "NEW".A window will be open.
+   9.In that window goto "VALUE" and give the new EPV value.
+   10.Give the time and date from which date and from what time EPV should change and click on "OK".
+
+   NOTE:while developing select the "TIP SNAPSHOT". 
+
+   CHANGING ENV FROM PROCESS ADMIN CONSOLE:
+   
+   1.Inorder to change the env login to the process admin console.
+   2.click on the "INSTALLED APPS".select the required "ACTIVE,DEFAULT" process app.
+   3.Then we find EXPOSING | TEAM BUILFINGS | SERVERS | ENVIRONMENTAL VARIABLES | EVENT SUBSCRIPTIONS.
+   4.select environment variables.Then we find all the environments variables created. It you are in prod admin console.
+     It will show envioronment variable related to production only
+                                         1.DATA_SOURCE
+                                         2.SCHEMA_NAME
+                                         
+   5.GO TO SCHEMA_NAME and change the name.
+
+=======================================================================================================================================================================
+33.can a EPV can be changed vicode? what is the syntax
+
+   Yes a EPV ca be changed via code.
+   syntax:tw.epv.name of the epv.variable name.update("updated value",date)
+
+=======================================================================================================================================================================
+34.What are the differences between subprocess and Linked Process
+
+   Subprocess:
+   1.Inorder to reduce complexity in view of a BPD We are going to subprocess
+   2.Subprocess is not reusable
+   3.Input and output variables created for parent process are accessable to child process.
+     But child process cannot create any input and output variable.So Subproces don't have any datamapping
+   4.The private variables created for parent process are accessable to child process but private variables created for child process
+     are not accessable to parent process.
+   5.EPV's linked in parent process are not reflected in child process. If you need EPV in child process you have to link EPV Explicitely
+   
+  Linked Process:
+  1.Inorder to call one bpd to other bpd we go for linked process
+  2.Linked process is reusable
+  3.Linked Process has datamapping
+
+     
+
+
+1.Scenario: Users are coming to bank and providing the details to the front office Team.
+   Front Office team has to open the UI and they has to fill the details(in process portal) on clicking on submit button
+   It should create an Instance in IBM BPM. How can you implement this scenario
+
+   Create a Front Office Team UI and expose it as a launch pad to that team.
+   In Front office team UI after the coach use a server script which contains start process by name java script API.
+   tw.system.startProcessByName("BPDname",Input values should be of Map Data Type)
+   
+   This can also be done by using "UCA" also.But UCA is expensive when compared to "startProcessByName".
+=======================================================================================================================================================================
+2.Scenario: Suppose i am purchasing an electronic item in flipkart i have once i click on paynow after providing bank
+   details.It should interact with payment gateway(3rd party system) and finally you should receive the response.How can
+   You implement this scenario
+
+   This can be achieved by using WSDL.The WSDL will expose the IBM BPM service as a SOAP (Simple Object Access Protocol) callable web service.
+   
+   In order to implement this your 3rd party system has to provide you the WSDL URL.you have to create an integration service, from the pallete drag and drop
+   webservice integration icon and then proceed with the next steps.This type of Webservice integration is called outbound webservice integration
+=======================================================================================================================================================================
+3.Scenario: I don't want BPM Coaches to be used going to implement my screens in Java how can I integrate BPM with Java Screens
+
+   This can be achieved by using "EXTERNAl IMPLEMENTATION".
+   In this external implematation no nedd to build any coaches.All we have to do is simply mention the input and output in the external implementation.
+   After developing external implementation what we have to do is drag and drop these in the BPD and do the data mapping.
+   After running the BPD instance will be created but the run button in the inspector is not enabled to run the task because there is no Human Service associated with     that particular activity.
+   The communication between external Java screen and BPM will be happened through REST API
+
+   You are exposing the task id and related business data.Using saved search your java team can able to show the task in their portal. Initially task is assigned to 
+   assigned to the group.Whenever user clicked on the task at the back end they will call Assign task to me function of REST API. Whenever the user completes the task
+   at back end they are calling finish task of REST API.Finish Task will expect Task Id and JSON (Java Script Object Notation).Again the call will be back to BPM
+   
+=======================================================================================================================================================================
+4.Relationship between primary key and foreign key relationship in DB
+   
+   A primary key foreign key relationship defines a one to many relationship.A foriegn key is a coloumn or a set of columns that references a primary key
+   coloumns in another table.Primary Key is Unique key, 
+=======================================================================================================================================================================
+5.Have you worked on DB Integration if so explain how you connected to Db.
+
+ Inorder to connect to the database, after writing the query/parameters in the SQL Execute/Multiple Statatements specify the Data Source Name which will connect to the  DB. Below is the procedure to create JNDI/Data Source connection in WAS COnsole.This will be taken care by your administrator.
+
+   1)I have to login to the WAS console.
+   2)In the WAS console goto the 'resources'.
+   3)Inside resources click on the "JDBC".
+   4)Inside "JDBC"  click on the "data sources".
+   5)It will display the list of data sorces.In the scope select cluster = single ckuster.
+   6)I have to create an authentication alias ther we will specify the user id and password for connecting to the DB
+   7)For that select anyone of the exixting data sources.
+   8)Then in the related items clcik on the "JAAS - J2C authentication alias".
+   9)Click on "new" to create a new to create new authentication alias.
+  10)Give the alias name in the alias name text field.It should match with the alias name which we have given while creating the application specific DB.
+  11)Give the userid and password.We can write or leave the description and click on apply.
+  12)When we create anything in "WAS" it doesnt save directly.we have to click on "svae directly to master configuration".
+  13)After authentication alias is created i shold create the data source name.
+  14)For that click on "new" button above the ist of data sources.
+  15)Then give the data source name and Jndi name
+  16)select JDBC provider.We can create a new one or selct an existing one(select XA diver).clcik on next
+  17)Then give the data base name and server name.The server name dafault takes the localhost.click on next
+  18)In the authentication security alias give the give the
+            a)authentication alias for XA recovery
+            b)component managed authentication alias
+            c)maping configuration alias
+            d)container managed authenticaation alias.
+  19)click on next and click on finish.
+  20)click on save directory to master configuration.Do the node synchronization by clicking on the "NODES" in the system administrator and click on synchronize.
+  21)Now click on the test connection to check the JNDI connection is successful or not.
+  
+======================================================================================================================================================================= 
+6.Significance of JNDI or Data Source Name 
+
+  Inorder to establish the communication between the database and the BPM this JNDI connection is necessary.In the real time we do not hard code the values and always  
+  fetch/insert/update the data from database.
+=======================================================================================================================================================================
+7.What are various types of Joins in SQL
+
+  The various types of joins in sql are:
+  
+  1)SIMPLE JOIN OR INNER JOIN: Returns all rows when there is atleast one match in both the tables
+  2)LEFT OUTER JOIN: Returns all rows from the left table and matched rows from the right table
+  3)RIGHT OUTER JOIN: Returns all rows from the right table and matched rows from the left table
+  4)FULL: Returns all rows when there is a match in one of the tables
+=======================================================================================================================================================================
+8.SCenario: I am inserting data into 10 tables.Iam using SQL Multiple execute statement.Out of 10 after reaching 6th query there is 
+   an error in insertion(not fitted in column due to large size).What about the 5 sql statement have they inserted.
+
+   No changes will takes place in the database because Upto 5th query whatever the data inserted into the tables will be rollback.
+=======================================================================================================================================================================
+9.What are the best practices you followed while developing a project in IBM BPM at bot BPD and Service Level
+  
+  1)Use less number of activities in system lane.
+  2)Check delete task on completion to delete the entry from LSW_Task table once after completion of system task
+  3)Uncheck tracking in BPD level.
+  4)Dont keep EPV's in a loop
+  5)Never check save execution context in services(script)
+  6)Use sub process or linked process to reduce the complexity of BPD view
+  7)Remove all unused variable.
+  8)While naming the variables use i,o while naming input and output variables
+  9)Dont use any hard coded values in BPD,go with resouce bundle creation
+=======================================================================================================================================================================
+10.What is the difference between simple and Multiinstance looping
+
+                  simple looping            |          multi instance looping
+                                            |
+        1)Here there is a anti clcockwise   | 1)Here there are some three parallel lines 
+          symbol is there in the activity   |   in the activity
+        2)Here loop maximum is there for    | 2)Here start quantity is there.
+          Giving how many times the loop    |
+          should repeat                     |
+        3)We can create a variable          | 3)We can write javascript API in start quantity 
+          In the varaible section and map   |   tw.system.step.counter.
+          here                              | 
+        4)When we are using loop condition  | 4)When we are using flow condition in Multi instance 
+          The looping will takes place when |   looping the looping will take place until the condition
+          The condition is satisfied.       |   is unsatisfied.If the condition is satisfied it will come
+          Otherwise it will come out of the |   out of the loop.
+          loop
+        5)Cancel remaining instances is not | 5)when we select run in parallel canacel remaining instances
+          there                             |   option is enabled.This will cancel the remaining tasks
+=======================================================================================================================================================================
+ 
+1.In MIL what is the difference between run in parallel and sequential looping.
+                 Run in sequential          |          Run in parallel
+                                            |
+        1)When we select "run in sequential"| 1)when we select"run in parallel" the flow condition
+          the flow condition and complex    |   and complex flow condition enables
+          flow condition will get disabled  | 2)All the tasks created at a time and we can 
+        2)The looping will takes place in a |    run the task in any order 
+          sequential manner which means the |    
+          next instance for the activity    |
+          whcih is under looping is created |
+          only after the current instance is|
+          finished.                         |
+       3)No option for like cancel          | 3)here we can cancel  the remaining tasks
+         remaining instances
+=======================================================================================================================================================================
+2.How can you pass start quantity value in MIL 
+  
+  1)we can directly give the value in the text field itself beside start quantity. (or)
+  2)Take a private variable of integer type and map that value in the  start quantity
+     tw.local.variablename
+  3)we can also use javascript api tw.system.step.counter.
+=======================================================================================================================================================================
+3.What are the various ways of converting XML to BO or BO to XML
+
+  We can convert an XML message to BO or BO to XMl message in 2 ways using
+  
+  1)Xpath: We should go for Xpath whenever there  is  a requirement like there are some 'n' tags are there out of which i want only some 'x' tags.
+       Whenever the XML is not properly structured with respect to BO then we go for XPATH
+           
+  2)serializer: when there is a requirement to convert the XML to bo at at a time i will go for serializer.
+                Whenver XML is properly structured with respect to BO then we go for Serializer
+  
+=======================================================================================================================================================================4.Difference between serializer and xpath
+
+  A serializer is used to convert the entire "XML message" to "BO" or vice versa at a time.
+
+  A xpath is used to covert required tags of "XML message" to "BO"
+=======================================================================================================================================================================
+5.Have you worked on Java Integration If yes please explain the steps
+   
+   Importing JAr file:
+   
+   1)Goto the files
+   2)Click on '+' button.
+   3)from the list select 'server file'
+   4)It will ask for file location.There is a browse button to open the file.
+   5)click on finish.
+    
+    we have use an integartion sevice for web service integartion and java integration.
+   1)Create a new integration service
+   2)drag and drop a java integration from the palete.
+   3)Goto the properties.In the definition we can find Jvaclass,method,translate java beans.
+   4)select an appropriate java class from the available classes which consits of required methods.
+   5)take the integration service and select the required method from the methods and do the data mapping.
+   6)If a method is not returning anything then check the translate javabeans ceckbox.
+=======================================================================================================================================================================
+6.What are the various ways of exposing a Human Service
+   
+   A human service can be exposed in 4 ways.They are:
+
+   1)Not exposed:This is dafault option.
+      
+   2)Administrative service:When we expose a service as a Administrative service The service is available in the process admin console for the selected team.
+
+   3)Startable service:the service is available in the launch pad bar of the process portal.
+
+   4)Dashboard:The service is available in the dashboard menu of the process portal.
+   
+   5)URL:The service is available in the form a URL.we can share this url for the people whoever want it.
+=======================================================================================================================================================================
+7.Scenario: Depending upon userchoice i want to change the language dynamically on the sceen.How can i acheive this functionality in IBM BPM
+
+   This can be done by using the javascript API "tw.system.user.setAttributeValue('Locale','Locale code')"
+
+=======================================================================================================================================================================
+8.What are the various visibility options available in IBM BPM
+  Same as Parent
+  Required
+  Editable
+  Disable
+  Hidden
+  None
+=======================================================================================================================================================================
+9.What are coach views and how they can be used
+
+   Coaches views are reusable templates/Componenet that are used to build the UI
+=======================================================================================================================================================================
+10.Have you worked on AJAX implementation? In which scenario you went for AJAX
+
+   An ajax service can be linked to a coach to to perform special operations such as automatically populating drop down lists and enabling type ahead.
+
+   Let us assume that i have an UI that contains a drop down list of universities.If i selected a university it should populate the colleges affliated to that             university.In such scenarios we should use ajax service.
+=======================================================================================================================================================================
+
+
+1.Changes between 7.x and 8.x in implementation of AJAX Service
+  In 7.x AJAX have default input is inputVar(String) and output is outputVar(NameValuePair)(List)
+  In 8.x Ajax have default input is text(String) and output is results(ANY)(List)
+=======================================================================================================================================================================
+2.Have you anytime deployed a snapshot in Online/Offline server or Do you aware of this procedure
+
+    
+   INSTALLING A SNAPSHOT IN ONLINE SERVER:
+   1.ADMIN has to login to the "PROCESS CENTER CONSOLE" OR "PROCESS CENTER".
+   2.In the "process apps" tab it will display the list of process apps.
+   3.select the required process app.
+   4.Go to "SNAPSHOT"option.It will display the list of snapshots related to that process app.
+   5.Go to required snapshot and click on "INSTALL".
+   6.After clicking on install it will show the list of servers.select anyone of the online servers.
+   7.If the previous version of the snapshot is installed instances should migrate.Select "MIGRATE INSTANCES" OR u can select "LEAVE" OR "DELETE".
+   8.select "MIGRATE INSTANCES" If want to migrate the instances.
+   9.Click on "INSTALLATION PACKAGE".It will create an installation package
+    
+   note:a)when we use "migrate instances" the older snapshot is deacivated by the system and the installed snapshot will be active,default.
+        b)If we "leave" the instances the older snapshot is in "active,default" state and admin has to make the newer version of the snapshot as "active,default"                
+          and "deactivate" the older one manually.   
+   
+   INSTALLING A SNAPSHOT IN OFFLINE SERVER:
+   1.ADMIN has to login to the "PROCESS CENTER CONSOLE" OR "PROCESS CENTER".
+   2.In the "process apps" tab it will display the list of process apps.
+   3.select the required process app.
+   4.Go to "SNAPSHOT"option.It will display the list of snapshots related to that process app.
+   5.Go to required snapshot and click on "INSTALL".
+   6.After clicking on install it will show the list of servers.select anyone of the offline server
+   7.If the previous version of the snapshot is installed it will dropdown.Select "MIGRATE INSTANCES" OR u can select "LEAVE" OR "DELETE".
+   8.select "MIGRATE INSTANCES" If want to migrate the instances.
+   9.Click on "INSTALLATION PACKAGE".
+     Because of a offine server only the pacakge is created.To install in the Offline server admin has to run some script based commands using a tool called "PUTTY"(if     
+     BPM Installed on Linux Environment or admin will run scripts in Command promt if BPM is installed on Windows OS).
+
+=======================================================================================================================================================================
+3.While deploying a snapshot in prod environment what are the necessary actions has to be take to go the deployment smoothly
+  Ofcourse production is offline server.FOr deploying Admin will follow the steps mentioned in above quesion.
+  Inorder to go the deployment smoothly admin has to pause the EM nodes before starting the deployment and also it is better to set blackout period before deployment.
+  After deploying he can remove the blackout period and resume the EM's.
+   
+=======================================================================================================================================================================
+4.Have you worked on Tracks? Advantage of tracks or workspaces
+
+   If the team is developing a complex project in agile methodology the project is divided into phases so that there is no scope to missing minor requirements.
+   
+   Tracks allow parallel developement. If phase1 of the project is completed. If phase 1 project went to production.Meanwhile if you extended your project as per       phase2 requirement.say for example 80% of phase 2 implementation completed. If you get an incident from prod team to fix it.
+   At that point of time we can create track for production fix.
+   we can divide our team to work paralley on phase2 development and phase1 prod fix
+=======================================================================================================================================================================
+5.Scenario: In Dev Environment under main track my code got corrupted i want to make my other track as default track and remove my main track
+   How can i acheive this
+
+   1) I will goto the process center console.
+   2) I will click on the required process app that contains the tracks
+   3) On the left there is a drop down called tracks.from that list click on the required track
+   4) Slect the option "make as default" and click on finish.
+=======================================================================================================================================================================
+6.In which scenarios you use Adhoc Event(deprecated from 8.5.5 onwared)
+
+   Adhoc event enables the end user to cancel the customer order at any time during the ordering process.
+
+   End user can initiate the Adhoc event from process portal.
+=======================================================================================================================================================================
+7.What is the difference between Business Object and shared Business OBject
+   
+   BUSINESS OBJECT: Suppose i have a gateway having 2 paths and i have changed a variable value in one path then it doesnt reflect in the other path.
+
+   SHARED OBJECT: Suppose i have a gateway having 2 paths and i have changed a variable value in one path then changes reflects in the other path also.
+=======================================================================================================================================================================
+8.Scenario: I have two variables if A>B , i want to complete the instance and if A<B or A==B i have to terminate the instance how can i implement
+  this functionality
+
+   This can be achieved by using "TREMINATE EVENT".
+   I will take a exclusive gate way and for one path i wil connect an activity and for another path i will take terminate event.
+   If the condition is true then the instance will be completed and  if the condition is false it will terminate all the instances and the status will be "4" 
+   in the LSW_BPD_table (Execution State column)
+=======================================================================================================================================================================
+9.I want to read or write data in notepad file what are the IBM Provided connectors
+   
+   CONNECTOR FOR WRITING DATA IN NOTEPAD: "write text file".
+
+   CONNECTOR FOR READING DATA FROM NOTEPAD: "Read text file".
+=======================================================================================================================================================================
+10.Have you worked on Exception Handling? how you used in your project  
+
+   yes.Exception handling is not specific to a prticular process app.The exception handling frame work is developed in a tollkit and all process apps make use of it.
+
+   At Service level we can catch and throw the error and at the BPD Level we can route to the back office team.
+   At Service Level: tw.system.error(XML Element)
+   At BPD Level: tw.system.step.error(XML Element)
+=======================================================================================================================================================================
+
+1.Whate are differences you observed between routing in 7.x and assignments in 8.x
+
+   1. In 7.x we have saved search option in process portal. In 8.x we have it in process admin console
+   2. In 7.x we have routing. In 8.x the name changed to Assignments. Custom Routing,Routing policy,List of users deprecated in 8.x
+      and in 8.x concept of team filter is introduced where we can create a dynamic group.
+   3. In 7.x We have Adhoc Event. This is deprecated from 8.5.5 onwards
+   4. In 7.x We have participant groups, In 8.x we have teams
+   5. In 7.x we have coaches. In 8.x these coaches are renamed as heritage coaches and new client side coaches are introduced from 8.5.5
+   
+=======================================================================================================================================================================
+2.What is the purpose of Team Filter. how you implemented it and in which scenario  
+
+   This team filter service is provided in 8.X version to make use of the depricated features in 7.X.
+   
+   If i want only some particular members of a team have to work on a task i will go with team filter service.
+   
+   1)In the asignments go to the team filter service and click on new or we can select an existing service.
+   2)It will open a new integration service,give a name and click on finish
+   3)By defaut the team filter service consists of input variable("original team") and output variable("filtered team").we should not delete these varaibles.
+   4)Take a server script in the integration service.In the server script we have to write the logic according to the requirement.
+=======================================================================================================================================================================
+3.What is the difference between inbound and outbound webservice integration
+
+   INBOUND WEB SERVICE: If we are exposing IBM BPM service as a SOAP callable web service that means a third means a third party system is receiving our service.
+
+   OUTBOUND WEB SERVICE: In outbound web service IBM BPM is using a third party WSDL 
+=======================================================================================================================================================================
+4.How will implement inbound/Outbound integration in your project
+
+   1) I will create a web service through  the Implementation
+   2) In the operations click on "add"
+   3) I will select the service that i want to add
+   4) Give a name i the operation name text field.
+   5) After adding the service a WSDL url is created automatically.
+   6)i will share this WSDL URL whoever want it.
+     The third party system can access this service though a SOAP UI.
+  
+   OUTBOUND WEB SERVICE INTEGRATION:
+
+   we can call athird party system using outbound webservice integration.Thre is nothing to do here just ask the third party system o provide the wsdl url
+   1)go to the Proces designer.
+   2)take a new integration service
+   3)drag and drop a Web service fro palete to canvas.
+   4)Then select the web service and goto the implemeantaion in the properties.
+   5)In the discovery scheme select the "Inline configuration"
+   6)Paste the WSDL URL in the WSDL URL text box or we can browse it by clicking on the browse button.
+   7)Click on the "discovery" button then what are all the operations that are present in the wsdl url loads into the BPM.
+   8)Click on "generate types" button,the it wil create the data types that are required.no need to create any BO or variables.
+   9)Goto data mapping and click on automatic data mapping.It will create private variables. 
+=======================================================================================================================================================================
+5.What is the difference between pass by value and pass by reference in IBM BPM
+
+   PASS BY VALUE: Process Invokes a service
+   PASS BY Reference:Process invokes a subprocess/ Service invokes nested service
+=======================================================================================================================================================================
+6.Do you have knowledge on REST API? In which scenarios you went for REST API
+
+   yes.Suppsoe If i dont want to use use BPM screens in my process apps and i want to use some java screens then i will use REST api.
+   The java screens are implemented by using external implemantation.when we are using external implementation the run button the inspector mode to run the task is        
+           disabled.So inorder to assing the task and finish the task i should use some REST API functions like "assign task to me" and "finish task."
+
+   we can start a process using rest api.
+
+   REST API is more useful in identifying/investigating production issues.
+=====================================================================================================================================================================
+7.What is the use of this java script API tw.system.executeServiceByName 
+
+   This is used to execute a service.
+=======================================================================================================================================================================
+8.In Timers Event Implementation you have something called repeatable
+   How does repetable works
+
+   REPEATABLE CHECKBOX:If timer is attached to a perticular activity in the implementation of timer if you uncheck the interrupt activity then it will allow you to 
+   select repeatable option.In scenarios link email has to be sent to the person for every 1 hour till the user works on the task we can go with repeatable option.
+=======================================================================================================================================================================
+9.At BPD Level have you heard about reschedule timer tw.system.reschedule timer
+  Using this you can reschedule the timer
+======================================================================================================================================================================
+10.There are two process Apps i want to call two BPD's which in different process apps
+   using same UCA. How you configure UCA
+
+   This can be done by using toolkits.
+   1)Create an UCA in the toolkit and take the snapshot of that UCA.
+   2)Then goto the process apps and add the toolkit that contains the UCA as a dependency.
+   3)Create a BPD with start message event and attch the UCA.
+   4)Open other process app and do the same.
+   5)Run the UCA in toolkit.The instances will be created in the process apps.
+
+   NOTE:We should add dependency of the toolkit otherwise the UCA of toolkit will not be shown when we  click on select for attaching the UCA.
+=======================================================================================================================================================================
+1.Have you worked on Tracking.How will generate tracking report in PDW DB
+
+   No.Because of performance issues it is a best practice to uncheck the tracking.
+   If you want tracking, from the variable section you can enable the tracking for the variable you want to track.
+   or you can create a tracking group and add the variables.With the tracking group name table will be created in performance dataware house database
+   and with the varibles of the tracking group columns wil be created.
+=======================================================================================================================================================================
+2.Have you customized process portal?
+  No.We have a shared code to create the views.So we directly created the views using that toolkit
+=======================================================================================================================================================================
+3.I have an eclipse, i have written some code.I want that code to be used in IBM BPM.
+  Take a Jar file and import as server file in IBM BPM file section.
+  Use Java integration for using the functionality in BPM
+=======================================================================================================================================================================
+4.Have you aware of Logging in IBM BPM.When you start or stop a server what are the logs updated
+ 
+  If you go and check system.out logs there you can see when you start the server e business id will be created.
+
+  In our application we have log4J
+  INFO
+  WARN
+  DEBUG
+  ERROR
+=======================================================================================================================================================================
+5.i have written some infinite loop in my service and i have run the code how admin will handle.
+   Can you halt the service
+  
+   1.admin has to login to the process admin console.
+
+   2.then we find "IBM BPM admin","user management","monitoring","event manger","admin tools","Saved search tools".
+
+   3.click on the "monitoring".then we find a drop down list "instrumentation","process monitor".
+
+   4.click on "process monitor".we can see the most expensive services,most expensive processes and how much time the process or service has taken to execute.
+
+   5.if a process or service is keep on executing click on the process or service name directly it will take to process or services tab.here there is an option "HALT"      
+     to halt the process or service.
+   
+=======================================================================================================================================================================
+6.In a coach view if i am changing something but did not write any code in the change event handler then what will happen.
+  
+  If you did not write anything in change event handler then view will be called this is the default behaviour of the coach view
+
+  
+=======================================================================================================================================================================
+7.While working with Webservices, if BO is already created.If i click on discover option
+   is duplicate BO's created?
+   
+  No it will not create duplicate BO's
+=======================================================================================================================================================================
+8.How can you change EPV 
+
+   A EPV can be changed via code.
+   syntax:tw.epv.name of the epv.variable name.update("updated value",date)
+=======================================================================================================================================================================
+
+9.Have you worked on Stay on Page ?
+
+ Yes.In a coach click on outgoing path at bottom right you can see fire validation never.Just change it to before then you can observe green color tick on the coach.
+ Connect a server script and to that server script connect stay on page.In the server script write the validation code.
+ your UI will be completed only when the validation is succesfull.
+=======================================================================================================================================================================
+10.Life Cycle of Coach View
+   Load
+   View
+   Change
+   Unload
+   Validation
+   Collaboration
+=======================================================================================================================================================================
