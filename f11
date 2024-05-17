@@ -1,0 +1,1021 @@
+    SELECT DESC_1 as name, CODE_1 as value 
+FROM MYBOS.PARAMETER_TABLE 
+WHERE PARAM_TYPE_CODE = 'BNMCCPT_22' 
+AND START_DATE < DATE(CURRENT TIMESTAMP) AND DATE(CURRENT TIMESTAMP) < END_DATE
+
+INSERT INTO PARAMETER_TABLE (PARAM_TYPE_CODE, PARAM_ID, CODE_1, DESC_1, START_DATE, END_DATE, ORDER_IDX) VALUES ('', 0, '', '', '', '', 0);
+
+
+
+SELECT MAX(PARAM_ID) ,MAX(ORDER_IDX) FROM MYBOS.PARAMETER_TABLE
+
+PARAM_TYPE_CODE	PARAM_ID	CODE_1	DESC_1	START_DATE	END_DATE	ORDER_IDX
+MOVETOKEN_JAL	61002	CASE1_CB	Update to Decide AA Business	2/1/2024	12/31/2099	1
+MOVETOKEN_JAL	61003	CASE2_CB	Update to Decide AA Approval	2/1/2024	12/31/2099	2
+CASE1_CB_JAL	725118609	Decide on AA	bpdid:37961fc5d0afb396:-1d8cf674:15523abeef9:4ab2	2/1/2024	12/31/2099	5
+CASE1_CB_JAL	725118610	Joint Approval	bpdid:37961fc5d0afb396:-1d8cf674:15523abeef9:4ab2	2/1/2024	12/31/2099	10
+
+
+INSERT INTO PARAMETER_TABLE
+ (PARAM_TYPE_CODE, PARAM_ID, CODE_1, DESC_1, START_DATE, END_DATE, ORDER_IDX)
+ VALUES ('MOVETOKEN_JAL', 735118558, 'CASE1_CB', 'Update to Decide AA Business', '2/1/2024', '12/31/2099', 18009),
+ ('MOVETOKEN_JAL', 735118559, 'CASE2_CB', 'Decide AA Approval', '2/1/2024', '12/31/2099', 18010),
+ ('CASE1_CB_JAL', 735118560, 'Decide on AA', 'bpdid:37961fc5d0afb396:-1d8cf674:15523abeef9:4ab2', '2/1/2024', '12/31/2099', 18011),
+ ('CASE1_CB_JALL', 735118561, 'Joint Approval', 'bpdid:37961fc5d0afb396:-1d8cf674:15523abeef9:4ab2', '2/1/2024', '12/31/2099', 18012)
+
+
+
+select *from MYBOS.PARAMETER_TABLE WHERE PARAM_TYPE_CODE LIKE '%JAL%'
+select max(ID) ,max(PARAM_ID_1) ,max(PARAM_ID_2) ,max(PARAM_ID_3)  from parameter_link
+
+
+
+
+
+SELECT * FROM parameter_link WHERE param_type_code_1 like '%CCRIS%'
+
+INSERT INTO PARAMETER_LINK (ID, PARAM_TYPE_CODE_1, PARAM_ID_1, PARAM_TYPE_CODE_2, PARAM_ID_2, PARAM_TYPE_CODE_3, PARAM_ID_3, PARAM_TYPE_CODE_4, PARAM_ID_4, PARAM_TYPE_CODE_5, PARAM_ID_5, DESC_1, CODE_1, DESC_2, CODE_2, DESC_3, CODE_3, DESC_4, CODE_4, DESC_5, CODE_5, START_DATE, END_DATE) 
+VALUES (7071, 'CCRIS_CCPT_SUB',  6201, 'C1', 19357, 'SC01', 300, 'Meets GP1', 14, '', 0, '', '', '', '', '', '', '', '', '', '', '', '');
+
+select max(ID) ,max(PARAM_ID_1) ,max(PARAM_ID_2) ,max(PARAM_ID_3),max(PARAM_ID_4) ,max(PARAM_ID_5),
+max(CODE_1) ,max(CODE_2) ,max(CODE_3) ,max(CODE_4) ,max(CODE_5)
+from parameter_link
+
+select * from MYBOS.PARAMETER_TABLE  WHERE PARAM_TYPE_CODE = 'BNMCCPT_24'
+
+
+
+
+
+SELECT 
+XMLCAST( XMLQUERY('$c/variable/approvals/approvalType' PASSING PS.XMLVALUE  AS "c" ) AS VARCHAR(40)) approvalType
+,AA.AA_NUMBER AA_NO
+FROM 
+MYBOS.AA_FORM_DATA_ACTIVE AA
+LEFT JOIN MYBOS.AA_PROCESS_DATA PS ON(PS.UUID=AA.UUID)
+WHERE AA.PROCESS_INSTANCE_ID = '38153'
+
+
+
+select *from MYBOS.PARAMETER_TABLE WHERE PARAM_TYPE_CODE LIKE '%JAL%'
+
+
+
+
+select CODE_1 as BPD_DESC,DESC_1 as BPD_ID, 'Pending' as Status, 'READONLY' as btnVisibility from MYBOS.PARAMETER_TABLE 
+WHERE PARAM_TYPE_CODE='<#= tw.local.routeBack.value #>_JAL
+
+
+SELECT  DESC_1 as Name,CODE_1 as value FROM MYBOS.PARAMETER_TABLE WHERE PARAM_TYPE_CODE = 'MOVETOKEN_JAL'
+
+
+select *from MYBOS.PARAMETER_TABLE WHERE PARAM_TYPE_CODE LIKE '%JAL%'
+
+
+SELECT 
+XMLCAST( XMLQUERY('$c/variable/approvals/approvalType' PASSING PS.XMLVALUE  AS "c" ) AS VARCHAR(40)) approvalType
+,AA.AA_NUMBER AA_NO
+FROM 
+MYBOS.AA_FORM_DATA_ACTIVE AA
+LEFT JOIN MYBOS.AA_PROCESS_DATA PS ON(PS.UUID=AA.UUID)
+WHERE AA.PROCESS_INSTANCE_ID = ''
+
+select CODE_1 as BPD_DESC,DESC_1 as BPD_ID, 'Pending' as Status, 'READONLY' as btnVisibility from MYBOS.PARAMETER_TABLE 
+WHERE PARAM_TYPE_CODE='<#= tw.local.routeBack.value #>_JAL
+
+
+dropdown : tw.local.routeBack ( N,V )
+
+SELECT  DESC_1 as Name,CODE_1 as value FROM MYBOS.PARAMETER_TABLE 
+WHERE PARAM_TYPE_CODE = 'MOVETOKEN_<#= tw.local.text #>'   //  approvalType  - JAL - FAL
+
+proceed :
+
+select CODE_1 as BPD_DESC,DESC_1 as BPD_ID, 'Pending' as Status, 'READONLY' as btnVisibility from MYBOS.PARAMETER_TABLE
+ WHERE PARAM_TYPE_CODE='<#= tw.local.routeBack.value #>_<#= tw.local.approvalType #>'
+
+
+
+ BB:
+bpdid:11d1def534ea1be0:-20c3084b:13c12ff4f7d:430 -- decide aa
+bpdid:11d1def534ea1be0:-20c3084b:13c12ff4f7d:-1ce - single approval
+bpdid:11d1def534ea1be0:-20c3084b:13c12ff4f7d:-1a8 - joint approval
+bpdid:e9cd3a9503125d5c:-28594472:150d1e7e3e9:-7fc9 - assignSecondApprove
+
+
+CB:
+bpdid:37961fc5d0afb396:-1d8cf674:15523b1872f:-3769  - decide aa
+bpdid:37961fc5d0afb396:-1d8cf674:15523d436f6:3dee - single approval
+bpdid:37961fc5d0afb396:-1d8cf674:15523d436f6:3dcc - joint approval
+bpdid:273de5582ceefe20:-aaadc02:16a76496f04:-7a11 -  Send Email Notification- Joint approval1
+
+
+ SELECT 
+XMLCAST( XMLQUERY('$c/variable/approvals/approvalType' PASSING PS.XMLVALUE  AS "c" ) AS VARCHAR(40)) approvalType
+,AA.AA_NUMBER AA_NO
+FROM 
+MYBOS.AA_FORM_DATA_ACTIVE AA
+LEFT JOIN MYBOS.AA_PROCESS_DATA PS ON(PS.UUID=AA.UUID)
+WHERE AA.PROCESS_INSTANCE_ID = '38153';
+
+
+INSERT INTO PARAMETER_LINK (ID, PARAM_TYPE_CODE_1, PARAM_ID_1, PARAM_TYPE_CODE_2, PARAM_ID_2, PARAM_TYPE_CODE_3, PARAM_ID_3, PARAM_TYPE_CODE_4, PARAM_ID_4, PARAM_TYPE_CODE_5, PARAM_ID_5, DESC_1, CODE_1, DESC_2, CODE_2, DESC_3, CODE_3, DESC_4, CODE_4, DESC_5, CODE_5, START_DATE, END_DATE) 
+VALUES (0, '', 0, '', 0, '', 0, '', 0, '', 0, '', '', '', '', '', '', '', '', '', '', '', '');
+
+7070  6200
+
+
+
+//log.info("ALL LOG START" +"Step: " + tw.local.Step + "Data" + tw.local.ccrisAuditTemp);
+
+function executeQuery(sql) {
+    var conn = null;
+    var st = null;
+
+    try {
+        var ds = new Packages.javax.naming.InitialContext().lookup(tw.env.dataSourceName);
+        conn = ds.getConnection();
+        st = conn.prepareStatement(sql);
+
+        try {
+            var result = st.executeUpdate();
+            log.info("result: " + result);
+        } catch (e) {
+            log.info("Insert Error >>>>: " + e);
+        }
+
+    } catch (e) {
+        log.info("Error>>>>: " + e);
+    } finally {
+        if (st != null) st.close();
+        if (conn != null) conn.close();
+    }
+}
+
+function getInsertSQL(tmpAllFields,rowdata) {
+    var SQL = "";
+    if (tmpAllFields == null) {
+        return SQL;
+    } else if (tmpAllFields.length == 0) {
+        return SQL;
+    } else {
+        var columns = "( ";
+        var params = " VALUES ( ";
+        for (var i = 0; i < tmpAllFields.length; i++) {
+
+            if (i < tmpAllFields.length - 1) {
+                columns += tmpAllFields[i] + ",";
+                params += "'" + eval("rowdata." + tmpAllFields[i]) + "', ";
+            } else {
+                columns += tmpAllFields[i];
+                params += "'" + eval("rowdata." + tmpAllFields[i]) + "'";
+            }
+
+        }
+        columns = columns + " )";
+        params = params + " )";
+
+        SQL = columns + " " + params;
+    }
+    return SQL;
+}
+
+function getUpdateSQL(tmpAllFields,rowdata) {
+    var SQL = "";
+    if (tmpAllFields == null) {
+        return SQL;
+    } else if (tmpAllFields.length == 0) {
+        return SQL;
+    } else {
+        var columnswithparam = "";
+        for (var i = 0; i < tmpAllFields.length; i++) {
+
+            if (i < tmpAllFields.length - 1) {
+                columnswithparam += tmpAllFields[i] + "=";
+                columnswithparam += "'" + eval("rowdata." + tmpAllFields[i]) + "', ";
+            } else {
+                columnswithparam += tmpAllFields[i] + "=";
+                columnswithparam += "'" + eval("rowdata." + tmpAllFields[i]) + "'";
+            }
+
+        }
+        columnswithparam = columnswithparam;
+
+
+        SQL = columnswithparam;
+    }
+    return SQL;
+}
+
+
+var DBFacilityIDList = new tw.object.Map();
+if (tw.local.fidlist != null && tw.local.fidlist != undefined && tw.local.fidlist.listLength > 0) {
+    for (var x = 0; x < tw.local.fidlist.listLength; x++) {
+        DBFacilityIDList.put(tw.local.fidlist[x].value,tw.local.fidlist[x].name);
+    }
+}
+
+
+
+if (tw.local.ccrisAuditTemp != null && tw.local.ccrisAuditTemp != undefined) {
+    var inscount = 0;
+    var updcount = 0;
+tw.local.ccrisInsertSql = new tw.object.listOf.String(); 
+tw.local.ccrisUpdateSql = new tw.object.listOf.String(); 
+
+    for (var i = 0; i < tw.local.ccrisAuditTemp.listLength; i++) {
+    
+ //   log.info( "insert" +tw.local.ccrisAuditTemp[i].FAC_ID)
+        if (DBFacilityIDList.containsKey(tw.local.ccrisAuditTemp[i].FAC_ID) == false) {
+ //         log.info( "insert" +tw.local.ccrisAuditTemp[i].FAC_ID);
+            var tmpAllFields = tw.local.ccrisAuditTemp[i].propertyNames.reverse();
+            var tempINSERTSQL = getInsertSQL(tmpAllFields,tw.local.ccrisAuditTemp[i]);
+            if (tempINSERTSQL != null && tempINSERTSQL != "") {
+                tempINSERTSQL = "INSERT INTO MYBOS.CCRIS_AUDIT" + tempINSERTSQL;
+                tw.local.ccrisInsertSql[inscount] = tempINSERTSQL;
+                inscount++;
+            }
+        } else {
+//          log.info( "UPDATE" +tw.local.ccrisAuditTemp[i].FAC_ID);
+            var tmpAllFields = tw.local.ccrisAuditTemp[i].propertyNames.reverse();
+            var tempUPDATESQL = getUpdateSQL(tmpAllFields,tw.local.ccrisAuditTemp[i]);
+            if (tempUPDATESQL != null && tempUPDATESQL != "") {
+                tempUPDATESQL = "UPDATE MYBOS.CCRIS_AUDIT SET " + tempUPDATESQL + " WHERE " + "FAC_ID='" + tw.local.ccrisAuditTemp[i].FAC_ID + "'";
+                tw.local.ccrisUpdateSql[updcount] = tempUPDATESQL;
+                updcount++;
+            }
+        }
+    }
+}
+
+if (tw.local.ccrisInsertSql != null && tw.local.ccrisInsertSql.listLength > 0) {
+    for (var i = 0; i < tw.local.ccrisInsertSql.listLength; i++) {
+         log.info("Insert CCRIS AUDIT ############"+tw.local.ccrisInsertSql[i]);
+        executeQuery(tw.local.ccrisInsertSql[i]);
+    }
+}
+if (tw.local.ccrisUpdateSql != null && tw.local.ccrisUpdateSql.listLength > 0) {
+    for (var j = 0; j < tw.local.ccrisUpdateSql.listLength; j++) {
+            log.info("UPDate CCRIS AUDIT ############"+tw.local.ccrisUpdateSql[j]);
+        executeQuery(tw.local.ccrisUpdateSql[j]);
+    }
+}
+
+
+INSERT INTO PARAMETER_LINK 
+(ID,  PARAM_TYPE_CODE_1, PARAM_ID_1,PARAM_TYPE_CODE_2 ,PARAM_ID_2, DESC_1,CODE_1, START_DATE, END_DATE)  VALUES
+(7071, 'BNMCCPT_24',  6201,  'C1', 19357, 'Meets GP1',        'SC01' ,      '5/2/2018','5/2/2033' ),
+(7072, 'BNMCCPT_24',  6201,  'C1', 19357, 'Meets GP2',        'SC02' ,       '5/2/2018','5/2/2033' ),
+(7073, 'BNMCCPT_24',  6201,  'C1', 19357, 'Meets GP1 & GP2' , 'SC03' ,    '5/2/2018','5/2/2033' ),
+(7074, 'BNMCCPT_24',  6201,  'C1', 19357, 'C5a',              'SC04' ,      '5/2/2018','5/2/2033' ),
+(7075, 'BNMCCPT_24',  6201,  'C1', 19357, 'C5b',              'SC05' ,      '5/2/2018','5/2/2033' ),
+
+(7076, 'BNMCCPT_24',  6201,  'C2', 19357, 'Meets GP1',        'SC01' ,      '5/2/2018','5/2/2033' ),
+(7077, 'BNMCCPT_24',  6201,  'C2', 19357, 'Meets GP2',        'SC02' ,       '5/2/2018','5/2/2033' ),
+(7078, 'BNMCCPT_24',  6201,  'C2', 19357, 'Meets GP1 & GP2' , 'SC03' ,    '5/2/2018','5/2/2033' ),
+(7079, 'BNMCCPT_24',  6201,  'C2', 19357, 'C5a',              'SC04' ,      '5/2/2018','5/2/2033' ),
+(7080, 'BNMCCPT_24',  6201,  'C2', 19357, 'C5b',              'SC05' ,      '5/2/2018','5/2/2033' ),
+
+(7081, 'BNMCCPT_24',  6201,  'C3', 19357, 'Meets GP1',        'SC01' ,      '5/2/2018','5/2/2033' ),
+(7082, 'BNMCCPT_24',   6201,  'C3', 19357, 'Meets GP2',       'SC02' ,       '5/2/2018','5/2/2033' ),
+(7083, 'BNMCCPT_24',  6201,  'C3', 19357, 'Meets GP1 & GP2' , 'SC03' ,    '5/2/2018','5/2/2033' ),
+(7084, 'BNMCCPT_24',  6201,  'C3', 19357, 'C5a',              'SC04' ,      '5/2/2018','5/2/2033' ),
+(7085, 'BNMCCPT_24',  6201,  'C3', 19357, 'C5b',              'SC05' ,      '5/2/2018','5/2/2033' ),
+
+(7086, 'BNMCCPT_24',  6201,  'C4', 19357, 'Meets GP1',        'SC01' ,      '5/2/2018','5/2/2033' ),
+(7087, 'BNMCCPT_24',  6201,  'C4', 19357, 'Meets GP2',        'SC02' ,       '5/2/2018','5/2/2033' ),
+(7088, 'BNMCCPT_24',  6201,  'C4', 19357, 'Meets GP1 & GP2' , 'SC03' ,    '5/2/2018','5/2/2033' ),
+(7089, 'BNMCCPT_24',  6201,  'C4', 19357, 'C5a',              'SC04' ,      '5/2/2018','5/2/2033' ),
+(7090, 'BNMCCPT_24',  6201,  'C4', 19357, 'C5b',              'SC05' ,      '5/2/2018','5/2/2033' ),
+
+(7091, 'BNMCCPT_24',  6201,  'C5', 19357, 'Meets GP1',        'SC01' ,      '5/2/2018','5/2/2033' ),
+(7092, 'BNMCCPT_24',  6201,  'C5', 19357, 'Meets GP2',        'SC02' ,       '5/2/2018','5/2/2033' ),
+(7093, 'BNMCCPT_24',  6201,  'C5', 19357, 'Meets GP1 & GP2' , 'SC03' ,    '5/2/2018','5/2/2033' ),
+(7094, 'BNMCCPT_24',  6201,  'C5', 19357, 'C5a',              'SC04' ,      '5/2/2018','5/2/2033' ),
+(7095, 'BNMCCPT_24',  6201,  'C5', 19357, 'C5b',              'SC05' ,      '5/2/2018','5/2/2033' );
+
+"SELECT MAP_VALUE AS CCPTClassification 
+FROM MYBOS.MAPPING WHERE PARAMETER_GROUP_NAME = 'CCPTClassification' 
+AND MAP_SYSTEM_NAME = 'CCRIS' AND CODE = '"
+
+
+SELECT * FROM (VALUES ('1')  ) t1 (c1)
+
+INSERT INTO PARAMETER_LINK 
+(ID,  PARAM_TYPE_CODE_1, PARAM_ID_1,DESC_2,CODE_2, DESC_1,CODE_1,   START_DATE, END_DATE)  VALUES
+(7096, 'BNM_24',  6202,  'FRESH/EXISTING WITH LEGAL DOC/EXISTING WITHOUT LEGAL DOC/EXISTING WITH REDUCTION/EXISTING WITH ADDITIONAL/
+CANCEL', 'BLOCK',        'Derivatives Limit' , 'DV06',   '5/2/2018','5/2/2033' ),
+
+(7097, 'BNM_24',  6202,  'FRESH/EXISTING WITH LEGAL DOC/EXISTING WITHOUT LEGAL DOC/EXISTING WITH REDUCTION/EXISTING WITH ADDITIONAL/
+CANCEL', 'BLOCK',        'Credit Linked Note' , 'CM12',   '5/2/2018','5/2/2033' ),
+
+(7098, 'BNM_24',  6202,  'FRESH/EXISTING WITH LEGAL DOC/EXISTING WITHOUT LEGAL DOC/EXISTING WITH REDUCTION/EXISTING WITH ADDITIONAL/
+CANCEL', 'BLOCK',        'Derivatives Limit-I' , 'IF70',   '5/2/2018','5/2/2033' )
+
+SELECT * FROM  PARAMETER_LINK  WHERE PARAM_ID_1= 6202
+
+
+
+INSERT INTO PARAMETER_LINK 
+(ID,  PARAM_TYPE_CODE_1, PARAM_ID_1,DESC_2,CODE_2, DESC_1,CODE_1,   START_DATE, END_DATE)  VALUES
+(7099, 'BCC_24',  6203,  'Federal Govt',      '301',        ' Soverign' , '01',   '5/2/2018','5/2/2033' ),
+(7100, 'BCC_24',  6203,  'OECD Central Govt',  '307',    'Soverign  ' , '01',   '5/2/2018','5/2/2033' ),
+
+(7101, 'BCC_24',  6203,  'BNM',                 '204',   'Central Bank' ,  ' 02',   '5/2/2018','5/2/2033' ),
+(7102, 'BCC_24',  6203,  'Non-OECD Central Bank','204',   'Central Bank' , ' 02',    '5/2/2018','5/2/2033' ),
+(7103, 'BCC_24',  6203,  'OECD Central Bank','234',   'Central Bank' , ' 02',    '5/2/2018','5/2/2033' ),
+
+(7104, 'BCC_24',  6203,  'State Goverment','302',   'PSE' , ' 04',    '5/2/2018','5/2/2033' )
+
+
+
+ SELECT CODE_1 AS NAME , DESC_2 AS VALUE FROM MYBOS.PARAMETER_LINK 
+WHERE PARAM_TYPE_CODE_1 = 'BCC_24'  --AND CODE_2= 'BLOCK'
+AND  DATE(CURRENT TIMESTAMP) > START_DATE 
+AND DATE(CURRENT TIMESTAMP) < END_DATE
+
+
+
+
+SELECT * FROM  PARAMETER_LINK  WHERE PARAM_ID_1= 6203
+
+if(tw.local.text!=null && tw.local.text!=""){         
+      if(tw.local.origResult !=null && tw.local.origResult.listLength >0)
+            tw.local.results =  tw.system.serializer.fromXml(tw.system.serializer.toXml(tw.local.origResult));
+      
+      for (var x=tw.local.results.listLength-1; x>=0; x--) {      
+          			if(tw.local.results[x].value == "N/Appl" || tw.local.results[x].name == "Not Applicable") {
+              			tw.local.results.removeIndex(x); 
+              			break;
+                  	}
+              	}
+                 if(tw.local.text == "NEW"){                 
+                for (var k=tw.local.results.listLength-1; k>=0; k--) {      
+                if(tw.local.results[k].value == "C6" || tw.local.results[k].value.indexOf("Prohibited") != -1) {
+                    tw.local.results.removeIndex(k);      
+                    break;
+                        }
+                    }
+                    }
+}
+
+
+if(tw.local.text!=null && tw.local.text!=""){         
+      if(tw.local.origResult !=null && tw.local.origResult.listLength >0)
+
+      tw.local.results =  tw.system.serializer.fromXml(tw.system.serializer.toXml(tw.local.origResult));
+                 if(tw.local.text == "NEW"){
+
+                for (var k=tw.local.results.listLength-1; k>=0; k--) {      
+                if(tw.local.results[k].value == "C6" || tw.local.results[k].value.indexOf("Prohibited") != -1) {
+                    tw.local.results.removeIndex(k);      
+                    break;
+                        }
+                    }
+                    }
+}
+
+
+    SELECT DESC_1 as name, CODE_1 as value 
+FROM MYBOS.PARAMETER_LINK 
+WHERE PARAM_TYPE_CODE_1 = 'BNMCCPT_24'  AND PARAM_TYPE_CODE_2= 'C1'
+AND  DATE(CURRENT TIMESTAMP) > START_DATE 
+AND DATE(CURRENT TIMESTAMP) < END_DATE
+
+UPDATE PARAMETER_LINK SET START_DATE = '5/2/2025' WHERE  PARAM_TYPE_CODE_2= 'C1' AND ID =7071
+
+SELECT * FROM  PARAMETER_LINK where PARAM_TYPE_CODE_1= 'BNMCCPT_24' AND PARAM_TYPE_CODE_2= 'C1'
+
+SELECT DESC_1 as name, CODE_1 as value
+    FROM MYBOS.PARAMETER_LINK
+    WHERE PARAM_TYPE_CODE_1 = 'BNMCCPT_24'
+        AND PARAM_TYPE_CODE_2= 'C1'
+        AND  DATE(CURRENT TIMESTAMP) > START_DATE
+        AND DATE(CURRENT TIMESTAMP) < END_DATE
+
+
+
+
+
+INSERT INTO PARAMETER_LINK 
+(ID,  PARAM_TYPE_CODE_1, PARAM_ID_1,PARAM_TYPE_CODE_2 ,PARAM_ID_2, DESC_1,CODE_1, START_DATE, END_DATE)  VALUES
+(7096, 'BCC24',  301,  'Federal Govt', 19357, 'Meets GP1',        'SC01' ,      '5/2/2018','5/2/2033' ),
+
+
+select max(ID) ,max(PARAM_ID_1) ,max(PARAM_ID_2) ,max(PARAM_ID_3),max(PARAM_ID_4) ,max(PARAM_ID_5),
+max(CODE_1) ,max(CODE_2) ,max(CODE_3) ,max(CODE_4) ,max(CODE_5) from parameter_link
+
+
+
+
+if (tw.local.text != null && tw.local.text != "") { // && tw.local.groupRoles.value!=""){
+log.info("Role Value" + tw.local.text);
+    log.info("value " + tw.local.text);
+    var role = tw.system.org.findRoleByName(tw.local.text);
+//   log.info("role " + role.name+"user"+role.users);
+//     var date = new tw.object.Date();
+//               date = date.format("ddMMyy");
+//               log.info("date arie nie "+date);
+    if (role != null) {
+        var userList = role.users;
+        //log.info(" User :"+userList);
+        if (userList != null) {
+
+            tw.local.results = new tw.object.listOf.NameValuePair();
+            for (var i = 0; i < userList.length; i++) {
+                var user = new tw.object.NameValuePair();
+                user.name = userList[i].fullName;
+                user.value = userList[i].name;
+                
+                tw.local.results.insertIntoList(i, user);
+            }
+          
+        }
+    }
+} 
+
+
+
+SELECT 
+BORROWERIDNO,
+OWNERPARTNERNAME,
+OWNERPARTNERIDNO,
+'' DOBDOR,
+CASE WHEN NATIONALITY_NM='MALAYSIA' THEN 'MY' ELSE NATIONALITY END NATIONALITY,
+ENTITYTYPE,
+REGINSABAHSARAWAK,
+'N' RPTREQTYPE,
+'' MEMBER,
+CORPORATESTATUS,
+NVL(MP.MAP_VALUE,'') INDUSTRIALSECTOR,
+RESIDENCYSTATUS,
+STATE,
+COUNTRYOFINC,
+CASE WHEN DOB != '' THEN SUBSTR(DOB,9,2)||SUBSTR(DOB,6,2)||SUBSTR(DOB,1,4) ELSE '' END DOB,
+CASE WHEN DOR != '' THEN SUBSTR(DOR,9,2)||SUBSTR(DOR,6,2)||SUBSTR(DOR,1,4) ELSE '' END DOR,
+NEWICNO
+FROM (
+  SELECT 
+  CASE WHEN O.NEWICNO != '' THEN O.NEWICNO ELSE CASE WHEN O.OLDICORPASSPORT != '' THEN O.OLDICORPASSPORT ELSE O.OWNERID END END BORROWERIDNO,
+  O.OWNERPARTNERNAME,
+  CASE WHEN O.NEWICNO != '' THEN O.NEWICNO ELSE CASE WHEN O.OLDICORPASSPORT != '' THEN O.OLDICORPASSPORT ELSE O.OWNERID END END OWNERPARTNERIDNO,
+  NVL(DOB,'') DOB,
+  NVL(DOR,'') DOR,
+  NVL(O.NEWICNO,'') NEWICNO,
+  NVL(NATIONALITY,'') NATIONALITY,
+  NVL(NATIONALITY_NM,'') NATIONALITY_NM,
+  PL1.CODE_3 ENTITYTYPE,
+  CASE WHEN O.REGINSABAHSARAWAK='true' THEN 'Y' ELSE 'N' END REGINSABAHSARAWAK,
+  PL2.CODE_2 CORPORATESTATUS,
+  PL4.CODE_4 RESIDENCYSTATUS,
+  NVL(STATE,'') STATE,
+  XMLCAST(XMLQUERY('$c/variable/borrower/corporateInformation/bnmSectorial/value' PASSING BR.XMLVALUE as "c") AS VARCHAR(10)) BNMSECTORIAL,
+  NVL(COUNTRYOFINC,'') COUNTRYOFINC
+  FROM MYBOS.AA_FORM_DATA_<#= tw.local.tableType #> AA
+  JOIN MYBOS.BORROWER_INFO BR ON (AA.UUID=BR.UUID)
+  LEFT JOIN 
+    XMLTABLE ('$c/variable/managementInformation/directorPartnerSoleProprietorsCommitteeMembers/item' PASSING BR.XMLVALUE AS "c" 
+      COLUMNS 
+        OWNERPARTNERNAME   VARCHAR(100)     PATH 'borrowerName',
+        OWNERID            VARCHAR(20)      PATH 'borrowerIDNo',
+        NEWICNO            VARCHAR(20)      PATH 'newICNo',
+        OLDICORPASSPORT    VARCHAR(20)      PATH 'oldICPassportBussRegNo',
+        CUSTTYPE           VARCHAR(50)      PATH 'customerType/value',
+        CUSTCLASS          VARCHAR(50)      PATH 'customerClass/value',
+        DOB                VARCHAR(30)      PATH 'personalInformation/dateOfBirth',
+        DOR                VARCHAR(30)      PATH 'corporateInformation/dateIncorporate',
+        NATIONALITY        VARCHAR(20)      PATH 'personalInformation/nationality/value',
+        NATIONALITY_NM     VARCHAR(20)      PATH 'personalInformation/nationality/name',
+        REGINSABAHSARAWAK  VARCHAR(10)      PATH 'registeredInSabahSarawak',
+        STATE              VARCHAR(10)      PATH 'state/value',
+        COUNTRYOFINC       VARCHAR(30)      PATH 'corporateInformation/countryOfInc/value'
+    ) AS O ON 1=1
+  LEFT JOIN MYBOS.PARAMETER_LINK PL1 ON (PL1.DESC_3 = 'CCRIS_ENTITY_TYPE' AND PL1.PARAM_TYPE_CODE_1 = 'CCRIS_BNM_V6' AND PL1.PARAM_ID_2 = O.CUSTCLASS AND PL1.PARAM_ID_3 = O.CUSTTYPE)
+  LEFT JOIN MYBOS.PARAMETER_LINK PL2 ON (PL2.DESC_2 = 'CORPORATE_STATUS' AND PL2.PARAM_TYPE_CODE_1 = 'CCRIS_BNM_V6' AND PL2.PARAM_ID_2 = O.CUSTCLASS AND PL2.PARAM_ID_3 = O.CUSTTYPE)
+  LEFT JOIN MYBOS.PARAMETER_LINK PL4 ON (PL4.DESC_4 = 'RESIDENCY_STATUS' AND PL4.PARAM_TYPE_CODE_1 = 'CCRIS_BNM_V6' AND PL4.PARAM_ID_2 = O.CUSTCLASS AND PL4.PARAM_ID_3 = O.CUSTTYPE)
+  WHERE AA.AA_NUMBER='<#= tw.local.aaNumber #>'
+  AND AA.ORIGIN_TYPE != 'FCM'
+) ALL
+--LEFT JOIN MYBOS.PARAMETER_LINK PL5 ON (PL5.PARAM_TYPE_CODE_1 = 'ISCCODE' and PL5.CODE_1=ALL.BNMSECTORIAL)
+LEFT JOIN MYBOS.MAPPING MP ON (MP.PARAMETER_GROUP_NAME = 'Industrial Sector' AND MP.MAP_SYSTEM_NAME = 'CCRIS' AND MP.CODE = ALL.STATE)
+
+
+
+if(
+    
+    (
+        operations[operator1](leftValue1, rightValue1) && operations[operator2](leftValue2, rightValue2)&&operations[operator5](leftValue5, rightValue5)
+    
+    ) 
+
+|| (
+    operations[operator3](leftValue3, rightValue3) && operations[operator4](leftValue4, rightValue4)
+    
+    )
+
+
+
+) {
+SELECT AA_NUMBER,NAME,GCIF, XMLCAST(XMLQUERY(' $c/variable/borrowerProfile/entity/name' PASSING B.XMLVALUE as "c" )AS VARCHAR(10)) AS ENTITY
+FROM MYBOS.AA_FORM_DATA_APPROVED AA
+LEFT JOIN MYBOS.BORROWER_INFO B ON B.UUID = AA.UUID
+WHERE  
+XMLEXISTS (' $c/variable/decisionList/item[1][step="Decide AA"]' PASSING AA.XMLVALUE as "c" )
+AND XMLEXISTS (' $c/variable/decisionList/item[1][decision !="Approve with Escalation"]' PASSING AA.XMLVALUE as "c" )
+AND XMLEXISTS (' $c/variable/borrowerProfile/entity[name="<ENTITY HERE>"]' PASSING B.XMLVALUE as "c" )
+AND ORIGIN_TYPE = 'CR'
+AND B.GCIF = '<BORROWER GCIF>'
+
+
+SELECT AA_NUMBER,NAME,GCIF, XMLCAST(XMLQUERY(' $c/variable/borrowerProfile/entity/name' PASSING B.XMLVALUE as "c" )AS VARCHAR(10)) AS ENTITY
+FROM MYBOS.AA_FORM_DATA_APPROVED AA
+LEFT JOIN MYBOS.BORROWER_INFO B ON B.UUID = AA.UUID
+WHERE  
+XMLEXISTS (' $c/variable/decisionList/item[1][step="Validate AA"]' PASSING AA.XMLVALUE as "c" )
+AND XMLEXISTS (' $c/variable/decisionList/item[1][decision="Validate"]' PASSING AA.XMLVALUE as "c" )
+AND XMLEXISTS (' $c/variable/borrowerProfile/entity[name="<ENTITY HERE>"]' PASSING B.XMLVALUE as "c" )
+AND ORIGIN_TYPE = 'CR'
+AND B.GCIF = '<GCIF HERE>'
+
+---Facility Active WIP AAs only
+select 
+  distinct aa.uuid, borrowerName as BRWR_NM, borrowerStatus as BRWR_TYPE, borrowerIDNo as BRWR_ID_NO, gcifNo as CIF_NUM, 
+  customerClass as CUSTOMER_CLASS, customerType as CUSTOMER_TYPE, natureOfBusiness,--borrowerTable
+  /* Commented by Yati on 30/9/14 for econsect */
+  --natureOfBiz as NATURE_OF_BIZ,  --callreport
+  aaTrackingNo as AA_ID, 
+  aaNumber as AA_NO, oldAANumber as OLD_AA_NO, st.creation_date as AA_DT,template as TEMPLATES, 
+  lendingUnit as LU,originatorInfoValue as USER_ID,originatorInfoName as USER_NAME,'' designation , aa_status as STATUS, --justification as FCM_REASONS,
+  template AS TEMPLATES, natureOfApplication, st.creation_date, 
+  --crrs brr frr el
+  totalSecuredValue as SECURED_AMOUNT, totalUnsecuredValue as UNSECURED_AMOUNT , --security
+  finalApprover as FINAL_APPROVER_LEVEL, --aaFormApproved
+  /*  by Yati on 30/9/14 for last action, decision and decision date */
+  aa_status last_action_taken, decision_status, date_upd decision_date,
+  id as FAC_ID,facilityName as FAC_TYPES,facstatus as FAC_STATUS, currency as CURRENCY, rate as RATE, newLimit as NEW_LIMIT, 
+  existingLimit as EXISTING_LIMIT, outstanding as OUTSTANDING_LIMIT,
+  to_char(issuranceDate, 'dd/MM/yyyy') as LO_DT,acceptanceStatus as ACCEP_STATUS, left(acceptanceOrReceptionDate,16) as ACCEPREJ_DATE, rejectReason as REJECT_REASON
+  --purpose as PURPOSE_DESC
+from mybos.aa_form_data_active aa
+left outer join mybos.BORROWER_INFO brwr ON aa.UUID=brwr.UUID
+left outer join mybos.CALL_REPORT cr ON aa.uuid = cr.aa_uuid
+left outer join mybos.AA_STATUS_DATA st ON aa.uuid = st.aa_uuid
+left outer join mybos.aa_form_data_approved aap ON aa.uuid = aap.uuid
+left outer join mybos.facility_info_active fac ON aa.uuid = fac.uuid
+LEFT OUTER JOIN MYBOS.LO_INFORMATION lo ON aa.uuid = lo.UUID
+LEFT OUTER JOIN MYBOS.SECURITY_INFO_ACTIVE sia on aa.UUID = sia.UUID
+LEFT OUTER JOIN
+xmltable('$c/variable/borrower' passing brwr.XMLVALUE as "c"
+columns
+  borrowerName varchar(100) path 'borrowerName',
+  newICNo varchar(100) path 'newICNo',
+  borrowerStatus varchar(100) path 'borrowerStatus',
+  borrowerIDNo varchar(100) path 'borrowerIDNo',
+  gcifNo varchar(100) path 'gcifNo',
+  customerClass varchar(100) PATH 'customerClass/name',
+  customerType varchar(100) path 'customerType/name'
+)as xmlbrwrTable
+ON 1=1
+LEFT OUTER JOIN
+xmltable('$c/variable' passing cr.XMLVALUE as "c"
+columns 
+  natureOfBiz varchar(1000) path 'natureOfBiz/name'
+)as xmlCRTable
+ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing aa.XMLVALUE as "c"
+columns
+aaTrackingNo varchar(70) PATH 'aaTrackingNo',
+aaNumber varchar(20) PATH 'aaNumber',
+oldAANumber varchar(20) PATH 'oldAANumber',
+lendingUnit varchar(50) PATH 'lendingUnit/name',
+originatorInfoValue varchar(20) PATH 'originatorInfo/value',
+originatorInfoName varchar(50) PATH 'originatorInfo/name',
+--justification varchar(1000) path 'freeformCreditManual/justification',
+template varchar(50) path 'template',
+natureOfApplication varchar(1000) PATH 'natureOfApplication/name',
+natureOfBusiness  varchar(100) PATH 'natureOfBusiness/name'
+) as xmlaaTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing aap.XMLVALUE as "c"
+columns
+finalApprover varchar(50) path 'finalApprover'
+) as xmlaapTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable/facilityList/item' passing fac.XMLVALUE as "c"
+columns
+id varchar(50) path 'let $x := . return $x/accountInfo/id',
+facilityName varchar(50) PATH 'let $x := . return $x/accountInfo/facilityName',
+facstatus varchar(100) PATH 'let $x := . return $x/financials/status/name',
+currency varchar(50) PATH  'let $x := . return $x/financials/currency/name',
+rate varchar(20) PATH 'let $x := . return $x/financials/rate',
+newLimit varchar(20) PATH 'let $x := . return $x/financials/newLimit',
+existingLimit varchar(20) PATH 'let $x := . return $x/financials/exisitingLimit',
+outstanding varchar(20) PATH 'let $x := . return $x/financials/outstanding'--,
+--purpose VARCHAR(1000) PATH 'let $x := . return $x/purpose/loanPurposeDescription/name'
+) as xmlfacTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing lo.XMLVALUE as "c"
+columns
+issuranceDate varchar(50) path 'let $x := . return $x/issuranceDate',
+acceptanceStatus varchar(50) path 'let $x := . return $x/acceptanceStatus',
+acceptanceOrReceptionDate varchar(50) path 'let $x := . return $x/acceptanceOrReceptionDate',
+rejectReason varchar(100) path 'let $x := . return $x/rejectReason/name'
+) as xmlLoTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing sia.XMLVALUE as "c"
+columns
+totalSecuredValue varchar(100) path 'let $x := . return $x/totalSecuredValue',
+totalUnsecuredValue varchar(100) path 'let $x := . return $x/totalUnsecuredValue'
+)  as xmlSiaTable ON 1=1
+where 
+    --to_date(st.creation_date,'yyyy-MM-dd') >=  to_date('2014-07-01','yyyy-MM-dd')
+    st.creation_date >= to_date('2014-07-01','yyyy-MM-DD') and  st.creation_date <= to_date('2014-07-10','yyyy-MM-DD')
+    and aa_status in ('Pending Amendment','Pending Approval','WIP')
+UNION
+/*Decline Cases*/
+select 
+  distinct aa.uuid, borrowerName as BRWR_NM, borrowerStatus as BRWR_TYPE, borrowerIDNo as BRWR_ID_NO, gcifNo as CIF_NUM, 
+  customerClass as CUSTOMER_CLASS, customerType as CUSTOMER_TYPE, natureOfBusiness,--borrowerTable
+  /* Commented by Yati on 30/9/14 for econsect */
+  --natureOfBiz as NATURE_OF_BIZ,  --callreport
+  aaTrackingNo as AA_ID, aaNumber as AA_NO, oldAANumber as OLD_AA_NO, st.creation_date as AA_DT,template as TEMPLATES, 
+  lendingUnit as LU,originatorInfoValue as USER_ID,originatorInfoName as USER_NAME,'' designation , aa_status as STATUS, --justification as FCM_REASONS,
+  template AS TEMPLATES, natureOfApplication, st.creation_date, 
+  --crrs brr frr el
+  totalSecuredValue as SECURED_AMOUNT, totalUnsecuredValue as UNSECURED_AMOUNT , --security
+  finalApprover as FINAL_APPROVER_LEVEL, --aaFormApproved
+  /*  by Yati on 30/9/14 for last action, decision and decision date */
+  aa_status last_action_taken, decision_status, date_upd decision_date,
+  id as FAC_ID,facilityName as FAC_TYPES,facstatus as FAC_STATUS, currency as CURRENCY, rate as RATE, newLimit as NEW_LIMIT, 
+  existingLimit as EXISTING_LIMIT, outstanding as OUTSTANDING_LIMIT,
+  to_char(issuranceDate, 'dd/MM/yyyy') as LO_DT,acceptanceStatus as ACCEP_STATUS, left(acceptanceOrReceptionDate,16) as ACCEPREJ_DATE, rejectReason as REJECT_REASON
+  --purpose as PURPOSE_DESC
+from mybos.aa_form_data_active aa
+left outer join mybos.BORROWER_INFO brwr ON aa.UUID=brwr.UUID
+left outer join mybos.CALL_REPORT cr ON aa.uuid = cr.aa_uuid
+left outer join mybos.AA_STATUS_DATA st ON aa.uuid = st.aa_uuid
+left outer join mybos.aa_form_data_approved aap ON aa.uuid = aap.uuid
+left outer join mybos.facility_info_active fac ON aa.uuid = fac.uuid
+LEFT OUTER JOIN MYBOS.LO_INFORMATION lo ON aa.uuid = lo.UUID
+LEFT OUTER JOIN MYBOS.SECURITY_INFO_ACTIVE sia on aa.UUID = sia.UUID
+LEFT OUTER JOIN
+xmltable('$c/variable/borrower' passing brwr.XMLVALUE as "c"
+columns
+  borrowerName varchar(100) path 'borrowerName',
+  newICNo varchar(100) path 'newICNo',
+  borrowerStatus varchar(100) path 'borrowerStatus',
+  borrowerIDNo varchar(100) path 'borrowerIDNo',
+  gcifNo varchar(100) path 'gcifNo',
+  customerClass varchar(100) PATH 'customerClass/name',
+  customerType varchar(100) path 'customerType/name'
+)as xmlbrwrTable
+ON 1=1
+LEFT OUTER JOIN
+xmltable('$c/variable' passing cr.XMLVALUE as "c"
+columns 
+  natureOfBiz varchar(1000) path 'natureOfBiz/name'
+)as xmlCRTable
+ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing aa.XMLVALUE as "c"
+columns
+aaTrackingNo varchar(70) PATH 'aaTrackingNo',
+aaNumber varchar(20) PATH 'aaNumber',
+oldAANumber varchar(20) PATH 'oldAANumber',
+lendingUnit varchar(50) PATH 'lendingUnit/name',
+originatorInfoValue varchar(20) PATH 'originatorInfo/value',
+originatorInfoName varchar(50) PATH 'originatorInfo/name',
+--justification varchar(1000) path 'freeformCreditManual/justification',
+template varchar(50) path 'template',
+natureOfApplication varchar(1000) PATH 'natureOfApplication/name',
+natureOfBusiness  varchar(100) PATH 'natureOfBusiness/name'
+) as xmlaaTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing aap.XMLVALUE as "c"
+columns
+finalApprover varchar(50) path 'finalApprover'
+) as xmlaapTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable/facilityList/item' passing fac.XMLVALUE as "c"
+columns
+id varchar(50) path 'let $x := . return $x/accountInfo/id',
+facilityName varchar(50) PATH 'let $x := . return $x/accountInfo/facilityName',
+facstatus varchar(100) PATH 'let $x := . return $x/financials/status/name',
+currency varchar(50) PATH  'let $x := . return $x/financials/currency/name',
+rate varchar(20) PATH 'let $x := . return $x/financials/rate',
+newLimit varchar(20) PATH 'let $x := . return $x/financials/newLimit',
+existingLimit varchar(20) PATH 'let $x := . return $x/financials/exisitingLimit',
+outstanding varchar(20) PATH 'let $x := . return $x/financials/outstanding'--,
+--purpose VARCHAR(1000) PATH 'let $x := . return $x/purpose/loanPurposeDescription/name'
+) as xmlfacTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing lo.XMLVALUE as "c"
+columns
+issuranceDate varchar(50) path 'let $x := . return $x/issuranceDate',
+acceptanceStatus varchar(50) path 'let $x := . return $x/acceptanceStatus',
+acceptanceOrReceptionDate varchar(50) path 'let $x := . return $x/acceptanceOrReceptionDate',
+rejectReason varchar(100) path 'let $x := . return $x/rejectReason/name'
+) as xmlLoTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing sia.XMLVALUE as "c"
+columns
+totalSecuredValue varchar(100) path 'let $x := . return $x/totalSecuredValue',
+totalUnsecuredValue varchar(100) path 'let $x := . return $x/totalUnsecuredValue'
+)  as xmlSiaTable ON 1=1
+where 
+    --to_date(st.creation_date,'yyyy-MM-dd') >=  to_date('2014-07-01','yyyy-MM-dd')
+    st.creation_date >= to_date('2014-07-01','yyyy-MM-DD') and  st.creation_date <= to_date('2014-07-10','yyyy-MM-DD')
+    and aa_status = 'Validated' and decision_status = 'Decline'
+UNION
+/*Approved Cases*/
+select 
+  distinct aa.uuid, borrowerName as BRWR_NM, borrowerStatus as BRWR_TYPE, borrowerIDNo as BRWR_ID_NO, gcifNo as CIF_NUM, 
+  customerClass as CUSTOMER_CLASS, customerType as CUSTOMER_TYPE, natureOfBusiness,--borrowerTable
+  /* Commented by Yati on 30/9/14 for econsect */
+  --natureOfBiz as NATURE_OF_BIZ,  --callreport  
+  aaTrackingNo as AA_ID, aaNumber as AA_NO, oldAANumber as OLD_AA_NO, st.creation_date as AA_DT,template as TEMPLATES, 
+  lendingUnit as LU,originatorInfoValue as USER_ID,originatorInfoName as USER_NAME,'' designation , aa_status as STATUS,
+  --justification as FCM_REASONS,
+  template AS TEMPLATES, natureOfApplication, st.creation_date, 
+  --crrs brr frr el
+  totalSecuredValue as SECURED_AMOUNT, totalUnsecuredValue as UNSECURED_AMOUNT , --security
+  finalApprover as FINAL_APPROVER_LEVEL, --aaFormApproved
+  /*  by Yati on 30/9/14 for last action, decision and decision date */
+  aa_status last_action_taken, decision_status, date_upd decision_date,
+  oriid as ORI_FAC_ID,oriFacilityName as ORI_FAC_TYPES,oriFacstatus as ORI_FAC_STATUS, oriCurrency as ORI_CURRENCY, 
+  oriRate as ORI_RATE, oriNewLimit as ORI_NEW_LIMIT, oriExistingLimit as ORI_EXISTING_LIMIT, 
+  oriOutstanding as ORI_OUTSTANDING_LIMIT,
+  left(issuranceDate, 16) as LO_DT,acceptanceStatus as ACCEP_STATUS, left(acceptanceOrReceptionDate,16) as ACCEPREJ_DATE, rejectReason as REJECT_REASON
+from mybos.aa_form_data_approved aa
+left outer join mybos.BORROWER_INFO brwr ON aa.UUID=brwr.UUID
+left outer join mybos.CALL_REPORT cr ON aa.uuid = cr.aa_uuid
+left outer join mybos.AA_STATUS_DATA st ON aa.uuid = st.aa_uuid
+--left outer join mybos.aa_form_data_approved aap ON aa.uuid = aap.uuid
+left outer join facility_info_original faco ON aa.uuid = faco.uuid 
+LEFT OUTER JOIN MYBOS.LO_INFORMATION lo ON aa.uuid = lo.UUID
+LEFT OUTER JOIN MYBOS.SECURITY_INFO_ACTIVE sia on aa.UUID = sia.UUID
+LEFT OUTER JOIN
+xmltable('$c/variable/borrower' passing brwr.XMLVALUE as "c"
+columns
+  borrowerName varchar(100) path 'borrowerName',
+  newICNo varchar(100) path 'newICNo',
+  borrowerStatus varchar(100) path 'borrowerStatus',
+  borrowerIDNo varchar(100) path 'borrowerIDNo',
+  gcifNo varchar(100) path 'gcifNo',
+  customerClass varchar(100) PATH 'customerClass/name',
+  customerType varchar(100) path 'customerType/name'
+)as xmlbrwrTable
+ON 1=1
+LEFT OUTER JOIN
+xmltable('$c/variable' passing cr.XMLVALUE as "c"
+columns 
+  natureOfBiz varchar(100) path 'natureOfBiz/name'
+)as xmlCRTable
+ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing aa.XMLVALUE as "c"
+columns
+aaTrackingNo varchar(70) PATH 'aaTrackingNo',
+aaNumber varchar(20) PATH 'aaNumber',
+oldAANumber varchar(20) PATH 'oldAANumber',
+lendingUnit varchar(50) PATH 'lendingUnit/name',
+originatorInfoValue varchar(20) PATH 'originatorInfo/value',
+originatorInfoName varchar(50) PATH 'originatorInfo/name',
+--justification varchar(100) path 'freeformCreditManual/justification',
+template varchar(50) path 'template',
+natureOfApplication varchar(100) PATH 'natureOfApplication/name',
+natureOfBusiness  varchar(100) PATH 'natureOfBusiness/name',
+finalApprover varchar(50) path 'finalApprover'
+) as xmlaaTable ON 1=1
+LEFT OUTER JOIN 
+--xmltable('$c/variable' passing aap.XMLVALUE as "c"
+--columns
+--finalApprover varchar(50) path 'finalApprover'
+--) as xmlaapTable ON 1=1
+--LEFT OUTER JOIN 
+xmltable('$c/variable/facilityList/item' passing faco.XMLVALUE as "c"
+columns
+oriId varchar(50) path 'let $x := . return $x/accountInfo/id',
+oriFacilityName varchar(50) PATH 'let $x := . return $x/accountInfo/facilityName',
+oriFacstatus varchar(100) PATH 'let $x := . return $x/financials/status/name',
+oriCurrency varchar(50) PATH  'let $x := . return $x/financials/currency/name',
+oriRate varchar(20) PATH 'let $x := . return $x/financials/rate',
+oriNewLimit varchar(20) PATH 'let $x := . return $x/financials/newLimit',
+oriExistingLimit varchar(20) PATH 'let $x := . return $x/financials/exisitingLimit',
+oriOutstanding varchar(20) PATH 'let $x := . return $x/financials/outstanding'--,
+--purpose VARCHAR(150) PATH 'let $x := . return $x/purpose/loanPurposeDescription/name'
+) as xmlfacoTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing lo.XMLVALUE as "c"
+columns
+issuranceDate varchar(50) path 'let $x := . return $x/issuranceDate',
+acceptanceStatus varchar(50) path 'let $x := . return $x/acceptanceStatus',
+acceptanceOrReceptionDate varchar(50) path 'let $x := . return $x/acceptanceOrReceptionDate',
+rejectReason varchar(50) path 'let $x := . return $x/rejectReason/name'
+) as xmlLoTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing sia.XMLVALUE as "c"
+columns
+totalSecuredValue varchar(100) path 'let $x := . return $x/totalSecuredValue',
+totalUnsecuredValue varchar(100) path 'let $x := . return $x/totalUnsecuredValue'
+)  as xmlSiaTable ON 1=1
+where to_date(st.creation_date,'yyyy-MM-dd') >=  to_date('2014-07-01','yyyy-MM-dd')
+UNION
+/*FCM*/
+select 
+  distinct aa.uuid, borrowerName as BRWR_NM, borrowerStatus as BRWR_TYPE, borrowerIDNo as BRWR_ID_NO, gcifNo as CIF_NUM, 
+  customerClass as CUSTOMER_CLASS, customerType as CUSTOMER_TYPE, natureOfBusiness,--borrowerTable
+  /* Commented by Yati on 30/9/14 for econsect */
+  --natureOfBiz as NATURE_OF_BIZ,  --callreport
+  aaTrackingNo as AA_ID, 
+  aa.origin_id as AA_NO, AANumber as OLD_AA_NO, st.creation_date as AA_DT,template as TEMPLATES, 
+  lendingUnit as LU,originatorInfoValue as USER_ID,originatorInfoName as USER_NAME,'' designation , aa_status as STATUS, --justification as FCM_REASONS,
+  template AS TEMPLATES, natureOfApplication, st.creation_date, 
+  --crrs brr frr el
+  totalSecuredValue as SECURED_AMOUNT, totalUnsecuredValue as UNSECURED_AMOUNT , --security
+  finalApprover as FINAL_APPROVER_LEVEL, --aaFormApproved
+  /*  by Yati on 30/9/14 for last action, decision and decision date */
+  aa_status last_action_taken, decision_status, date_upd decision_date,
+  id as FAC_ID,facilityName as FAC_TYPES,facstatus as FAC_STATUS, currency as CURRENCY, rate as RATE, newLimit as NEW_LIMIT, 
+  existingLimit as EXISTING_LIMIT, outstanding as OUTSTANDING_LIMIT,
+  to_char(issuranceDate, 'dd/MM/yyyy') as LO_DT,acceptanceStatus as ACCEP_STATUS, left(acceptanceOrReceptionDate,16) as ACCEPREJ_DATE, rejectReason as REJECT_REASON
+  --purpose as PURPOSE_DESC
+from mybos.aa_form_data_active aa
+left outer join mybos.BORROWER_INFO brwr ON aa.UUID=brwr.UUID
+left outer join mybos.CALL_REPORT cr ON aa.uuid = cr.aa_uuid
+left outer join mybos.AA_STATUS_DATA st ON aa.uuid = st.aa_uuid
+left outer join mybos.aa_form_data_approved aap ON aa.uuid = aap.uuid
+left outer join mybos.facility_info_active fac ON aa.uuid = fac.uuid
+LEFT OUTER JOIN MYBOS.LO_INFORMATION lo ON aa.uuid = lo.UUID
+LEFT OUTER JOIN MYBOS.SECURITY_INFO_ACTIVE sia on aa.UUID = sia.UUID
+LEFT OUTER JOIN
+xmltable('$c/variable/borrower' passing brwr.XMLVALUE as "c"
+columns
+  borrowerName varchar(100) path 'borrowerName',
+  newICNo varchar(100) path 'newICNo',
+  borrowerStatus varchar(100) path 'borrowerStatus',
+  borrowerIDNo varchar(100) path 'borrowerIDNo',
+  gcifNo varchar(100) path 'gcifNo',
+  customerClass varchar(100) PATH 'customerClass/name',
+  customerType varchar(100) path 'customerType/name'
+)as xmlbrwrTable
+ON 1=1
+LEFT OUTER JOIN
+xmltable('$c/variable' passing cr.XMLVALUE as "c"
+columns 
+  natureOfBiz varchar(1000) path 'natureOfBiz/name'
+)as xmlCRTable
+ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing aa.XMLVALUE as "c"
+columns
+aaTrackingNo varchar(70) PATH 'aaTrackingNo',
+aaNumber varchar(20) PATH 'aaNumber',
+oldAANumber varchar(20) PATH 'oldAANumber',
+lendingUnit varchar(50) PATH 'lendingUnit/name',
+originatorInfoValue varchar(20) PATH 'originatorInfo/value',
+originatorInfoName varchar(50) PATH 'originatorInfo/name',
+--justification varchar(1000) path 'freeformCreditManual/justification',
+template varchar(50) path 'template',
+natureOfApplication varchar(1000) PATH 'natureOfApplication/name',
+natureOfBusiness  varchar(100) PATH 'natureOfBusiness/name'
+) as xmlaaTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing aap.XMLVALUE as "c"
+columns
+finalApprover varchar(50) path 'finalApprover'
+) as xmlaapTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable/facilityList/item' passing fac.XMLVALUE as "c"
+columns
+id varchar(50) path 'let $x := . return $x/accountInfo/id',
+facilityName varchar(50) PATH 'let $x := . return $x/accountInfo/facilityName',
+facstatus varchar(100) PATH 'let $x := . return $x/financials/status/name',
+currency varchar(50) PATH  'let $x := . return $x/financials/currency/name',
+rate varchar(20) PATH 'let $x := . return $x/financials/rate',
+newLimit varchar(20) PATH 'let $x := . return $x/financials/newLimit',
+existingLimit varchar(20) PATH 'let $x := . return $x/financials/exisitingLimit',
+outstanding varchar(20) PATH 'let $x := . return $x/financials/outstanding'--,
+--purpose VARCHAR(1000) PATH 'let $x := . return $x/purpose/loanPurposeDescription/name'
+) as xmlfacTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing lo.XMLVALUE as "c"
+columns
+issuranceDate varchar(50) path 'let $x := . return $x/issuranceDate',
+acceptanceStatus varchar(50) path 'let $x := . return $x/acceptanceStatus',
+acceptanceOrReceptionDate varchar(50) path 'let $x := . return $x/acceptanceOrReceptionDate',
+rejectReason varchar(100) path 'let $x := . return $x/rejectReason/name'
+) as xmlLoTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing sia.XMLVALUE as "c"
+columns
+totalSecuredValue varchar(100) path 'let $x := . return $x/totalSecuredValue',
+totalUnsecuredValue varchar(100) path 'let $x := . return $x/totalUnsecuredValue'
+)  as xmlSiaTable ON 1=1
+where 
+    --to_date(st.creation_date,'yyyy-MM-dd') >=  to_date('2014-07-01','yyyy-MM-dd')
+    st.creation_date >= to_date('2014-07-01','yyyy-MM-DD') and  st.creation_date <= to_date('2014-07-10','yyyy-MM-DD')
+    and aa.origin_id like 'CM%' and aa_status in ('Pending Amendment','Pending Approval','WIP')
+UNION
+/*FCM Decline cases*/
+select 
+  distinct aa.uuid, borrowerName as BRWR_NM, borrowerStatus as BRWR_TYPE, borrowerIDNo as BRWR_ID_NO, gcifNo as CIF_NUM, 
+  customerClass as CUSTOMER_CLASS, customerType as CUSTOMER_TYPE, natureOfBusiness,--borrowerTable
+  /* Commented by Yati on 30/9/14 for econsect */
+  --natureOfBiz as NATURE_OF_BIZ,  --callreport
+  aaTrackingNo as AA_ID, 
+  aa.origin_id as AA_NO, AANumber as OLD_AA_NO, st.creation_date as AA_DT,template as TEMPLATES, 
+  lendingUnit as LU,originatorInfoValue as USER_ID,originatorInfoName as USER_NAME,'' designation , aa_status as STATUS, --justification as FCM_REASONS,
+  template AS TEMPLATES, natureOfApplication, st.creation_date, 
+  --crrs brr frr el
+  totalSecuredValue as SECURED_AMOUNT, totalUnsecuredValue as UNSECURED_AMOUNT , --security
+  finalApprover as FINAL_APPROVER_LEVEL, --aaFormApproved
+  /*  by Yati on 30/9/14 for last action, decision and decision date */
+  aa_status last_action_taken, decision_status, date_upd decision_date,
+  id as FAC_ID,facilityName as FAC_TYPES,facstatus as FAC_STATUS, currency as CURRENCY, rate as RATE, newLimit as NEW_LIMIT, 
+  existingLimit as EXISTING_LIMIT, outstanding as OUTSTANDING_LIMIT,
+  to_char(issuranceDate, 'dd/MM/yyyy') as LO_DT,acceptanceStatus as ACCEP_STATUS, left(acceptanceOrReceptionDate,16) as ACCEPREJ_DATE, rejectReason as REJECT_REASON
+  --purpose as PURPOSE_DESC
+from mybos.aa_form_data_active aa
+left outer join mybos.BORROWER_INFO brwr ON aa.UUID=brwr.UUID
+left outer join mybos.CALL_REPORT cr ON aa.uuid = cr.aa_uuid
+left outer join mybos.AA_STATUS_DATA st ON aa.uuid = st.aa_uuid
+left outer join mybos.aa_form_data_approved aap ON aa.uuid = aap.uuid
+left outer join mybos.facility_info_active fac ON aa.uuid = fac.uuid
+LEFT OUTER JOIN MYBOS.LO_INFORMATION lo ON aa.uuid = lo.UUID
+LEFT OUTER JOIN MYBOS.SECURITY_INFO_ACTIVE sia on aa.UUID = sia.UUID
+LEFT OUTER JOIN
+xmltable('$c/variable/borrower' passing brwr.XMLVALUE as "c"
+columns
+  borrowerName varchar(100) path 'borrowerName',
+  newICNo varchar(100) path 'newICNo',
+  borrowerStatus varchar(100) path 'borrowerStatus',
+  borrowerIDNo varchar(100) path 'borrowerIDNo',
+  gcifNo varchar(100) path 'gcifNo',
+  customerClass varchar(100) PATH 'customerClass/name',
+  customerType varchar(100) path 'customerType/name'
+)as xmlbrwrTable
+ON 1=1
+LEFT OUTER JOIN
+xmltable('$c/variable' passing cr.XMLVALUE as "c"
+columns 
+  natureOfBiz varchar(1000) path 'natureOfBiz/name'
+)as xmlCRTable
+ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing aa.XMLVALUE as "c"
+columns
+aaTrackingNo varchar(70) PATH 'aaTrackingNo',
+aaNumber varchar(20) PATH 'aaNumber',
+oldAANumber varchar(20) PATH 'oldAANumber',
+lendingUnit varchar(50) PATH 'lendingUnit/name',
+originatorInfoValue varchar(20) PATH 'originatorInfo/value',
+originatorInfoName varchar(50) PATH 'originatorInfo/name',
+--justification varchar(1000) path 'freeformCreditManual/justification',
+template varchar(50) path 'template',
+natureOfApplication varchar(1000) PATH 'natureOfApplication/name',
+natureOfBusiness  varchar(100) PATH 'natureOfBusiness/name'
+) as xmlaaTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing aap.XMLVALUE as "c"
+columns
+finalApprover varchar(50) path 'finalApprover'
+) as xmlaapTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable/facilityList/item' passing fac.XMLVALUE as "c"
+columns
+id varchar(50) path 'let $x := . return $x/accountInfo/id',
+facilityName varchar(50) PATH 'let $x := . return $x/accountInfo/facilityName',
+facstatus varchar(100) PATH 'let $x := . return $x/financials/status/name',
+currency varchar(50) PATH  'let $x := . return $x/financials/currency/name',
+rate varchar(20) PATH 'let $x := . return $x/financials/rate',
+newLimit varchar(20) PATH 'let $x := . return $x/financials/newLimit',
+existingLimit varchar(20) PATH 'let $x := . return $x/financials/exisitingLimit',
+outstanding varchar(20) PATH 'let $x := . return $x/financials/outstanding'--,
+--purpose VARCHAR(1000) PATH 'let $x := . return $x/purpose/loanPurposeDescription/name'
+) as xmlfacTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing lo.XMLVALUE as "c"
+columns
+issuranceDate varchar(50) path 'let $x := . return $x/issuranceDate',
+acceptanceStatus varchar(50) path 'let $x := . return $x/acceptanceStatus',
+acceptanceOrReceptionDate varchar(50) path 'let $x := . return $x/acceptanceOrReceptionDate',
+rejectReason varchar(100) path 'let $x := . return $x/rejectReason/name'
+) as xmlLoTable ON 1=1
+LEFT OUTER JOIN 
+xmltable('$c/variable' passing sia.XMLVALUE as "c"
+columns
+totalSecuredValue varchar(100) path 'let $x := . return $x/totalSecuredValue',
+totalUnsecuredValue varchar(100) path 'let $x := . return $x/totalUnsecuredValue'
+)  as xmlSiaTable ON 1=1
+where 
+    --to_date(st.creation_date,'yyyy-MM-dd') >=  to_date('2014-07-01','yyyy-MM-dd')
+    st.creation_date >= to_date('2014-07-01','yyyy-MM-DD') and  st.creation_date <= to_date('2014-07-10','yyyy-MM-DD')
+    and aa.origin_id like 'CM%' --and aa_status in ('Pending Amendment','Pending Approval','WIP')
+    and aa_status = 'Validated' and decision_status = 'Decline'
+order by creation_date asc
+
+
+"SELECT AA_NUMBER AS NAME, UUID AS VALUE FROM MYBOS.AA_FORM_DATA_ACTIVE WHERE PROCESS_INSTANCE_ID = '"+tw.local.currInstanceId+"'"
+
