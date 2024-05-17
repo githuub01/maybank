@@ -1,0 +1,1004 @@
+echo 'Start Deleting files - /bpmdata/Dev/EosPrintingArchive -' $(date)
+rm /bpmdata/Dev/EosPrintingArchive/*.docx
+echo 'Delation Completed' $(date)
+echo 'Start Deleting files - /bpmdata/Dev/CorporateBanking/EosPrintingArchive -' $(date)
+rm /bpmdata/Dev/CorporateBanking/EosPrintingArchive/*.docx
+echo 'Delation Completed' $(date)
+
+
+/usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/wsadmin.sh -conntype SOAP -port 8880 -f /home/root/BPMScript/snapshot_2013.jacl -lang jacl -username wasadmin -password P@ssw0rd
+
+
+
+/usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/wsadmin.sh -conntype SOAP -port 8880 -f /home/root/BPMScript/snapshot.jacl -lang jacl -username wasadmin -password P@ssw0rd
+
+/usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/wsadmin.sh -conntype SOAP -port 8880 -f /home/root/BPMScript/snapshot_archive.jacl -lang jacl -username wasadmin -password P@ssw0rd
+/usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/wsadmin.sh -conntype SOAP -port 8880 -f /home/root/BPMScript/snapshot_cleanup.jacl -lang jacl -username wasadmin -password P@ssw0rd
+
+
+/usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/wsadmin.sh -conntype SOAP -port 8880 -f /home/root/BPMScript/snapshot_weekly.jacl -lang jacl -username wasadmin -password P@ssw0rd
+
+/usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/wsadmin.sh -conntype SOAP -port 8880 -f /home/root/BPMScript/unamed_snapshot.jacl -lang jacl -username wasadmin -password P@ssw0rd
+
+/usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/wsadmin.sh -conntype SOAP -port 8880 -f /home/root/BPMScript/unamed_snapshot_noon.jacl -lang jacl -username wasadmin -password P@ssw0rd
+
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrdmgrsvr/config/cells/bpmprocctrdev01Cell01/assets
+rm -R LOPA-V1.29-Java_Logger_Library.jar
+rm -R LOPA-V1.29-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.30-Java_Logger_Library.jar
+rm -R LOPA-V1.30-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.31-Java_Logger_Library.jar
+rm -R LOPA-V1.31-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.32-Java_Logger_Library.jar
+rm -R LOPA-V1.32-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.33-Java_Logger_Library.jar
+rm -R LOPA-V1.33-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.24-Java_Logger_Library.jar
+rm -R LOPA-V1.24-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.35-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.35-Java_Logger_Library.jar
+rm -R LOPA-V1.21-Java_Logger_Library.jar
+rm -R LOPA-V1.21-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.41-Java_Logger_Library.jar
+rm -R LOPA-V1.41-Audit_Integration_Service_Library.jar
+rm -R RCL-Tip-Java_Logger_Library.jar
+rm -R RCL-Tip-Audit_Integration_Service_Library.jar
+rm -R LOPA-1.58-Java_Logger_Library.jar
+rm -R LOPA-1.58-DynaCache_Caching_Library.jar
+rm -R LOPA-1.58-Coach_Bonus_Library.jar
+rm -R LOPA-1.58-Audit_Integration_Service_Library.jar
+rm -R RCL-Tip-MBB_Business_Lending_RefLists_Library.jar
+rm -R RCL-Tip-HTML_Data_Store_Library.jar
+rm -R RCL-Tip-GEMS_WebServices_Library.jar
+rm -R RCL-Tip-GCMS_Webservices_Library.jar
+rm -R RCL-Tip-GCIF_Webservices_Library.jar
+rm -R RCL-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R RCL-Tip-ELDS_Webservices_Library.jar
+rm -R RCL-Tip-DataBaseToolkit_Library.jar
+rm -R RCL-Tip-CRRS_Webservices_Library.jar
+rm -R RCL-Tip-CCRIS_Webservices_Library.jar
+rm -R RCL-Tip-CBM_Report_Toolkit_Library.jar
+rm -R RCL-Tip-CBM_ROC_Web_Service_Library.jar
+rm -R RCL-Tip-CBM_ROB_Web_Service_Library.jar
+rm -R RCL-Tip-CBM_OTH_Web_Service_Library.jar
+rm -R LOPA-V1.70-Java_Logger_Library.jar
+rm -R LOPA-V1.70-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.70-Coach_Bonus_Library.jar
+rm -R LOPA-V1.70-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.68-Java_Logger_Library.jar
+rm -R LOPA-V1.68-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.68-Coach_Bonus_Library.jar
+rm -R LOPA-V1.68-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.67-Java_Logger_Library.jar
+rm -R LOPA-V1.67-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.67-Coach_Bonus_Library.jar
+rm -R LOPA-V1.67-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.71-Java_Logger_Library.jar
+rm -R LOPA-V1.71-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.71-Coach_Bonus_Library.jar
+rm -R LOPA-V1.71-Audit_Integration_Service_Library.jar
+rm -R MBB_REF-V1.27-MBB_Business_Lending_RefLists_Library.jar
+rm -R MBB_REF-V1.27-Java_Logger_Library.jar
+rm -R MBB_REF-V1.27-Errror_Info_Utilities_TK_Library.jar
+rm -R MBB_REF-V1.27-DataBaseToolkit_Library.jar
+rm -R REAI-Tip-MBB_Business_Lending_RefLists_Library.jar
+rm -R REAI-Tip-HTML_Data_Store_Library.jar
+rm -R REAI-Tip-GEMS_WebServices_Library.jar
+rm -R REAI-Tip-GCMS_Webservices_Library.jar
+rm -R REAI-Tip-GCIF_Webservices_Library.jar
+rm -R REAI-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R REAI-Tip-ELDS_Webservices_Library.jar
+rm -R REAI-Tip-DataBaseToolkit_Library.jar
+rm -R REAI-Tip-CRRS_Webservices_Library.jar
+rm -R REAI-Tip-CCRIS_Webservices_Library.jar
+rm -R REAI-Tip-CBM_Report_Toolkit_Library.jar
+rm -R REAI-Tip-CBM_ROC_Web_Service_Library.jar
+rm -R REAI-Tip-CBM_ROB_Web_Service_Library.jar
+rm -R REAI-Tip-CBM_OTH_Web_Service_Library.jar
+rm -R LOPA-V1.86-Java_Logger_Library.jar
+rm -R LOPA-V1.86-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.86-Coach_Bonus_Library.jar
+rm -R LOPA-V1.86-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.84-Java_Logger_Library.jar
+rm -R LOPA-V1.84-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.84-Coach_Bonus_Library.jar
+rm -R LOPA-V1.84-Audit_Integration_Service_Library.jar
+rm -R JEYTST1-Tip-MBB_Business_Lending_RefLists_Library.jar
+rm -R JEYTST1-Tip-Java_Logger_Library.jar
+rm -R JEYTST1-Tip-HTML_Data_Store_Library.jar
+rm -R JEYTST1-Tip-GEMS_WebServices_Library.jar
+rm -R JEYTST1-Tip-GCMS_Webservices_Library.jar
+rm -R JEYTST1-Tip-GCIF_Webservices_Library.jar
+rm -R JEYTST1-Tip-Fusion_GCIF_Library.jar
+rm -R JEYTST1-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R JEYTST1-Tip-ELDS_Webservices_Library.jar
+rm -R JEYTST1-Tip-DataBaseToolkit_Library.jar
+rm -R JEYTST1-Tip-CRRS_Webservices_Library.jar
+rm -R JEYTST1-Tip-CCRIS_Webservices_Library.jar
+rm -R JEYTST1-Tip-CBM_Report_Toolkit_Library.jar
+rm -R JEYTST1-Tip-CBM_ROC_Web_Service_Library.jar
+rm -R JEYTST1-Tip-CBM_ROB_Web_Service_Library.jar
+rm -R JEYTST1-Tip-CBM_OTH_Web_Service_Library.jar
+rm -R JEYTST1-Tip-Audit_Integration_Service_Library.jar
+rm -R IMPACT-Tip-Travel_Expenses_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-MBB_Business_Lending_RefLists_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-MBB_Business_Lending_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-Java_Logger_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-HTML_Data_Store_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-GEMS_WebServices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-GCMS_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-GCIF_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-Fusion_GCIF_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-Errror_Info_Utilities_TK_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-ELDS_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-DataBaseToolkit_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CRRS_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CCRIS_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CBM_Report_Toolkit_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CBM_ROC_Web_Service_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CBM_ROB_Web_Service_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CBM_OTH_Web_Service_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.87-Java_Logger_Library.jar
+rm -R LOPA-V1.87-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.87-Coach_Bonus_Library.jar
+rm -R LOPA-V1.87-Audit_Integration_Service_Library.jar
+rm -R LOPA-SS122_8-MBB_Business_Lending_RefLists_Library.jar
+rm -R LOPA-SS122_8-Java_Logger_Library.jar
+rm -R LOPA-SS122_8-HTML_Data_Store_Library.jar
+rm -R LOPA-SS122_8-GEMS_WebServices_Library.jar
+rm -R LOPA-SS122_8-GCMS_Webservices_Library.jar
+rm -R LOPA-SS122_8-GCIF_Webservices_Library.jar
+rm -R LOPA-SS122_8-Fusion_GCIF_Library.jar
+rm -R LOPA-SS122_8-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-SS122_8-ELDS_Webservices_Library.jar
+rm -R LOPA-SS122_8-DataBaseToolkit_Library.jar
+rm -R LOPA-SS122_8-CRRS_Webservices_Library.jar
+rm -R LOPA-SS122_8-CCRIS_Webservices_Library.jar
+rm -R LOPA-SS122_8-CBM_Report_Toolkit_Library.jar
+rm -R LOPA-SS122_8-CBM_ROC_Web_Service_Library.jar
+rm -R LOPA-SS122_8-CBM_ROB_Web_Service_Library.jar
+rm -R LOPA-SS122_8-CBM_OTH_Web_Service_Library.jar
+rm -R LOPA-SS122_8-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.02-Java_Logger_Library.jar
+rm -R LOPA-V1.02-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.03-Java_Logger_Library.jar
+rm -R LOPA-V1.03-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.14-Java_Logger_Library.jar
+rm -R LOPA-V1.14-Audit_Integration_Service_Library.jar
+rm -R LOPA-SS122_9-MBB_Business_Lending_RefLists_Library.jar
+rm -R LOPA-SS122_9-Java_Logger_Library.jar
+rm -R LOPA-SS122_9-HTML_Data_Store_Library.jar
+rm -R LOPA-SS122_9-GEMS_WebServices_Library.jar
+rm -R LOPA-SS122_9-GCMS_Webservices_Library.jar
+rm -R LOPA-SS122_9-GCIF_Webservices_Library.jar
+rm -R LOPA-SS122_9-Fusion_GCIF_Library.jar
+rm -R LOPA-SS122_9-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-SS122_9-ELDS_Webservices_Library.jar
+rm -R LOPA-SS122_9-DataBaseToolkit_Library.jar
+rm -R LOPA-SS122_9-CRRS_Webservices_Library.jar
+rm -R LOPA-SS122_9-CCRIS_Webservices_Library.jar
+rm -R LOPA-SS122_9-CBM_Report_Toolkit_Library.jar
+rm -R LOPA-SS122_9-CBM_ROC_Web_Service_Library.jar
+rm -R LOPA-SS122_9-CBM_ROB_Web_Service_Library.jar
+rm -R LOPA-SS122_9-CBM_OTH_Web_Service_Library.jar
+rm -R LOPA-SS122_9-Audit_Integration_Service_Library.jar
+rm -R TAFDV-Tip-MBB_Business_Lending_RefLists_Library.jar
+rm -R TAFDV-Tip-Java_Logger_Library.jar
+rm -R TAFDV-Tip-HTML_Data_Store_Library.jar
+rm -R TAFDV-Tip-GEMS_WebServices_Library.jar
+rm -R TAFDV-Tip-GCMS_Webservices_Library.jar
+rm -R TAFDV-Tip-GCIF_Webservices_Library.jar
+rm -R TAFDV-Tip-Fusion_GCIF_Library.jar
+rm -R TAFDV-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R TAFDV-Tip-ELDS_Webservices_Library.jar
+rm -R TAFDV-Tip-DataBaseToolkit_Library.jar
+rm -R TAFDV-Tip-CRRS_Webservices_Library.jar
+rm -R TAFDV-Tip-CCRIS_Webservices_Library.jar
+rm -R TAFDV-Tip-CBM_Report_Toolkit_Library.jar
+rm -R TAFDV-Tip-CBM_OTH_Web_Service_Library.jar
+rm -R TAFDV-Tip-Audit_Integration_Service_Library.jar
+rm -R TAFDV-Tip-CBM_ROC_Web_Service_Library.jar
+rm -R TAFDV-Tip-CBM_ROB_Web_Service_Library.jar
+rm -R LOPA-SS012_9-Java_Logger_Library.jar
+rm -R LOPA-SS012_9-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-SS012_9-Audit_Integration_Service_Library.jar
+rm -R LOPA-SS012_8-Java_Logger_Library.jar
+rm -R LOPA-SS012_8-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-SS012_8-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.92-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-V1.92-Java_Logger_Library.jar
+rm -R LOPA-V1.92-Audit_Integration_Service_Library.jar
+rm -R LSHTMP-Tip-Java_Logger_Library.jar
+rm -R LSHTMP-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R LSHTMP-Tip-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.94-Java_Logger_Library.jar
+rm -R LOPA-V1.94-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-V1.94-Audit_Integration_Service_Library.jar
+rm -R AUGT1-Tip-Java_Logger_Library.jar
+rm -R AUGT1-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R AUGT1-Tip-DataBaseToolkit_Library.jar
+
+
+
+
+     
+
+
+
+
+
+
+
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/config/cells/bpmprocctrdev01Cell01/assets
+rm -R LOPA-V1.29-Java_Logger_Library.jar
+rm -R LOPA-V1.29-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.30-Java_Logger_Library.jar
+rm -R LOPA-V1.30-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.31-Java_Logger_Library.jar
+rm -R LOPA-V1.31-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.32-Java_Logger_Library.jar
+rm -R LOPA-V1.32-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.33-Java_Logger_Library.jar
+rm -R LOPA-V1.33-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.24-Java_Logger_Library.jar
+rm -R LOPA-V1.24-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.35-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.35-Java_Logger_Library.jar
+rm -R LOPA-V1.21-Java_Logger_Library.jar
+rm -R LOPA-V1.21-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.41-Java_Logger_Library.jar
+rm -R LOPA-V1.41-Audit_Integration_Service_Library.jar
+rm -R RCL-Tip-Java_Logger_Library.jar
+rm -R RCL-Tip-Audit_Integration_Service_Library.jar
+rm -R LOPA-1.58-Java_Logger_Library.jar
+rm -R LOPA-1.58-DynaCache_Caching_Library.jar
+rm -R LOPA-1.58-Coach_Bonus_Library.jar
+rm -R LOPA-1.58-Audit_Integration_Service_Library.jar
+rm -R RCL-Tip-MBB_Business_Lending_RefLists_Library.jar
+rm -R RCL-Tip-HTML_Data_Store_Library.jar
+rm -R RCL-Tip-GEMS_WebServices_Library.jar
+rm -R RCL-Tip-GCMS_Webservices_Library.jar
+rm -R RCL-Tip-GCIF_Webservices_Library.jar
+rm -R RCL-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R RCL-Tip-ELDS_Webservices_Library.jar
+rm -R RCL-Tip-DataBaseToolkit_Library.jar
+rm -R RCL-Tip-CRRS_Webservices_Library.jar
+rm -R RCL-Tip-CCRIS_Webservices_Library.jar
+rm -R RCL-Tip-CBM_Report_Toolkit_Library.jar
+rm -R RCL-Tip-CBM_ROC_Web_Service_Library.jar
+rm -R RCL-Tip-CBM_ROB_Web_Service_Library.jar
+rm -R RCL-Tip-CBM_OTH_Web_Service_Library.jar
+rm -R LOPA-V1.70-Java_Logger_Library.jar
+rm -R LOPA-V1.70-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.70-Coach_Bonus_Library.jar
+rm -R LOPA-V1.70-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.68-Java_Logger_Library.jar
+rm -R LOPA-V1.68-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.68-Coach_Bonus_Library.jar
+rm -R LOPA-V1.68-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.67-Java_Logger_Library.jar
+rm -R LOPA-V1.67-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.67-Coach_Bonus_Library.jar
+rm -R LOPA-V1.67-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.71-Java_Logger_Library.jar
+rm -R LOPA-V1.71-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.71-Coach_Bonus_Library.jar
+rm -R LOPA-V1.71-Audit_Integration_Service_Library.jar
+rm -R MBB_REF-V1.27-MBB_Business_Lending_RefLists_Library.jar
+rm -R MBB_REF-V1.27-Java_Logger_Library.jar
+rm -R MBB_REF-V1.27-Errror_Info_Utilities_TK_Library.jar
+rm -R MBB_REF-V1.27-DataBaseToolkit_Library.jar
+rm -R REAI-Tip-MBB_Business_Lending_RefLists_Library.jar
+rm -R REAI-Tip-HTML_Data_Store_Library.jar
+rm -R REAI-Tip-GEMS_WebServices_Library.jar
+rm -R REAI-Tip-GCMS_Webservices_Library.jar
+rm -R REAI-Tip-GCIF_Webservices_Library.jar
+rm -R REAI-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R REAI-Tip-ELDS_Webservices_Library.jar
+rm -R REAI-Tip-DataBaseToolkit_Library.jar
+rm -R REAI-Tip-CRRS_Webservices_Library.jar
+rm -R REAI-Tip-CCRIS_Webservices_Library.jar
+rm -R REAI-Tip-CBM_Report_Toolkit_Library.jar
+rm -R REAI-Tip-CBM_ROC_Web_Service_Library.jar
+rm -R REAI-Tip-CBM_ROB_Web_Service_Library.jar
+rm -R REAI-Tip-CBM_OTH_Web_Service_Library.jar
+rm -R LOPA-V1.86-Java_Logger_Library.jar
+rm -R LOPA-V1.86-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.86-Coach_Bonus_Library.jar
+rm -R LOPA-V1.86-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.84-Java_Logger_Library.jar
+rm -R LOPA-V1.84-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.84-Coach_Bonus_Library.jar
+rm -R LOPA-V1.84-Audit_Integration_Service_Library.jar
+rm -R JEYTST1-Tip-MBB_Business_Lending_RefLists_Library.jar
+rm -R JEYTST1-Tip-Java_Logger_Library.jar
+rm -R JEYTST1-Tip-HTML_Data_Store_Library.jar
+rm -R JEYTST1-Tip-GEMS_WebServices_Library.jar
+rm -R JEYTST1-Tip-GCMS_Webservices_Library.jar
+rm -R JEYTST1-Tip-GCIF_Webservices_Library.jar
+rm -R JEYTST1-Tip-Fusion_GCIF_Library.jar
+rm -R JEYTST1-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R JEYTST1-Tip-ELDS_Webservices_Library.jar
+rm -R JEYTST1-Tip-DataBaseToolkit_Library.jar
+rm -R JEYTST1-Tip-CRRS_Webservices_Library.jar
+rm -R JEYTST1-Tip-CCRIS_Webservices_Library.jar
+rm -R JEYTST1-Tip-CBM_Report_Toolkit_Library.jar
+rm -R JEYTST1-Tip-CBM_ROC_Web_Service_Library.jar
+rm -R JEYTST1-Tip-CBM_ROB_Web_Service_Library.jar
+rm -R JEYTST1-Tip-CBM_OTH_Web_Service_Library.jar
+rm -R JEYTST1-Tip-Audit_Integration_Service_Library.jar
+rm -R IMPACT-Tip-Travel_Expenses_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-MBB_Business_Lending_RefLists_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-MBB_Business_Lending_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-Java_Logger_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-HTML_Data_Store_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-GEMS_WebServices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-GCMS_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-GCIF_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-Fusion_GCIF_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-Errror_Info_Utilities_TK_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-ELDS_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-DataBaseToolkit_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CRRS_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CCRIS_Webservices_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CBM_Report_Toolkit_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CBM_ROC_Web_Service_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CBM_ROB_Web_Service_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-CBM_OTH_Web_Service_Library.jar
+rm -R MBBBL4-V602P-V6.0_11-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.87-Java_Logger_Library.jar
+rm -R LOPA-V1.87-DynaCache_Caching_Library.jar
+rm -R LOPA-V1.87-Coach_Bonus_Library.jar
+rm -R LOPA-V1.87-Audit_Integration_Service_Library.jar
+rm -R LOPA-SS122_8-MBB_Business_Lending_RefLists_Library.jar
+rm -R LOPA-SS122_8-Java_Logger_Library.jar
+rm -R LOPA-SS122_8-HTML_Data_Store_Library.jar
+rm -R LOPA-SS122_8-GEMS_WebServices_Library.jar
+rm -R LOPA-SS122_8-GCMS_Webservices_Library.jar
+rm -R LOPA-SS122_8-GCIF_Webservices_Library.jar
+rm -R LOPA-SS122_8-Fusion_GCIF_Library.jar
+rm -R LOPA-SS122_8-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-SS122_8-ELDS_Webservices_Library.jar
+rm -R LOPA-SS122_8-DataBaseToolkit_Library.jar
+rm -R LOPA-SS122_8-CRRS_Webservices_Library.jar
+rm -R LOPA-SS122_8-CCRIS_Webservices_Library.jar
+rm -R LOPA-SS122_8-CBM_Report_Toolkit_Library.jar
+rm -R LOPA-SS122_8-CBM_ROC_Web_Service_Library.jar
+rm -R LOPA-SS122_8-CBM_ROB_Web_Service_Library.jar
+rm -R LOPA-SS122_8-CBM_OTH_Web_Service_Library.jar
+rm -R LOPA-SS122_8-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.02-Java_Logger_Library.jar
+rm -R LOPA-V1.02-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.03-Java_Logger_Library.jar
+rm -R LOPA-V1.03-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.14-Java_Logger_Library.jar
+rm -R LOPA-V1.14-Audit_Integration_Service_Library.jar
+rm -R LOPA-SS122_9-MBB_Business_Lending_RefLists_Library.jar
+rm -R LOPA-SS122_9-Java_Logger_Library.jar
+rm -R LOPA-SS122_9-HTML_Data_Store_Library.jar
+rm -R LOPA-SS122_9-GEMS_WebServices_Library.jar
+rm -R LOPA-SS122_9-GCMS_Webservices_Library.jar
+rm -R LOPA-SS122_9-GCIF_Webservices_Library.jar
+rm -R LOPA-SS122_9-Fusion_GCIF_Library.jar
+rm -R LOPA-SS122_9-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-SS122_9-ELDS_Webservices_Library.jar
+rm -R LOPA-SS122_9-DataBaseToolkit_Library.jar
+rm -R LOPA-SS122_9-CRRS_Webservices_Library.jar
+rm -R LOPA-SS122_9-CCRIS_Webservices_Library.jar
+rm -R LOPA-SS122_9-CBM_Report_Toolkit_Library.jar
+rm -R LOPA-SS122_9-CBM_ROC_Web_Service_Library.jar
+rm -R LOPA-SS122_9-CBM_ROB_Web_Service_Library.jar
+rm -R LOPA-SS122_9-CBM_OTH_Web_Service_Library.jar
+rm -R LOPA-SS122_9-Audit_Integration_Service_Library.jar
+rm -R TAFDV-Tip-MBB_Business_Lending_RefLists_Library.jar
+rm -R TAFDV-Tip-Java_Logger_Library.jar
+rm -R TAFDV-Tip-HTML_Data_Store_Library.jar
+rm -R TAFDV-Tip-GEMS_WebServices_Library.jar
+rm -R TAFDV-Tip-GCMS_Webservices_Library.jar
+rm -R TAFDV-Tip-GCIF_Webservices_Library.jar
+rm -R TAFDV-Tip-Fusion_GCIF_Library.jar
+rm -R TAFDV-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R TAFDV-Tip-ELDS_Webservices_Library.jar
+rm -R TAFDV-Tip-DataBaseToolkit_Library.jar
+rm -R TAFDV-Tip-CRRS_Webservices_Library.jar
+rm -R TAFDV-Tip-CCRIS_Webservices_Library.jar
+rm -R TAFDV-Tip-CBM_Report_Toolkit_Library.jar
+rm -R TAFDV-Tip-CBM_OTH_Web_Service_Library.jar
+rm -R TAFDV-Tip-Audit_Integration_Service_Library.jar
+rm -R TAFDV-Tip-CBM_ROC_Web_Service_Library.jar
+rm -R TAFDV-Tip-CBM_ROB_Web_Service_Library.jar
+rm -R LOPA-SS012_9-Java_Logger_Library.jar
+rm -R LOPA-SS012_9-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-SS012_9-Audit_Integration_Service_Library.jar
+rm -R LOPA-SS012_8-Java_Logger_Library.jar
+rm -R LOPA-SS012_8-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-SS012_8-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.92-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-V1.92-Java_Logger_Library.jar
+rm -R LOPA-V1.92-Audit_Integration_Service_Library.jar
+rm -R LSHTMP-Tip-Java_Logger_Library.jar
+rm -R LSHTMP-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R LSHTMP-Tip-Audit_Integration_Service_Library.jar
+rm -R LOPA-V1.94-Java_Logger_Library.jar
+rm -R LOPA-V1.94-Errror_Info_Utilities_TK_Library.jar
+rm -R LOPA-V1.94-Audit_Integration_Service_Library.jar
+rm -R AUGT1-Tip-Java_Logger_Library.jar
+rm -R AUGT1-Tip-Errror_Info_Utilities_TK_Library.jar
+rm -R AUGT1-Tip-DataBaseToolkit_Library.jar
+
+
+
+
+     
+
+echo 'Start Server' $(date)
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/
+./startServer.sh ProcessCenter.AppTarget.bpmprocctrdev01Node01.0
+echo 'Completed' $(date)
+
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/
+./startServer.sh ProcessCenter.Messaging.bpmprocctrdev01Node01.0
+./startServer.sh ProcessCenter.Support.bpmprocctrdev01Node01.0
+./startServer.sh ProcessCenter.WebApp.bpmprocctrdev01Node01.0
+./startServer.sh ProcessCenter.AppTarget.bpmprocctrdev01Node01.0
+
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrdmgrsvr/bin/
+./startManager.sh
+
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/
+./startNode.sh
+echo 'Start Server' $(date)
+./startServer.sh ProcessCenter.Messaging.bpmprocctrdev01Node01.0
+./startServer.sh ProcessCenter.Support.bpmprocctrdev01Node01.0
+./startServer.sh ProcessCenter.WebApp.bpmprocctrdev01Node01.0
+./startServer.sh ProcessCenter.AppTarget.bpmprocctrdev01Node01.0
+echo 'Completed' $(date)
+
+
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/
+./stopServer.sh ProcessCenter.AppTarget.bpmprocctrdev01Node01.0 -username wasadmin -password P@ssw0rd
+./stopServer.sh ProcessCenter.Messaging.bpmprocctrdev01Node01.0 -username wasadmin -password P@ssw0rd
+./stopServer.sh ProcessCenter.Support.bpmprocctrdev01Node01.0 -username wasadmin -password P@ssw0rd
+./stopServer.sh ProcessCenter.WebApp.bpmprocctrdev01Node01.0 -username wasadmin -password P@ssw0rd
+
+
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/
+./stopServer.sh ProcessCenter.AppTarget.bpmprocctrdev01Node01.0 -username wasadmin -password P@ssw0rd
+./stopServer.sh ProcessCenter.Messaging.bpmprocctrdev01Node01.0 -username wasadmin -password P@ssw0rd
+./stopServer.sh ProcessCenter.Support.bpmprocctrdev01Node01.0 -username wasadmin -password P@ssw0rd
+./stopServer.sh ProcessCenter.WebApp.bpmprocctrdev01Node01.0 -username wasadmin -password P@ssw0rd
+
+
+echo 'Start Server' $(date)
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmprocctrNode01/bin/
+./stopServer.sh ProcessCenter.AppTarget.bpmprocctrdev01Node01.0 -username wasadmin -password P@ssw0rd
+echo 'Completed' $(date)
+
+
+
+clean up manual
+
+cd /usr/IBM/BPM/v8.0/AppServer/profiles/bpmruntimesitNode/bin
+./wsadmin.sh -conntype SOAP -port 8883 -username wasadmin -password adm1ns1t
+
+
+$AdminTask BPMDeactivate {-containerAcronym GCMSSC1 -containerSnapshotAcronym V1.0_86}
+$AdminTask BPMStop {-containerAcronym GCMSSC1 -containerSnapshotAcronym V1.0_86}
+$AdminTask BPMUndeploy  {-containerAcronym GCMSSC1 -containerSnapshotAcronym V1.0_86}
+$AdminTask BPMDeleteSnapshot {-containerAcronym GCMSSC1 -containerSnapshotAcronyms V1.0_86}
+
+--select * from LSW_SNAPSHOT INNER JOIN LSW_PROJECT ON LSW_SNAPSHOT.PROJECT_ID=LSW_PROJECT.PROJECT_ID where LSW_PROJECT.SHORT_NAME='MBBBL4'
+--and LSW_SNAPSHOT.NAME ='v6.10.068'
+
+
+
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCIFWS -containerTrackAcronym Main -keptNumber 100}
+
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym 4803486d-6407-4422-aa8c-fe6b73d5d00b}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms 4803486d-6407-4422-aa8c-fe6b73d5d00b}
+
+
+
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMDM -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym EOSMOU -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -keptNumber 20}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -keptNumber 50}
+
+
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym C111934 -keptNumber 20}
+
+$AdminTask BPMSnapshotCleanup {-containerAcronym EIUTK -containerTrackAcronym Main -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym EOSADM1 -containerTrackAcronym Main -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym BPELWS -containerTrackAcronym Main -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym FDSWS -containerTrackAcronym Main -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCIFWS -containerTrackAcronym Main -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym WSTLDAT -containerTrackAcronym Main -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CRRSWS -containerTrackAcronym Main -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBB_REF -containerTrackAcronym Main -keptNumber 10}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBB_REF -containerTrackAcronym V1292OU -keptNumber 50}
+$AdminTask BPMSnapshotCleanup {-containerAcronym DYNA -containerTrackAcronym Main -keptNumber 10}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MYTEST -containerTrackAcronym Main -keptNumber 10}
+$AdminTask BPMSnapshotCleanup {-containerAcronym REOSDB -containerTrackAcronym Main -keptNumber 10}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCIFDT -containerTrackAcronym Main -keptNumber 10}
+$AdminTask BPMSnapshotCleanup {-containerAcronym PROTGAT -containerTrackAcronym Main -keptNumber 10}
+
+
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 11140d33-cda0-4852-a2e5-9d7c68d50dba}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 11140d33-cda0-4852-a2e5-9d7c68d50dba}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 11140d33-cda0-4852-a2e5-9d7c68d50dba -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 1df2cd3e-47fd-40a9-932c-2041e59cb597}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 1df2cd3e-47fd-40a9-932c-2041e59cb597}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 1df2cd3e-47fd-40a9-932c-2041e59cb597 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym b73e3b0a-aadd-4992-9dcb-8219260c3e95}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym b73e3b0a-aadd-4992-9dcb-8219260c3e95}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms b73e3b0a-aadd-4992-9dcb-8219260c3e95 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym c90779a4-8481-40c6-82fc-160aa84ac93c}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym c90779a4-8481-40c6-82fc-160aa84ac93c}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms c90779a4-8481-40c6-82fc-160aa84ac93c -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 5a19802a-4558-4f59-ab92-6b97354f5115}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 5a19802a-4558-4f59-ab92-6b97354f5115}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 5a19802a-4558-4f59-ab92-6b97354f5115 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 264cd1f8-2d4e-4220-850a-e177691f9915}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 264cd1f8-2d4e-4220-850a-e177691f9915}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 264cd1f8-2d4e-4220-850a-e177691f9915 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym f42ec4d2-b05a-4b0f-b390-8f73c43375a4}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym f42ec4d2-b05a-4b0f-b390-8f73c43375a4}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms f42ec4d2-b05a-4b0f-b390-8f73c43375a4 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 2dd763e7-c673-45df-a6a4-649cf0a2df22}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 2dd763e7-c673-45df-a6a4-649cf0a2df22}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 2dd763e7-c673-45df-a6a4-649cf0a2df22 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 727fbef5-9c40-4f72-9a43-4fd70da19e9d}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 727fbef5-9c40-4f72-9a43-4fd70da19e9d}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 727fbef5-9c40-4f72-9a43-4fd70da19e9d -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 17d0facf-f7f0-4fe0-a303-e9aedf71a6e5}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 17d0facf-f7f0-4fe0-a303-e9aedf71a6e5}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 17d0facf-f7f0-4fe0-a303-e9aedf71a6e5 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 60d88174-6119-442d-a1bb-b04177158066}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 60d88174-6119-442d-a1bb-b04177158066}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 60d88174-6119-442d-a1bb-b04177158066 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 3ed7f104-e0d6-47cb-96a7-9ffae29d7018}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 3ed7f104-e0d6-47cb-96a7-9ffae29d7018}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 3ed7f104-e0d6-47cb-96a7-9ffae29d7018 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 78621dbd-1c56-4564-881c-6e547f375019}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 78621dbd-1c56-4564-881c-6e547f375019}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 78621dbd-1c56-4564-881c-6e547f375019 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym f1acea3b-1015-4687-a548-cfe9613d18a1}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym f1acea3b-1015-4687-a548-cfe9613d18a1}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms f1acea3b-1015-4687-a548-cfe9613d18a1 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym da4df60b-2da7-40f5-9ea8-c4e8c4968a61}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym da4df60b-2da7-40f5-9ea8-c4e8c4968a61}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms da4df60b-2da7-40f5-9ea8-c4e8c4968a61 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym b30b20f8-8691-4d31-9780-0f0400b13dc8}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym b30b20f8-8691-4d31-9780-0f0400b13dc8}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms b30b20f8-8691-4d31-9780-0f0400b13dc8 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym b5d55776-703e-497b-8ecd-235cf6fe9d8f}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym b5d55776-703e-497b-8ecd-235cf6fe9d8f}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms b5d55776-703e-497b-8ecd-235cf6fe9d8f -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 78b1dca3-40c1-448b-a05f-3f1da1ec2826}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 78b1dca3-40c1-448b-a05f-3f1da1ec2826}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 78b1dca3-40c1-448b-a05f-3f1da1ec2826 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym d1ac5348-498b-4086-a5c3-5ed7212ae3df}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym d1ac5348-498b-4086-a5c3-5ed7212ae3df}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms d1ac5348-498b-4086-a5c3-5ed7212ae3df -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym d33e24da-8efe-45fc-a6f5-553125f2938d}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym d33e24da-8efe-45fc-a6f5-553125f2938d}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms d33e24da-8efe-45fc-a6f5-553125f2938d -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym ceb6e5ec-ec5b-4860-8961-b231562caa6c}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym ceb6e5ec-ec5b-4860-8961-b231562caa6c}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms ceb6e5ec-ec5b-4860-8961-b231562caa6c -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 4d5b194f-d946-4386-b710-116575b43ee6}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 4d5b194f-d946-4386-b710-116575b43ee6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 4d5b194f-d946-4386-b710-116575b43ee6 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 4ff9e044-6eff-406d-b383-30668d6937c6}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 4ff9e044-6eff-406d-b383-30668d6937c6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 4ff9e044-6eff-406d-b383-30668d6937c6 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym f9b4799b-b1cc-46c1-8305-a82b7fdaeb3b}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym f9b4799b-b1cc-46c1-8305-a82b7fdaeb3b}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms f9b4799b-b1cc-46c1-8305-a82b7fdaeb3b -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 303da8fe-de8c-4547-8602-ac4802d4575b}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 303da8fe-de8c-4547-8602-ac4802d4575b}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 303da8fe-de8c-4547-8602-ac4802d4575b -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 4582f7c5-c85a-41be-b378-d3518e32721e}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 4582f7c5-c85a-41be-b378-d3518e32721e}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 4582f7c5-c85a-41be-b378-d3518e32721e -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 98dc22ed-324b-48e8-9b51-3d828bc08d3d}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 98dc22ed-324b-48e8-9b51-3d828bc08d3d}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 98dc22ed-324b-48e8-9b51-3d828bc08d3d -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 8d49a0b8-363e-414c-8647-b0f5551d407c}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 8d49a0b8-363e-414c-8647-b0f5551d407c}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 8d49a0b8-363e-414c-8647-b0f5551d407c -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 396fe5bd-f871-429d-8514-33ffd626a492}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 396fe5bd-f871-429d-8514-33ffd626a492}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 396fe5bd-f871-429d-8514-33ffd626a492 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 0292b4eb-8fea-4da0-9f3d-3b5a15e0dcec}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 0292b4eb-8fea-4da0-9f3d-3b5a15e0dcec}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 0292b4eb-8fea-4da0-9f3d-3b5a15e0dcec -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 0568f158-24dd-4aad-ae8a-b34fd722e035}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 0568f158-24dd-4aad-ae8a-b34fd722e035}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 0568f158-24dd-4aad-ae8a-b34fd722e035 -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym bbdefa0c-c128-47b7-9bfd-e676b45e307d}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym bbdefa0c-c128-47b7-9bfd-e676b45e307d}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms bbdefa0c-c128-47b7-9bfd-e676b45e307d -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 616b77fd-1059-48fc-9cd7-b3f164197eed}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 616b77fd-1059-48fc-9cd7-b3f164197eed}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms 616b77fd-1059-48fc-9cd7-b3f164197eed -ignoreDependency true}
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym eb03cd32-5d00-49b9-bc76-a871c87f25c5}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym eb03cd32-5d00-49b9-bc76-a871c87f25c5}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronyms eb03cd32-5d00-49b9-bc76-a871c87f25c5 -ignoreDependency true}
+
+
+
+
+
+
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronyms 35fe6c72-1f42-4638-b24c-4b22ba680057}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronyms 188f265e-2b7c-41f6-ae92-8538dc690198}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronyms ce84e0bd-0581-4de0-b064-836f42b5b61a}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronyms 18208f81-801e-4d08-8c09-4f7f46b7d0c6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronyms 325656f4-51b7-4677-a066-c4eba87d73db}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronyms b1ff4f07-9302-465c-8d08-59db4346cca6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronyms 43a7b4e9-0752-4680-98ea-31d5a081de0e}
+
+
+
+
+
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronym 35fe6c72-1f42-4638-b24c-4b22ba680057}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronym 188f265e-2b7c-41f6-ae92-8538dc690198}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronym ce84e0bd-0581-4de0-b064-836f42b5b61a}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronym 18208f81-801e-4d08-8c09-4f7f46b7d0c6}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronym 325656f4-51b7-4677-a066-c4eba87d73db}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronym b1ff4f07-9302-465c-8d08-59db4346cca6}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronym 43a7b4e9-0752-4680-98ea-31d5a081de0e}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronym 507e1dc5-dfa5-4232-8de9-cf996c2340f7}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym V604P -containerSnapshotAcronym 7bcd0d89-2a70-48dc-aecd-c3623759a369}
+
+
+
+
+
+
+
+
+
+
+
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 4c3b2eef-0d8f-40f9-9bee-1bd39c4e8316}
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 81a4af3d-3ff2-4108-b76e-d7b94876196d}
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym bf2b507f-d65a-49dc-a8f7-d0b4057cda94}
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 8e561d31-d4ab-4186-a5d9-70a0eefca18b}
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 37fddfc4-f569-4c17-a574-b91a051b0b28}
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym 60fe8bf2-f240-4c40-ae09-a07bc94e65c9}
+$AdminTask BPMDeactivate {-containerAcronym MBBBL4 -containerTrackAcronym V606023 -containerSnapshotAcronym cc41f15d-1103-4ec6-acd7-c9f173d67d6c}
+
+
+
+
+
+
+
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym GEMSWS5}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms GEMSWS5 -ignoreDependency true}
+
+
+$AdminTask BPMArchive {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronym V1.5.3}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronyms V1.5.3 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronym V1.5.4}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronyms V1.5.4 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronym V1.5.5}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronyms V1.5.5 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronym V1.5.6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronyms V1.5.6 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronym V1.5.7}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronyms V1.5.7 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronym V1.5.8}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CBMRPTK -containerTrackAcronym Main -containerSnapshotAcronyms V1.5.8 -ignoreDependency true}
+
+
+
+
+
+
+$AdminTask BPMArchive {-containerAcronym AIS -containerTrackAcronym Main -containerSnapshotAcronym V1.3.7}
+$AdminTask BPMSnapshotCleanup {-containerAcronym AIS -containerTrackAcronym Main -containerSnapshotAcronyms V1.3.7 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym AIS -containerTrackAcronym Main -containerSnapshotAcronym V1.3.8}
+$AdminTask BPMSnapshotCleanup {-containerAcronym AIS -containerTrackAcronym Main -containerSnapshotAcronyms V1.3.8 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym AIS -containerTrackAcronym Main -containerSnapshotAcronym V1.3.9}
+$AdminTask BPMSnapshotCleanup {-containerAcronym AIS -containerTrackAcronym Main -containerSnapshotAcronyms V1.3.9 -ignoreDependency true}
+
+
+
+V1.3.3
+V1.3.4
+
+
+
+$AdminTask BPMArchive {-containerAcronym CRRSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.0.6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CRRSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.0.6 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CRRSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.0.7}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CRRSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.0.7 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CRRSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.0.8}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CRRSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.0.8 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CRRSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.0.9}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CRRSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.0.9 -ignoreDependency true}
+
+
+
+$AdminTask BPMArchive {-containerAcronym MBB_REF -containerTrackAcronym Main -containerSnapshotAcronym V1.29.5}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBB_REF -containerTrackAcronym Main -containerSnapshotAcronyms V1.29.5 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBB_REF -containerTrackAcronym Main -containerSnapshotAcronym V1.29.6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBB_REF -containerTrackAcronym Main -containerSnapshotAcronyms V1.29.6 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBB_REF -containerTrackAcronym Main -containerSnapshotAcronym C5}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBB_REF -containerTrackAcronym Main -containerSnapshotAcronyms C5 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBB_REF -containerTrackAcronym Main -containerSnapshotAcronym C6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBB_REF -containerTrackAcronym Main -containerSnapshotAcronyms C6 -ignoreDependency true}
+
+
+
+V1.0_10
+V1.0_11
+V1.0_12
+V1.0_13
+V1.0_14
+V1.03_1
+V1.03_2
+V1.04.0
+V1.04_1
+V1.04_2
+V1.04_3
+V1.04_4
+
+
+
+
+C5
+C6
+
+
+
+$AdminTask BPMArchive {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronym V1.6.1}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.6.1 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronym V1.6.2}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.6.2 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronym V1.6.3}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.6.3 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronym V1.6.4}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.6.4 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronym V6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronyms V6 -ignoreDependency true}
+
+
+V1.6.1
+V1.6.2
+
+
+
+
+
+$AdminTask BPMArchive {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronym V1.4.7}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.4.7 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronym V1.4.8}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.4.8 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronym V1.4.9}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.4.9 -ignoreDependency true}
+
+
+V1.5.1
+V1.5.2
+V1.5.3
+
+
+
+
+
+$AdminTask BPMArchive {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronym C3}
+$AdminTask BPMSnapshotCleanup {-containerAcronym CCRISWS -containerTrackAcronym Main -containerSnapshotAcronyms C3 -ignoreDependency true}
+
+
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.4.6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.4.6 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.4.7}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.4.7 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.4.8}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.4.8 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.4.9}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.4.9 -ignoreDependency true}
+
+
+
+V1.4.6
+V1.4.7
+V1.4.8
+V1.4.9
+
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2.1}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2.1 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2.2}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2.2 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2.3}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2.3 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2.4}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2.4 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2.5}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2.5 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2.6}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2.6 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2.7}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2.7 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2.8}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2.8 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronym V1.2.9}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GEMSWS -containerTrackAcronym Main -containerSnapshotAcronyms V1.2.9 -ignoreDependency true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronym CBV22_6} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronyms CBV22_6 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronym CBV22_7} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronyms CBV22_7 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronym CBV22_8} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronyms CBV22_8 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronym CBV22_9} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronyms CBV22_9 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronym CBV2_29} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym C81945G -containerSnapshotAcronyms CBV2_29 -ignoreDependency true}
+
+
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V1.12_3} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V1.12_3 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V2.00_3} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V2.00_3 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V2.00.0} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V2.00.0 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.02.} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.02. -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.0_1} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.0_1 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.0_2} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.0_2 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.0_3} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.0_3 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.0_4} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.0_4 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.0_5} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.0_5 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.0_6} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.0_6 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.0_7} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.0_7 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.0_8} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.0_8 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronym V20.0_9} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBBL4 -containerTrackAcronym EOSM_1 -containerSnapshotAcronyms V20.0_9 -ignoreDependency true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronym CBV22_1} 
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV22_1 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronym CBV22_2}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV22_2 -ignoreDependency true}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV2_11 -ignoreDependency true}
+
+
+
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym GCMSP1B -containerSnapshotAcronym CBV5.36}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym GCMSP1B -containerSnapshotAcronyms CBV5.36 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym GCMSP1B -containerSnapshotAcronym CBV5.37}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym GCMSP1B -containerSnapshotAcronyms CBV5.37 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym GCMSP1B -containerSnapshotAcronym CBV5.39}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym GCMSP1B -containerSnapshotAcronyms CBV5.39 -ignoreDependency true}
+
+
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronym CBV629}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV629 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronym CBV6.29}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV6.29 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronym CBV6.30}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV6.30 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronym CBV6.31}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV6.31 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronym CBV6._1}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV6._1 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronym CBV6.32}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV6.32 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronym CBV6.33}
+$AdminTask BPMSnapshotCleanup {-containerAcronym MBBCB1 -containerTrackAcronym EOSMOU -containerSnapshotAcronyms CBV6.33 -ignoreDependency true}
+
+
+
+
+V1.0_17
+V1.0_18
+V1.0_19
+
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_11}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_11 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_12}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_12 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_13}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_13 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_14}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_14 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_15}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_15 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_16}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_16 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_17}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_17 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_18}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_18 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_19}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_19 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_21}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_21 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_22}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_22 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronym GCMS_23}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym FRRGCMS -containerSnapshotAcronyms GCMS_23 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym Main_1 -containerSnapshotAcronym V1._125}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym Main_1 -containerSnapshotAcronyms V1._125 -ignoreDependency true}
+$AdminTask BPMArchive {-containerAcronym GCMSSC1 -containerTrackAcronym Main_1 -containerSnapshotAcronym V.1.01.}
+$AdminTask BPMSnapshotCleanup {-containerAcronym GCMSSC1 -containerTrackAcronym Main_1 -containerSnapshotAcronyms V.1.01. -ignoreDependency true}
+
+
