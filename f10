@@ -1,0 +1,1649 @@
+<style>
+.invis{
+	visibility:hidden;
+}
+</style>
+<script>
+//var count=45; //NEED TO COME BACK AND MAKE THIS 100, 20 IS FOR TESTING IN BPM ONLY
+var tempCounter = document.getElementById("errorCounter").value;
+var count = parseInt(tempCounter);
+var counter=setInterval(timer, 1000); 
+
+function timer()
+{
+  count=count-1;
+  if (count <= 0)
+  {
+      clearInterval(counter);
+      document.getElementById("timer").innerHTML = "Proceed, or call your system adminstrator at ";
+      var btn = dojo.query("[data-viewid='Button1']")[0];      
+	dojo.removeClass(btn,"invis") ;
+      return;
+  }
+
+document.getElementById("timer").innerHTML="You may retry in " + count + " seconds, or contact your system adminstrator at "; 
+}
+</script>
+<span id="timer"></span>
+
+
+var errorPanel=dojo.byId("displayErrorCV");
+errorPanel.innerHTML="";
+
+var errorContainer = event.newVal;
+
+if (errorContainer != null && errorContainer.errorInfoList != null) {
+
+	var errorList = errorContainer.errorInfoList.items;
+	if(errorList != null && errorList.length >0){
+		var temp ="<ul>";
+		for(var i=0; i<errorList.length; i++){
+			temp += "<li>"+errorList[i].message+"</li>";
+		}
+		temp +="</ul>"
+		errorPanel.innerHTML=temp;
+	}
+}
+
+
+
+var string = "Unable to retrieve error message.";
+
+if(tw.system.error != null){
+    //to get error in XML
+    tw.local.errorNodeList = tw.system.error.getElementByTagName("message");
+    tw.local.errorElement = tw.local.errorNodeList.item();
+    
+    //to get message from <message> element
+    string = tw.local.errorElement.getText();
+
+
+    if (tw.system.currentTask != null){
+        if(tw.system.currentTask.id != null && tw.system.currentTask.id != undefined){
+            currTaskId = tw.system.currentTask.id;
+        }
+        if(tw.system.currentTask.subject != null && tw.system.currentTask.subject != undefined){
+            currTaskSubj = tw.system.currentTask.subject;
+        }
+        if(tw.system.currentTask.processActivityName != null && tw.system.currentTask.processActivityName != undefined){
+            currTaskActName  = tw.system. currentTask.processActivityName;
+
+            var uid = java.util.UUID.randomUUID();
+
+
+
+
+ var table = this.context.element.getElementsByTagName("div")[0];
+var processAcronym = this.context.options.processAcronym.get("value");
+var printAaServiceName = this.context.options.printAaServiceName.get("value");
+
+if(document.getElementById("cvSchemaOU") != null) {
+	schemaOU = document.getElementById("cvSchemaOU").value;
+}
+if(document.getElementById("cvDataSourceOU") != null) {
+	dataSourceOU = document.getElementById("cvDataSourceOU").value;
+}
+
+var data = this.context.binding.get("value");
+
+
+
+
+var tableInnerHTML = "";
+var generatedLink = "";
+for(i=0; i < data.length(); i++) {
+	var param="";
+
+	if(schemaOU == "MYBOS") {
+		param="&serviceName=Show Print FCM&tw.local.uuid=" +data.get(i).value;
+	} else {
+		param="&serviceName="+printAaServiceName+"&tw.local.originType=FCM&tw.local.fcmNumber=" +data.get(i).name;
+	}
+	
+	generatedLink = "/teamworks/executeServiceByName?processApp=" +
+	 			processAcronym +
+	 			"&tw.local.schemaOU=" + schemaOU +
+				"&tw.local.dataSourceOU=" + dataSourceOU +
+				param;
+	tableInnerHTML += "<div class='aaNumber'><b>FCM Number:</b> " + data.get(i).name + "</div>" +
+				"<div class='button'><button type='button' class='BPMButton BPMButtonBorder' " + 
+					"onclick='window.open(\"" + generatedLink + 
+					"\")'>Display</button></div><br/>"
+}
+table.innerHTML = tableInnerHTML;
+
+
+
+SELECT a.uuid as UUID 	
+FROM mybos.aa_form_data_approved a, 
+xmltable ( '$c/variable' passing a.xmlvalue AS "c" 
+columns
+aa_number varchar(100) path 'aaNumber', 
+aa_number_old varchar(100) path 'oldAANumber', 
+lending_unit varchar(200) path 'lendingUnit/name', 
+lending_unit_code varchar(200) path 'lendingUnit/value', 
+originator_name varchar(100) path 'originatorInfo/name', 
+originator_id varchar(100) path 'originatorInfo/value', 
+final_approver varchar (500) path 'finalApprover',
+trade_facility varchar (5) path 'tradeFacility',						
+decision_sts VARCHAR(200) PATH 'decisionList/item[step = ("Validate AA","Validate FCM")][1]/decision',
+decision_date VARCHAR(200) PATH 'decisionList/item[step = ("Validate AA","Validate FCM")][1]/substring(date,1,10)'
+) AS af
+WHERE Varchar_format(To_date(af.decision_date, 'DD/MM/YYYY'),'DDMMYYYY') = Varchar_format(To_date(TODAY_DATE, 'YYYY-MM-DD'), 'DDMMYYYY');
+
+
+
+tw.local.snapshotVer = tw.system.model.processAppSnapshot.name;
+
+
+//tw.local.taskInstance = new tw.object.listOf.TaskInstance();
+//TEST CASE
+//tw.local.fromDate = new tw.object.Date();
+//tw.local.fromDate.setHours(11,0,0,0);
+//
+//tw.local.toDate=new tw.object.Date();
+//tw.local.toDate.setDate(tw.local.toDate.getDate()+4);
+//tw.local.toDate.setHours(12,0,0,0);
+
+
+function workingDaysBetweenDates(fromDate, toDate) {  
+    
+    var timeElap = new Array();
+    var adjDay = 0;
+    var tempDayAdjustment = 0;
+    
+    if (toDate < fromDate){
+        return;
+    }
+    
+    //calculate adjust day
+    var toDateT = toDate%86400000;
+    var fromDateT = fromDate%86400000;
+    if(toDateT < fromDateT){
+        adjDay=1;
+    }
+    
+    var frDay = fromDate.getDay();
+    var toDay = toDate.getDay();
+    
+    if((frDay == 1 || frDay == 7) && (toDay == 1 || toDay == 7)){        
+        toDate = fromDate;
+        adjDay=0;
+        //log.info("inside both weekend ###fromDate:"+fromDate +" ###toDate: "+toDate);
+    }
+    
+    if((frDay == 1 || frDay == 7) && (toDay != 1 && toDay != 7)){//if frDay = SUN/SAT, and today nt weekends
+        fromDate.setDate(fromDate.getDate()+1);
+        fromDate.setHours(0);
+        fromDate.setMinutes(0);
+        fromDate.setSeconds(0);
+        frDay = 2;
+        adjDay=0;
+        //log.info("inside started weekend and completed on weekdays ###fromDate:"+fromDate +" ###toDate: "+toDate);
+    }
+    
+    if(frDay == 6 && (toDay == 1 || toDay == 7)){//if frDay = FRI, and today is weekends
+        toDate.setDate(fromDate.getDate());
+        toDate.setHours(23);
+        toDate.setMinutes(59);
+        toDate.setSeconds(59);
+        toDay = 6;
+        adjDay=0;
+        //log.info("inside started on FRI and completed on weekends ###fromDate:"+fromDate +" ###toDate: "+toDate);
+    }
+    
+    var realDiff = toDate - fromDate;  
+    fromDate.setHours(0,0,0,1);
+    toDate.setHours(23,59,59,999);
+    var numDay = Math.floor((toDate-fromDate)/86400000);
+    var weekdays = numDay-(Math.floor(numDay/7))*2
+    var weekends=(Math.floor(numDay/7))*2;
+
+    
+    if(frDay == toDay){
+	    //log.info("######=======########::::"+ fromDate + "::::" + toDate);
+    }else{
+        //log.info("toDay.....: " + toDay);
+	    if(toDay == 1){//if sunday
+		    weekends += 1;
+		    //log.info("##############111::::"+ fromDate + "::::" + toDate);
+    	}
+	    if(frDay == 7 && (toDay != 1 && toDay != 7)){//if frDay = Sat, and today nt weekends
+		    weekends += 2;
+		    //log.info("##############222::::"+ fromDate + "::::" + toDate);
+    	}
+	    if(frDay == 1 && (toDay != 1 && toDay != 7)){//if frDay = SUN, and today nt weekends
+		    weekends += 1;
+		    //log.info("##############333::::"+ fromDate + "::::" + toDate);
+    	}
+	    if((frDay != 1 && frDay != 7) &&(toDay != 1 && toDay != 7)){//if frDay, and toDay not in weekends
+		    if(frDay > toDay){
+			    weekends += 2;
+			    //log.info("##############444::::"+ fromDate + "::::" + toDate);			
+    		}
+    		//log.info("##############555::::"+ fromDate + "::::" + toDate);
+	    }
+    }
+
+    //calcualte HH, MM
+    var temp = realDiff%86400000;
+    var hour = Math.floor(temp/(3600*1000));
+    var minute=Math.floor((temp-hour*(3600*1000))/(60*1000));
+    timeElap[0]=numDay-weekends-adjDay;
+    timeElap[1]=hour;
+    timeElap[2]=minute;
+	
+    return timeElap;
+}
+
+// var J for aaMovementTimeLapse to exlude if statement
+var j = 0;
+tw.local.aaMovementTimeLapse = new tw.object.listOf.AaMovementTimeLapse();
+var totDays = 0;
+var Days = 0;
+// Set calculated times to CurrentTask Instance Array
+for (var i=0; i<tw.local.receivedClosedDates.listLength; i++){
+var timeElap =null;
+if(tw.local.receivedClosedDates[i].receivedDate != null && tw.local.receivedClosedDates[i].closedDate != null)
+{
+    if(tw.local.receivedClosedDates[i].receivedDate != null) {
+    //log.info("testin rigg 1 "+tw.local.receivedClosedDates[i].receivedDate);
+        tw.local.receivedClosedDates[i].receivedDate.setSeconds(0);
+        tw.local.receivedClosedDates[i].receivedDate.setMilliseconds(0);
+    }
+    
+    if(tw.local.receivedClosedDates[i].closedDate != null) {
+    //log.info("testin rigg 2 "+tw.local.receivedClosedDates[i].closedDate);
+        tw.local.receivedClosedDates[i].closedDate.setSeconds(0);
+        tw.local.receivedClosedDates[i].closedDate.setMilliseconds(0);
+    }
+    timeElap = workingDaysBetweenDates(tw.local.receivedClosedDates[i].receivedDate, tw.local.receivedClosedDates[i].closedDate);
+//  tw.local.taskInstance[i] = new tw.object.TaskInstance();
+   
+    if(timeElap != null){
+        if (timeElap[0] == 0 && timeElap[1] == 0 && timeElap[2] == 0){
+            tw.local.taskInstance[i].taDays = "0";
+            tw.local.taskInstance[i].taHoursMins = "00:00"
+        }
+        else{
+            Days = timeElap[0];
+            tw.local.taskInstance[i].taDays = Days.toString();
+            
+            timeElap[1] = timeElap[1].toString()
+                if (timeElap[1].length <2){
+                    timeElap[1] = "0" + timeElap[1];
+                }
+            timeElap[2] = timeElap[2].toString();
+                if (timeElap[2].length <2){
+                    timeElap[2] = "0" + timeElap[2];
+                }
+            tw.local.taskInstance[i].taHoursMins = timeElap[1] + ":" + timeElap[2];
+            totDays = totDays + Days ;
+        }
+        
+            tw.local.aaMovementTimeLapse[j] = new tw.object.AaMovementTimeLapse();
+            tw.local.aaMovementTimeLapse[j].days = timeElap[0];
+            tw.local.aaMovementTimeLapse[j].hours = timeElap[1];
+            tw.local.aaMovementTimeLapse[j].minutes = timeElap[2];
+            j++;
+    }
+  }  
+}
+
+
+// Calculate total process time
+var totMin = 0;
+var minString = "";
+var totHour = 0;
+var hourString = "";
+var totDay = 0;
+if (tw.local.aaMovementTimeLapse.listLength>0 && tw.local.aaMovementTimeLapse[0].days != null){
+    totDay = tw.local.aaMovementTimeLapse[0].days;
+}
+
+
+for (var i=0; i<tw.local.aaMovementTimeLapse.listLength; i++){
+    if (tw.local.aaMovementTimeLapse[i].minutes == null){
+        tw.local.aaMovementTimeLapse[i].minutes = 0;
+    }
+    if (tw.local.aaMovementTimeLapse[i].hours == null){
+        tw.local.aaMovementTimeLapse[i].hours = 0;
+    }
+    
+    if (tw.local.aaMovementTimeLapse[i].days > totDay){
+        totDay = tw.local.aaMovementTimeLapse[i].days;
+    }
+    
+    totMin += tw.local.aaMovementTimeLapse[i].minutes;
+    totHour += tw.local.aaMovementTimeLapse[i].hours;
+
+}
+
+// Format correctly for days, hours:mins
+while (totMin >= 60){
+     totHour++;
+     totMin = totMin - 60;
+}
+
+while (totHour >=24){
+    totDays = totDays + 1 ;
+     totHour = totHour - 24;
+}
+
+// Format totals
+if (totMin < 10) minString = "0" + totMin.toString();
+else minString = totMin.toString();
+    
+if (totHour <10) hourString = "0" + totHour.toString();
+else hourString = totHour.toString();
+
+var listLength = tw.local.taskInstance.listLength;
+tw.local.taskInstance[listLength] = new tw.object.TaskInstance();
+//tw.local.taskInstance[listLength].taDays = totDay.toString();
+tw.local.taskInstance[listLength].taDays = totDays.toString();
+tw.local.taskInstance[listLength].taHoursMins = hourString + ":" + minString;
+tw.local.taskInstance[listLength].closedDate = "Total:";
+
+
+
+var string = "Unable to retrieve error message.";
+
+if(tw.system.error != null){
+    //to get error in XML
+    tw.local.errorNodeList = tw.system.error.getElementByTagName("message");
+    tw.local.errorElement = tw.local.errorNodeList.item();
+    
+    //to get message from <message> element
+    string = tw.local.errorElement.getText();
+}
+
+get the estimated timed error occured
+var currDtTime = new tw.object.Date();
+var currTaskId = "";
+var currTaskSubj = "";
+var currTaskActName = "";
+
+//get current task's detail
+if (tw.system.currentTask != null){
+    if(tw.system.currentTask.id != null && tw.system.currentTask.id != undefined){
+        currTaskId = tw.system.currentTask.id;
+    }
+    if(tw.system.currentTask.subject != null && tw.system.currentTask.subject != undefined){
+        currTaskSubj = tw.system.currentTask.subject;
+    }
+    if(tw.system.currentTask.processActivityName != null && tw.system.currentTask.processActivityName != undefined){
+        currTaskActName  = tw.system. currentTask.processActivityName;
+    }
+}
+
+//set default process instance id
+if (tw.local.currInstanceId == null || tw.local.currInstanceId == undefined){
+    tw.local.currInstanceId = "Unknown Process Instance ID";
+}
+
+//get aa number
+var aaNum = "Unknown AA number";
+var aaUid = "";
+if (tw.local.aaSearchResult != null && tw.local.aaSearchResult != undefined){
+    if(tw.local.aaSearchResult[0] != null && tw.local.aaSearchResult[0] != undefined){
+        aaNum = tw.local.aaSearchResult[0].name;
+        aaUid = tw.local.aaSearchResult[0].value;
+    }
+}
+
+//set debug id
+var debugId = "";
+var temp = Math.floor((1 + (Math.random()*9999)));
+debugId = aaNum.slice(-6)+temp.toString();
+
+//form error message
+var uid = java.util.UUID.randomUUID();
+var formErrorMsg = new tw.object.ErrorInfo();
+formErrorMsg.originatedFrom = tw.local.currInstanceId + ": " + currTaskSubj;
+formErrorMsg.acccessing = currTaskId.split('.').slice(1).join('.') + ": " + currTaskActName;
+formErrorMsg.message = "Unexpected error occurs for AA ["+aaNum+"] at "+currDtTime.format("dd/MM/yyyy hh:mm:ss a") + " -" + string;
+formErrorMsg.message += "<br/>Debug ID [" + debugId + "]";
+if(currTaskId != "" && currTaskActName != ""){
+    formErrorMsg.message += "-Failed accessing "+formErrorMsg.acccessing;
+}
+
+
+
+//set value to error info container
+if (tw.local.errorInfoContainer == null || tw.local.errorInfoContainer == undefined){
+    tw.local.errorInfoContainer = new tw.object.ErrorInfoContainer();
+    tw.local.errorInfoContainer.errorInfoList = new tw.object.listOf.ErrorInfo();
+}
+if (tw.local.errorInfoContainer.errorInfoList == null || tw.local.errorInfoContainer.errorInfoList == undefined){
+    tw.local.errorInfoContainer.errorInfoList = new tw.object.listOf.ErrorInfo();
+}
+var errorLength = tw.local.errorInfoContainer.errorInfoList.listLength;
+tw.local.errorInfoContainer.errorInfoList.insertIntoList(errorLength, formErrorMsg);
+
+//log error
+if(tw.system.error != null){
+    log.error("ERROR ["+debugId+"]: "+aaUid);
+    log.error("ERROR ["+debugId+"]: "+tw.system.error.toString(true));
+}
+
+//log.info("string is --> "+string);
+//log.info("curr datetime is --> "+currDtTime);
+//log.info("curr task id is --> "+currTaskId);
+//log.info("curr task subj is --> "+currTaskSubj);
+//log.info("curr task activity name --> "+currTaskActName);
+//log.info("curr instance id is --> "+tw.local.currInstanceId);
+//log.info("curr aa number is --> "+aaNum);
+//log.info("curr aa uuid is --> "+aaUid);
+//log.info("curr debug id is --> "+debugId);
+//log.info("curr temp is --> "+temp);
+//log.info("curr uid is --> "+uid);
+//log.info("curr msg is --> "+formErrorMsg.message);
+
+
+<style>
+	.invis{
+		visibility:hidden;
+	}
+</style>
+	<script>
+	var count=45; //NEED TO COME BACK AND MAKE THIS 100, 20 IS FOR TESTING IN BPM ONLY
+	var counter=setInterval(timer, 1000); 
+	
+	function timer()
+	{
+	  count=count-1;
+	  if (count <= 0)
+	  {
+		  clearInterval(counter);
+		  document.getElementById("timer").innerHTML = "Proceed, or call your system adminstrator at ";
+		  var btn = dojo.query("[data-viewid='Button1']")[0];      
+		dojo.removeClass(btn,"invis") ;
+		  return;
+	  }
+	
+	document.getElementById("timer").innerHTML="You may retry in " + count + " seconds, or contact your system adminstrator at "; 
+	}
+	</script>
+	<span id="timer"></span>
+
+
+	//If any of the following commands fail, the error will be caught and token will be directed to the "Not Found" activity
+var foundRole = tw.system.org.findRoleByName(tw.local.acoRole);
+var foundRoleName = foundRole.name;
+tw.local.numUsers = foundRole.allUsers.length;
+
+
+var f = new java.io.File(tw.env.printingOutputPath);
+
+if (f.isDirectory())
+{
+	var c = new org.apache.commons.io.filefilter.WildcardFileFilter(tw.local.aaNumber + "_" + tw.local.tableType + "_error*docx");
+	var fileListString = org.apache.commons.io.FileUtils.listFiles(f, c, null).toString();
+	if (fileListString != null && fileListString != "" && fileListString != "[]")
+	{
+		fileListString = fileListString.replace("[", "");
+		fileListString = fileListString.replace("]", "");
+		var fileList = fileListString.split(", ");
+		for (var i = 0; i < fileList.length; i++)
+		{
+			var errorModuleName = fileList[i].substring(fileList[i].lastIndexOf("_") + 1, fileList[i].lastIndexOf("."));
+			var found = false;
+			for (var j = 0; j < tw.local.moduleTypeList.listLength; j++)
+			{
+			      
+			    if (tw.local.moduleTypeList[j] == errorModuleName)
+				{    
+					found = true;
+					break;
+				}
+			}
+			//log.info("Call PDF Generator : " + errorModuleName  +  " : " + found +  ": " + tw.local.groupUUID);
+
+			if (!found)
+			{
+				if (tw.local.groupUUID != '')
+				{
+					//tw.local.moduleTypeList.insertIntoList(0, errorModuleName + "Group");
+	                tw.local.moduleTypeList.insertIntoList(0, errorModuleName);
+				}
+				else
+				{
+				    if(errorModuleName.search('Group') == -1)
+				    {
+				        tw.local.moduleTypeList.insertIntoList(0, errorModuleName);
+				    }
+				}
+			}
+		}
+	}
+}
+
+//log.info("Call PDF Generator : " + tw.local.moduleTypeList);
+
+
+
+
+var borrwerPorfileDate = '';
+var marketSegment = '';
+var aaStatus = '';
+var accountStatus = "";
+var template = '';
+var dateClassified = "";
+var grpReview = "";
+var grpName = "";
+var gelAA = "";
+var rrHistory = "N/App";
+var aaCategory = "";
+var keyPromoter = "";
+//var thisHTML=tw.local.tempHTML;
+
+var borrowerName = "";
+var natureOfBusiness = "";
+var borrowerSince = '';
+var dateIncorporate = '';
+var currencyAuthorisedCapital = '';
+var currencyPaidUpCapital = '';
+var totalNoOfEmployees = '';
+var briefDescOfBorrowersBiz = '';
+var reviewPeriod = '';
+var finalApprover = '';
+
+if (tw.local.borrowerInformation != null && tw.local.borrowerInformation != undefined)
+{
+	if (tw.local.borrowerInformation.borrowerProfile != null && tw.local.borrowerInformation.borrowerProfile != undefined)
+	{
+		borrwerPorfileDate = replaceNullDate(tw.local.borrowerInformation.borrowerProfile.date);
+		marketSegment = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrowerProfile.marketSegment.name);
+		template = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrowerProfile.template.name);
+		dateClassified = replaceNullDate(tw.local.borrowerInformation.borrowerProfile.classifiedDate);
+        if(tw.local.borrowerInformation.borrowerProfile.groupReview != null && tw.local.borrowerInformation.borrowerProfile.groupReview != undefined && tw.local.borrowerInformation.borrowerProfile.groupReview.name != null && tw.local.borrowerInformation.borrowerProfile.groupReview.name != undefined){
+        grpReview = tw.local.borrowerInformation.borrowerProfile.groupReview.name;
+        }
+        if(tw.local.borrowerInformation.borrowerProfile.groupName != null && tw.local.borrowerInformation.borrowerProfile.groupName != undefined){
+        grpName = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrowerProfile.groupName);
+        }
+        if(tw.local.borrowerInformation.borrowerProfile.gelAa != null && tw.local.borrowerInformation.borrowerProfile.gelAa != undefined && tw.local.borrowerInformation.borrowerProfile.gelAa.name != null && tw.local.borrowerInformation.borrowerProfile.gelAa.name != undefined){
+        gelAA = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrowerProfile.gelAa.name);
+        }
+        if(tw.local.borrowerInformation.borrowerProfile.aaCategory != null && tw.local.borrowerInformation.borrowerProfile.aaCategory != undefined && tw.local.borrowerInformation.borrowerProfile.aaCategory.name != null && tw.local.borrowerInformation.borrowerProfile.aaCategory.name != undefined){
+        aaCategory = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrowerProfile.aaCategory.name);
+        }   
+        if(tw.local.borrowerInformation.borrowerProfile.reviewPeriod != null && tw.local.borrowerInformation.borrowerProfile.reviewPeriod != undefined && tw.local.borrowerInformation.borrowerProfile.reviewPeriod.name != null && tw.local.borrowerInformation.borrowerProfile.reviewPeriod.name != undefined){
+        reviewPeriod = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrowerProfile.reviewPeriod.name);
+        }
+        
+		if (tw.local.borrowerInformation.borrowerProfile.aaStatus != null)
+		{
+			for (var i = 0; i < tw.local.borrowerInformation.borrowerProfile.aaStatus.listLength; i++)
+			{
+				aaStatus += replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrowerProfile.aaStatus[i].name);
+
+				if (i != tw.local.borrowerInformation.borrowerProfile.aaStatus.listLength - 1)
+				{
+					aaStatus += ", ";
+				}
+			}
+		}
+        if(tw.local.borrowerInformation.borrowerProfile.accStatus != null && tw.local.borrowerInformation.borrowerProfile.accStatus != undefined && tw.local.borrowerInformation.borrowerProfile.accStatus.name != null && tw.local.borrowerInformation.borrowerProfile.accStatus.name != undefined){
+		        accountStatus = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrowerProfile.accStatus.name);
+		} else {
+		    if (tw.local.borrowerInformation.borrowerProfile.accountStatus != null)
+		{
+			for (var i = 0; i < tw.local.borrowerInformation.borrowerProfile.accountStatus.listLength; i++)
+			{
+				accountStatus += replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrowerProfile.accountStatus[i].name);
+
+				if (i != tw.local.borrowerInformation.borrowerProfile.accountStatus.listLength - 1)
+				{
+					accountStatus += ", ";
+				}
+			}
+		}
+		}
+		if(tw.local.borrowerInformation.borrowerProfile.rrHistory != null && tw.local.borrowerInformation.borrowerProfile.rrHistory !=undefined){
+	    if(tw.local.borrowerInformation.borrowerProfile.rrHistory.listLength >0){
+	    for(var r =0 ; r < 5 ; r++){
+	    if(tw.local.borrowerInformation.borrowerProfile.rrHistory[r] !=null && tw.local.borrowerInformation.borrowerProfile.rrHistory[r] !=undefined){
+	    if(tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrDate !=null && tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrDate !=undefined){
+	    log.info("rrdate :"+tw.local.borrowerInformation.borrowerProfile.rrHistory[r]+" at index :"+r)
+	    if(r==0){
+	    rrHistory = "";
+	     if(tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc != null && tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc != undefined &&
+	     tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc.name != null && tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc.value != undefined){
+	     rrHistory = replaceNullDate(tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc.name+":"+tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrDate.format("yyyy-MM-dd"));    
+	     }
+	     else
+	     {
+	     rrHistory = replaceNullDate(tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrDate.format("yyyy-MM-dd"));    
+	     }
+	    }
+	    else
+	    {
+	    var rrDateTemp = "";
+	     if(tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc != null && tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc != undefined &&
+	     tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc.name != null && tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc.value != undefined){
+	     rrDateTemp = replaceNullDate(tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrNameDesc.name+":"+tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrDate.format("yyyy-MM-dd"));    
+	     }	    
+	     else{
+	    rrDateTemp = replaceNullDate(tw.local.borrowerInformation.borrowerProfile.rrHistory[r].rrDate.format("yyyy-MM-dd")); 
+	    }
+	    rrHistory = rrHistory+","+rrDateTemp; 
+	    }
+	    }
+	    }
+	    }
+	    }	
+	
+	    }
+
+	if (tw.local.borrowerInformation.borrower != null && tw.local.borrowerInformation.borrower != undefined)
+	{
+		if (tw.local.borrowerInformation.borrower.borrowerName != null && tw.local.borrowerInformation.borrower.borrowerName != undefined)
+		{
+			borrowerName = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrower.borrowerName);
+		}
+
+		if (tw.local.borrowerInformation.borrower.borrowerSince != null && tw.local.borrowerInformation.borrower.borrowerSince != undefined)
+		{
+			//borrowerSince = replaceNullDate(tw.local.borrowerInformation.borrower.borrowerSince);
+			borrowerSince = replaceNullDate(tw.local.borrowerInformation.borrower.borrowerSince.format('dd/MM/yyyy'));
+			//borrowerSince = replaceNullDate(tempborrowerSince.format('dd/MM/yyyy'));
+		}
+
+		if (tw.local.borrowerInformation.borrower.businessOperation != null && tw.local.borrowerInformation.borrower.businessOperation != undefined)
+		{
+			briefDescOfBorrowersBiz = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrower.businessOperation.briefDescriptionOfBorrowersBusiness);
+		}
+
+		if (tw.local.borrowerInformation.borrower.corporateInformation != null && tw.local.borrowerInformation.borrower.corporateInformation != undefined)
+		{
+			currencyAuthorisedCapital = tw.local.borrowerInformation.borrower.corporateInformation.currencyAuthorisedCapital.name + " " + formatAmount(tw.local.borrowerInformation.borrower.corporateInformation.authroisedCapital);
+
+			currencyPaidUpCapital = tw.local.borrowerInformation.borrower.corporateInformation.currencyPaidUpCapital.name + " " + formatAmount(tw.local.borrowerInformation.borrower.corporateInformation.paidUpCapital);
+
+			if (tw.local.borrowerInformation.borrower.corporateInformation.totalNoOfEmployees != null &&
+				tw.local.borrowerInformation.borrower.corporateInformation.totalNoOfEmployees != undefined)
+			{
+				totalNoOfEmployees = tw.local.borrowerInformation.borrower.corporateInformation.totalNoOfEmployees.toString();
+			}
+
+			if (tw.local.borrowerInformation.borrower.corporateInformation.natureOfBusiness != null &&
+				tw.local.borrowerInformation.borrower.corporateInformation.natureOfBusiness != undefined)
+			{
+				natureOfBusiness = replaceNullAndSpecialCharString(tw.local.borrowerInformation.borrower.corporateInformation.natureOfBusiness.name);
+			}
+
+			if (tw.local.borrowerInformation.borrower.corporateInformation.dateIncorporate != null &&
+				tw.local.borrowerInformation.borrower.corporateInformation.dateIncorporate != undefined)
+			{
+				dateIncorporate = replaceNullDate(tw.local.borrowerInformation.borrower.corporateInformation.dateIncorporate);
+			}
+
+		}
+
+	}
+	
+
+}
+    
+}
+
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_finalApprover", replaceNullAndSpecialCharString(tw.local.aa.aaFormData.finalApprover));
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_borrwerPorfileDate", borrwerPorfileDate);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_aaNumber", replaceNullAndSpecialCharString(tw.local.aa.aaFormData.aaNumber));
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_lendingUnit", replaceNullAndSpecialCharString(tw.local.aa.aaFormData.lendingUnit.name));
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_marketSegment", marketSegment);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_aaStatus", aaStatus);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_accountStatus", accountStatus);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_template", replaceNullAndSpecialCharString(template));
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_dateClassified", dateClassified);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_groupReview", grpReview);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_group_name", grpName);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_gelAA", gelAA);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_aaCategory", aaCategory);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_rrHistory", rrHistory);
+//log.info("rrHistory :"+rrHistory);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_borrowerName", borrowerName);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_natureOfBusiness", natureOfBusiness);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_dateIncorporate", dateIncorporate);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_borrowerSince", borrowerSince);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_currencyAuthorisedCapital", currencyAuthorisedCapital);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_currencyPaidUpCapital", currencyPaidUpCapital);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_totalNoOfEmployees", totalNoOfEmployees);
+
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_briefDescOfBorrowersBiz", briefDescOfBorrowersBiz);
+generateDocxNvpList(tw.local.docxBO.fixedFieldList, "1a_reviewPeriod", reviewPeriod);
+
+//HERE, I AM USING XML TO COMB THROUGH THE BUSINESS OBJECT 
+//(AND IT'S VARIOUS COMPLEX DATA STRUCTURES) EXTRACTING
+//EVERY NAME VALUE PAIR INTO A NEW LIST.
+
+tw.local.nodeList = tw.local.input.childNodes;
+tw.local.nameValueName = new tw.object.listOf.String();
+tw.local.nameValueList = new tw.object.listOf.NameValuePair();
+
+var j=0;
+var n=0;
+
+for (var i=0; i<tw.local.nodeList.length; i++) {
+    if (tw.local.nodeList.item(i).getAttribute("type") == "NameValuePair") {
+       tw.local.nameValueName[n] = tw.local.nodeList.item(i).tagName;    //Insert NVP variable name into nameValueName list
+       n++;
+       tw.local.nameValueList[j] = new tw.object.NameValuePair(); //Create new entry in nameValueList
+       tw.local.nameValueList[j].name = "";
+       tw.local.nameValueList[j].value = "";
+       
+       if (tw.local.nodeList.item(i).hasChildNodes() == true) {    //current object is a complex object, (ideally a NVP)
+           
+           //Look at "name" tag
+           if (tw.local.nodeList.item(i).getElementByTagName("name").item(0) == null) {        //NVP name is null
+               tw.local.nodeList.item(i).appendChild(new tw.object.XMLElement("name"));        //create new child node "name"
+               tw.local.nodeList.item(i).lastChild.setText("");
+               tw.local.nodeList.item(i).lastChild.setAttribute("type", "String");
+               tw.local.nameValueList[j].name = "";                                             //Insert blank into nameValueList[j].name
+           }
+           else if (tw.local.nodeList.item(i).getElementByTagName("name").item(0) != null) {    //NVP name not null
+               var tempNodeList = tw.local.nodeList.item(i).getElementByTagName("name");        //Get name
+               tw.local.nameValueList[j].name = tempNodeList.item(0).getText();                 //Get text of name, insert into nameValueList[j].name
+           }
+           
+           //Look at "value" tag
+           if (tw.local.nodeList.item(i).getElementByTagName("value").item(0) == null) {        //NVP value is null
+               tw.local.nodeList.item(i).appendChild(new tw.object.XMLElement("value"));        //Create new child node "value"
+               tw.local.nodeList.item(i).lastChild.setText("");                        
+               tw.local.nodeList.item(i).lastChild.setAttribute("type", "String");
+               tw.local.nameValueList[j].value = "";                                            //Insert blank into nameValueList[j].value
+           }   
+           else if (tw.local.nodeList.item(i).getElementByTagName("value").item(0) != null) {   //NVP value is not null            
+               var tempNodeList = tw.local.nodeList.item(i).getElementByTagName("value");       //Get value
+               tw.local.nameValueList[j].value = tempNodeList.item(0).getText();                //Get text of value, insert into nameValueList[j].value
+           } 
+       }
+       
+       //WHY do we turn simple variables into complext objects with a NameValuePair child? -TL
+       else if (tw.local.nodeList.item(i).hasChildNodes() == false) {                            //Current NVP node is null, create blank NVP
+           tw.local.nodeList.item(i).appendChild(new tw.object.XMLElement("name"));              //Create new child node "name"
+           tw.local.nodeList.item(i).lastChild.setText("");
+           tw.local.nodeList.item(i).lastChild.setAttribute("type", "String");
+           tw.local.nodeList.item(i).appendChild(new tw.object.XMLElement("value"));             //Create new child node "value"
+           tw.local.nodeList.item(i).lastChild.setText("");
+           tw.local.nodeList.item(i).lastChild.setAttribute("type", "String");
+       }
+       j++;       
+    }
+    else if (tw.local.nodeList.item(i).hasChildNodes() == true) {   //Current node is a complex type 
+        j = checkChildren(tw.local.nodeList.item(i), j);
+    }
+}
+
+function checkChildren(parent, j) {
+    var parent = parent.childNodes;
+    var parentLen = parent.length
+
+    for (var k=0; k<parentLen; k++) {
+
+        if (parent.item(k).getAttribute("type") == "NameValuePair") {
+           tw.local.nameValueName[n] = parent.item(k).tagName;
+           n++;
+           tw.local.nameValueList[j] = new tw.object.NameValuePair();
+           tw.local.nameValueList[j].name = "";
+           tw.local.nameValueList[j].value = "";
+       
+           if (parent.item(k).hasChildNodes() == true) {
+
+               if (parent.item(k).getElementByTagName("name").item(0) == null) {
+				   
+                   parent.item(k).appendChild(new tw.object.XMLElement("name"));
+                   parent.item(k).lastChild.setText("");
+                   parent.item(k).lastChild.setAttribute("type", "String");
+                   tw.local.nameValueList[j].name = "";           
+               }
+               else if (parent.item(k).getElementByTagName("name").item(0) != null) {
+                   var tempNodeList = parent.item(k).getElementByTagName("name");
+                   tw.local.nameValueList[j].name = tempNodeList.item(0).getText();
+               }
+               if (parent.item(k).getElementByTagName("value").item(0) == null) {
+                   parent.item(k).appendChild(new tw.object.XMLElement("value"));
+                   parent.item(k).lastChild.setText("");
+                   parent.item(k).lastChild.setAttribute("type", "String");
+                   tw.local.nameValueList[j].value = "";               
+               }
+               else if (parent.item(k).getElementByTagName("value").item(0) != null) {
+                   var tempNodeList = parent.item(k).getElementByTagName("value");
+                   tw.local.nameValueList[j].value = tempNodeList.item(0).getText();
+               } 
+           }
+           else if (parent.item(k).hasChildNodes() == false) {
+               parent.item(k).appendChild(new tw.object.XMLElement("name"));
+               parent.item(k).lastChild.setText("");
+               parent.item(k).lastChild.setAttribute("type", "String");
+               parent.item(k).appendChild(new tw.object.XMLElement("value"));
+               parent.item(k).lastChild.setText("");
+               parent.item(k).lastChild.setAttribute("type", "String");
+           }    
+           j++; 
+        }
+        else if (parent.item(k).hasChildNodes() == true){
+            j = checkChildren(parent.item(k), j);
+        }
+    }
+    return j;
+}
+
+
+//log.info("####"+tw.local.SelectedCountry+"####");
+if(tw.local.SelectedCountry.name == "" && tw.local.SelectedCountry.value == '') {
+    tw.system.addCoachValidationError(tw.system.coachValidation,"tw.local.SelectedCountry" , "Please select Country.");
+}
+
+if(tw.local.instanceID == null || tw.local.instanceID == '') {
+    if(tw.local.aaNumber == null || tw.local.aaNumber=='') {
+        tw.system.addCoachValidationError(tw.system.coachValidation,"tw.local.instanceID" , "Instance ID is required if AA/FCM Number is not entered.");
+    }
+}
+
+if(tw.local.aaNumber == null || tw.local.aaNumber == '') {
+    if(tw.local.instanceID == null || tw.local.instanceID=='') {
+        tw.system.addCoachValidationError(tw.system.coachValidation,"tw.local.instanceID" , "Instance ID is required if AA/FCM Number is not entered.");
+    }
+}
+
+
+tw.local.originId ="";
+if(tw.local.sqlOut!=null && tw.local.sqlOut.listLength>0){
+    if(tw.local.sqlOut[0].rows!=null && tw.local.sqlOut[0].rows.listLength>0 )
+    tw.local.originId = tw.local.sqlOut[0].rows[0].data[0];
+}
+
+
+var node;
+
+if(tw.local.result && tw.local.result.firstChild != null){
+    node = tw.local.result.firstChild;
+}else{
+    node = null;
+}
+
+if(node != null){
+    var resultStr = node.xpath('record/column[@name="LIMIT"]')[0].getText();
+    tw.local.limit = parseFloat(resultStr);
+}else{
+    // Default limit if not found is 5 million.
+    tw.local.limit = 5000000;
+}
+
+
+// 1. Create Log information.
+var errorLogInfo = new tw.object.LogInfo();
+
+errorLogInfo.sourceLocation      = "Get Rate Limit";
+errorLogInfo.soruceOperation     = "Execute SQL";
+errorLogInfo.logLevel            = Number(tw.epv.LogLevels.OFF);
+errorLogInfo.loggerName          = (String)(tw.epv.LoanOriginationLoggerNames.DataError);
+errorLogInfo.message             = "Failed to Execute SQL \n";
+errorLogInfo.message             = errorLogInfo.message + tw.system.error_type + " " +  tw.system.error.toString(true);
+errorLogInfo.includeUserAndProcessInfo = true;
+
+tw.local.errorLogInfo = errorLogInfo;
+ 
+// 2. Create ErrorInfoContainer. If the error is not null it may have been created by down stram handlers.
+if (tw.local.error == null) {
+    tw.local.error = new tw.object.ErrorInfoContainer();
+    tw.local.error.errorInfoList = new tw.object.listOf.ErrorInfo();
+}
+
+var index = tw.local.error.errorInfoList.listLength;
+var err = new tw.object.ErrorInfo();
+
+// 3. Add error message specific for this locale.
+err.originatedFrom  = errorLogInfo.sourceLocation;
+err.message = "Failed to Execute SQL. Please contact IT support.";
+err.acccessing = errorLogInfo.soruceOperation;
+
+tw.local.error.errorInfoList[index] = err;
+
+
+for(var i=0; i<tw.local.ReportData.listLength; i++){
+    var rptName = tw.local.ReportData[i].reportName;
+    var base64Str = tw.local.Map.get(rptName);
+
+    if(base64Str != null && base64Str != "") {
+        //tw.local.ReportData[i].reportLink = "<a href='data:application/vnd.ms-excel;base64,"+base64Str+ "' download='download'>"+rptName+"</a>";
+        tw.local.ReportData[i].reportLink = "<a href='data:application/vnd.ms-excel;base64,"+base64Str+ "' download='"+rptName+"'><u>download</u></a>";
+        tw.local.ReportData[i].creationTimeStr = tw.local.ReportData[i].creationTime.format("MM/dd/yyyy HH:mm:ss");
+    }
+}
+
+
+var foundRoles = tw.system.org.findUserByName(tw.local.originator).roles;
+//var foundRoles = tw.system.org.findUserByName("testing").roles;
+
+for(var i=0; i<foundRoles.length; i++){
+
+    
+    if(foundRoles[i].name.indexOf("BC-") != -1){
+      tw.local.isHunter=false;
+      var dash = foundRoles[i].name.indexOf("-");
+      for(var j=0;j<tw.local.hunterLu.listLength;j++){
+          if(foundRoles[i].name.substr(dash+1, 2).indexOf(tw.local.hunterLu[j].name) != -1){
+          tw.local.isHunter=true;
+          break;
+          }
+      }
+      
+    }
+    
+}
+
+
+
+var img = this.context.element.querySelector("img");
+img.src = com_ibm_bpm_coach.getManagedAssetUrl("Error_icon_24x24.png", com_ibm_bpm_coach.assetType_WEB, "SYSC");
+img.onmouseover = function(event) {
+	img.src = com_ibm_bpm_coach.getManagedAssetUrl("Error_icon_hover_24x24.png", com_ibm_bpm_coach.assetType_WEB, "SYSC");
+}
+img.onmouseout = function(event) {
+	img.src = com_ibm_bpm_coach.getManagedAssetUrl("Error_icon_24x24.png", com_ibm_bpm_coach.assetType_WEB, "SYSC");
+}
+
+//
+// Data Change Boundary Trigger - load()
+//
+this._handleBindAll = function(dat1) {
+	//console.dir(dat1);
+	//console.log("BindAll fired!");
+	var myData = this.context.binding.get("value");
+	//myData.bindAll(lang.hitch(this, this._handleBindAll));
+	this.context.trigger(function() {
+		// Do Nothing
+		// console.log("Trigger completed!")
+	});
+}
+
+this.setupBinding = function() {
+	if (this._bindingHandle != undefined && this._bindingHandle != null) {
+		this._bindingHandle.unbind();
+		this._bindingHandle = null;
+	}
+	if (this.context.options.isBindAll != undefined)
+	{
+   		var isBindAll = this.context.options.isBindAll.get("value");
+   		if (isBindAll == true)
+   		{
+			var boundData = this.context.binding.get("value");
+			this._bindingHandle = boundData.bindAll(lang.hitch(this, this._handleBindAll));
+   		}
+	}
+};
+
+// If we have some bound data ...
+if (this.context.binding != undefined) {
+   this.setupBinding();
+} else {
+	console.log("!!! Warning !!! - Data Change Boundary Trigger is not bound to any data");
+}
+
+
+// Check Account Number
+function validAccountNumber (str){
+    var is12digs_regex = /^\d{12}$/; //regex for 12-digit number
+    return str.search(is12digs_regex) != -1;
+}
+
+// Check Credit Card Number
+function validCreditCardNumber (str){
+    var is16digs_regex = /^\d{16}$/; //regex for 12-digit number
+    return str.search(is16digs_regex) != -1;
+}
+
+var numberList;
+var valid = true;
+
+
+var string = "Unable to retrieve error message.";
+
+if(tw.system.error != null){
+    //to get error in XML
+    tw.local.errorNodeList = tw.system.error.getElementByTagName("message");
+    tw.local.errorElement = tw.local.errorNodeList.item();
+    
+    //to get message from <message> element
+    string = tw.local.errorElement.getText();
+}
+tw.system.error.getElementByTagName("message").item().getText()
+get the estimated timed error occured
+var currDtTime = new tw.object.Date();
+var currTaskId = "";
+var currTaskSubj = "";
+var currTaskActName = "";
+
+//get current task's detail
+if (tw.system.currentTask != null){
+    if(tw.system.currentTask.id != null && tw.system.currentTask.id != undefined){
+        currTaskId = tw.system.currentTask.id;
+    }
+    if(tw.system.currentTask.subject != null && tw.system.currentTask.subject != undefined){
+        currTaskSubj = tw.system.currentTask.subject;
+    }
+    if(tw.system.currentTask.processActivityName != null && tw.system.currentTask.processActivityName != undefined){
+        currTaskActName  = tw.system. currentTask.processActivityName;
+    }
+}
+
+//set default process instance id
+if (tw.local.currInstanceId == null || tw.local.currInstanceId == undefined){
+    tw.local.currInstanceId = "Unknown Process Instance ID";
+}
+
+//get aa number
+var aaNum = "Unknown AA number";
+var aaUid = "";
+if (tw.local.aaSearchResult != null && tw.local.aaSearchResult != undefined){
+    if(tw.local.aaSearchResult[0] != null && tw.local.aaSearchResult[0] != undefined){
+        aaNum = tw.local.aaSearchResult[0].name;
+        aaUid = tw.local.aaSearchResult[0].value;
+    }
+}
+
+//set debug id
+var debugId = "";
+var temp = Math.floor((1 + (Math.random()*9999)));
+debugId = aaNum.slice(-6)+temp.toString();
+
+//form error message
+var uid = java.util.UUID.randomUUID();
+var formErrorMsg = new tw.object.ErrorInfo();
+formErrorMsg.originatedFrom = tw.local.currInstanceId + ": " + currTaskSubj;
+formErrorMsg.acccessing = currTaskId.split('.').slice(1).join('.') + ": " + currTaskActName;
+formErrorMsg.message = "Unexpected error occurs for AA ["+aaNum+"] at "+currDtTime.format("dd/MM/yyyy hh:mm:ss a") + " -" + string;
+formErrorMsg.message += "<br/>Debug ID [" + debugId + "]";
+if(currTaskId != "" && currTaskActName != ""){
+    formErrorMsg.message += "-Failed accessing "+formErrorMsg.acccessing;
+}
+
+
+
+//set value to error info container
+if (tw.local.errorInfoContainer == null || tw.local.errorInfoContainer == undefined){
+    tw.local.errorInfoContainer = new tw.object.ErrorInfoContainer();
+    tw.local.errorInfoContainer.errorInfoList = new tw.object.listOf.ErrorInfo();
+}
+if (tw.local.errorInfoContainer.errorInfoList == null || tw.local.errorInfoContainer.errorInfoList == undefined){
+    tw.local.errorInfoContainer.errorInfoList = new tw.object.listOf.ErrorInfo();
+}
+var errorLength = tw.local.errorInfoContainer.errorInfoList.listLength;
+tw.local.errorInfoContainer.errorInfoList.insertIntoList(errorLength, formErrorMsg);
+
+//log error
+if(tw.system.error != null){
+    log.error("ERROR ["+debugId+"]: "+aaUid);
+    log.error("ERROR ["+debugId+"]: "+tw.system.error.toString(true));
+}
+
+//log.info("string is --> "+string);
+//log.info("curr datetime is --> "+currDtTime);
+//log.info("curr task id is --> "+currTaskId);
+//log.info("curr task subj is --> "+currTaskSubj);
+//log.info("curr task activity name --> "+currTaskActName);
+//log.info("curr instance id is --> "+tw.local.currInstanceId);
+//log.info("curr aa number is --> "+aaNum);
+//log.info("curr aa uuid is --> "+aaUid);
+//log.info("curr debug id is --> "+debugId);
+//log.info("curr temp is --> "+temp);
+//log.info("curr uid is --> "+uid);
+//log.info("curr msg is --> "+formErrorMsg.message);
+
+
+SELECT ticketNo as name, uuid as value 
+FROM MYBOS.BORROWER_INFO aa, 
+XMLTABLE ('$c/variable' passing aa.XMLVALUE as "c" COLUMNS 
+ticketNo VARCHAR(100) 	PATH 'let $x := . return $x/borrowerProfile/ticketNo')  
+AS name where UUID= '<#=tw.local.UUID#>'
+
+
+
+var string = "Unable to retrieve error message.";
+
+if(tw.system.error != null){
+    //to get error in XML
+    tw.local.errorNodeList = tw.system.error.getElementByTagName("message");
+    tw.local.errorElement = tw.local.errorNodeList.item();
+    
+    //to get message from <message> element
+    string = tw.local.errorElement.getText();
+}
+
+//get the estimated timed error occured
+var currDtTime = new tw.object.Date();
+var currTaskId = "";
+var currTaskSubj = "";
+var currTaskActName = "";
+
+//get current task's detail
+if (tw.system.currentTask != null){
+    if(tw.system.currentTask.id != null && tw.system.currentTask.id != undefined){
+        currTaskId = tw.system.currentTask.id;
+    }
+    if(tw.system.currentTask.subject != null && tw.system.currentTask.subject != undefined){
+        currTaskSubj = tw.system.currentTask.subject;
+    }
+    if(tw.system.currentTask.processActivityName != null && tw.system.currentTask.processActivityName != undefined){
+        currTaskActName  = tw.system. currentTask.processActivityName;
+    }
+}
+
+//set default process instance id
+if (tw.local.currInstanceId == null || tw.local.currInstanceId == undefined){
+    tw.local.currInstanceId = "Unknown Process Instance ID";
+}
+
+//get aa number
+var aaNum = "Unknown AA number";
+var aaUid = "";
+if (tw.local.aaSearchResult != null && tw.local.aaSearchResult != undefined){
+    if(tw.local.aaSearchResult[0] != null && tw.local.aaSearchResult[0] != undefined){
+        aaNum = tw.local.aaSearchResult[0].name;
+        aaUid = tw.local.aaSearchResult[0].value;
+    }
+}
+
+//set debug id
+var debugId = "";
+var temp = Math.floor((1 + (Math.random()*9999)));
+debugId = aaNum.slice(-6)+temp.toString();
+
+//form error message
+var uid = java.util.UUID.randomUUID();
+var formErrorMsg = new tw.object.ErrorInfo();
+formErrorMsg.originatedFrom = tw.local.currInstanceId + ": " + currTaskSubj;
+formErrorMsg.acccessing = currTaskId.split('.').slice(1).join('.') + ": " + currTaskActName;
+formErrorMsg.message = "Unexpected error occurs for AA ["+aaNum+"] at "+currDtTime.format("dd/MM/yyyy hh:mm:ss a") + " -" + string;
+formErrorMsg.message += "<br/>Debug ID [" + debugId + "]";
+if(currTaskId != "" && currTaskActName != ""){
+    formErrorMsg.message += "-Failed accessing "+formErrorMsg.acccessing;
+}
+
+
+
+//set value to error info container
+if (tw.local.errorInfoContainer == null || tw.local.errorInfoContainer == undefined){
+    tw.local.errorInfoContainer = new tw.object.ErrorInfoContainer();
+    tw.local.errorInfoContainer.errorInfoList = new tw.object.listOf.ErrorInfo();
+}
+if (tw.local.errorInfoContainer.errorInfoList == null || tw.local.errorInfoContainer.errorInfoList == undefined){
+    tw.local.errorInfoContainer.errorInfoList = new tw.object.listOf.ErrorInfo();
+}
+var errorLength = tw.local.errorInfoContainer.errorInfoList.listLength;
+tw.local.errorInfoContainer.errorInfoList.insertIntoList(errorLength, formErrorMsg);
+
+//log error
+if(tw.system.error != null){
+    log.error("ERROR ["+debugId+"]: "+aaUid);
+    log.error("ERROR ["+debugId+"]: "+tw.system.error.toString(true));
+}
+
+//log.info("string is --> "+string);
+//log.info("curr datetime is --> "+currDtTime);
+//log.info("curr task id is --> "+currTaskId);
+//log.info("curr task subj is --> "+currTaskSubj);
+//log.info("curr task activity name --> "+currTaskActName);
+//log.info("curr instance id is --> "+tw.local.currInstanceId);
+//log.info("curr aa number is --> "+aaNum);
+//log.info("curr aa uuid is --> "+aaUid);
+//log.info("curr debug id is --> "+debugId);
+//log.info("curr temp is --> "+temp);
+//log.info("curr uid is --> "+uid);
+//log.info("curr msg is --> "+formErrorMsg.message);
+
+
+
+tw.local.visibilityStrings = ["Default", "Required", "Editable", "Read Only", "None"]
+tw.local.visibilityPairs = [
+    {name: "Default", value: "Default"},
+    {name: "Required", value: "Required"},
+    {name: "Editable", value: "Editable"},
+    {name: "Read Only", value: "Read Only"},
+    {name: "None", value: "None"}
+]
+tw.local.visibilityPairs.listAddSelected(0)
+
+
+//log.info("ALL LOG START" +"Step: " + tw.local.Step + "Data" + tw.local.ccrisAuditTemp);
+
+function executeQuery(sql) {
+    var conn = null;
+    var st = null;
+
+    try {
+        var ds = new Packages.javax.naming.InitialContext().lookup(tw.env.dataSourceName);
+        conn = ds.getConnection();
+        st = conn.prepareStatement(sql);
+
+        try {
+            var result = st.executeUpdate();
+            log.info("result: " + result);
+        } catch (e) {
+            log.info("Insert Error >>>>: " + e);
+        }
+
+    } catch (e) {
+        log.info("Error>>>>: " + e);
+    } finally {
+        if (st != null) st.close();
+        if (conn != null) conn.close();
+    }
+}
+
+function getInsertSQL(tmpAllFields,rowdata) {
+    var SQL = "";
+    if (tmpAllFields == null) {
+        return SQL;
+    } else if (tmpAllFields.length == 0) {
+        return SQL;
+    } else {
+        var columns = "( ";
+        var params = " VALUES ( ";
+        for (var i = 0; i < tmpAllFields.length; i++) {
+
+            if (i < tmpAllFields.length - 1) {
+                columns += tmpAllFields[i] + ",";
+                params += "'" + eval("rowdata." + tmpAllFields[i]) + "', ";
+            } else {
+                columns += tmpAllFields[i];
+                params += "'" + eval("rowdata." + tmpAllFields[i]) + "'";
+            }
+
+        }
+        columns = columns + " )";
+        params = params + " )";
+
+        SQL = columns + " " + params;
+    }
+    return SQL;
+}
+
+function getUpdateSQL(tmpAllFields,rowdata) {
+    var SQL = "";
+    if (tmpAllFields == null) {
+        return SQL;
+    } else if (tmpAllFields.length == 0) {
+        return SQL;
+    } else {
+        var columnswithparam = "";
+        for (var i = 0; i < tmpAllFields.length; i++) {
+
+            if (i < tmpAllFields.length - 1) {
+                columnswithparam += tmpAllFields[i] + "=";
+                columnswithparam += "'" + eval("rowdata." + tmpAllFields[i]) + "', ";
+            } else {
+                columnswithparam += tmpAllFields[i] + "=";
+                columnswithparam += "'" + eval("rowdata." + tmpAllFields[i]) + "'";
+            }
+
+        }
+        columnswithparam = columnswithparam;
+
+
+        SQL = columnswithparam;
+    }
+    return SQL;
+}
+
+
+var DBFacilityIDList = new tw.object.Map();
+if (tw.local.fidlist != null && tw.local.fidlist != undefined && tw.local.fidlist.listLength > 0) {
+    for (var x = 0; x < tw.local.fidlist.listLength; x++) {
+        DBFacilityIDList.put(tw.local.fidlist[x].value,tw.local.fidlist[x].name);
+    }
+}
+
+
+
+if (tw.local.ccrisAuditTemp != null && tw.local.ccrisAuditTemp != undefined) {
+    var inscount = 0;
+    var updcount = 0;
+tw.local.ccrisInsertSql = new tw.object.listOf.String(); 
+tw.local.ccrisUpdateSql = new tw.object.listOf.String(); 
+
+    for (var i = 0; i < tw.local.ccrisAuditTemp.listLength; i++) {
+    
+ //   log.info( "insert" +tw.local.ccrisAuditTemp[i].FAC_ID)
+        if (DBFacilityIDList.containsKey(tw.local.ccrisAuditTemp[i].FAC_ID) == false) {
+ //         log.info( "insert" +tw.local.ccrisAuditTemp[i].FAC_ID);
+            var tmpAllFields = tw.local.ccrisAuditTemp[i].propertyNames.reverse();
+            var tempINSERTSQL = getInsertSQL(tmpAllFields,tw.local.ccrisAuditTemp[i]);
+            if (tempINSERTSQL != null && tempINSERTSQL != "") {
+                tempINSERTSQL = "INSERT INTO MYBOS.CCRIS_AUDIT" + tempINSERTSQL;
+                tw.local.ccrisInsertSql[inscount] = tempINSERTSQL;
+                inscount++;
+            }
+        } else {
+//          log.info( "UPDATE" +tw.local.ccrisAuditTemp[i].FAC_ID);
+            var tmpAllFields = tw.local.ccrisAuditTemp[i].propertyNames.reverse();
+            var tempUPDATESQL = getUpdateSQL(tmpAllFields,tw.local.ccrisAuditTemp[i]);
+            if (tempUPDATESQL != null && tempUPDATESQL != "") {
+                tempUPDATESQL = "UPDATE MYBOS.CCRIS_AUDIT SET " + tempUPDATESQL + " WHERE " + "FAC_ID='" + tw.local.ccrisAuditTemp[i].FAC_ID + "'";
+                tw.local.ccrisUpdateSql[updcount] = tempUPDATESQL;
+                updcount++;
+            }
+        }
+    }
+}
+
+if (tw.local.ccrisInsertSql != null && tw.local.ccrisInsertSql.listLength > 0) {
+    for (var i = 0; i < tw.local.ccrisInsertSql.listLength; i++) {
+         log.info("Insert CCRIS AUDIT ############"+tw.local.ccrisInsertSql[i]);
+        executeQuery(tw.local.ccrisInsertSql[i]);
+    }
+}
+if (tw.local.ccrisUpdateSql != null && tw.local.ccrisUpdateSql.listLength > 0) {
+    for (var j = 0; j < tw.local.ccrisUpdateSql.listLength; j++) {
+            log.info("UPDate CCRIS AUDIT ############"+tw.local.ccrisUpdateSql[j]);
+        executeQuery(tw.local.ccrisUpdateSql[j]);
+    }
+}
+
+
+tw.system.coachValidation = new tw.object.CoachValidation();
+
+if (tw.local.strTextArea == null || tw.local.strTextArea == "") {
+    tw.system.addCoachValidationError(tw.system.coachValidation, "tw.local.strTextArea", "Please enter SQL statements");
+}
+
+
+tw.system.coachValidation = new tw.object.CoachValidation();
+
+if (tw.local.SelectedApplication.name=="") { 
+    tw.system.addCoachValidationError(tw.system.coachValidation, "tw.local.ApplicationList[]", "Please Select Application Type");
+}
+
+
+
+tw.local.snapshotVer = tw.system.model.processAppSnapshot.name;
+
+for(var i=0; i<tw.local.ReportData.listLength; i++){
+    var rptName = tw.local.ReportData[i].reportName;
+    var base64Str = tw.local.Map.get(rptName);
+
+    if(base64Str != null && base64Str != "") {
+        //tw.local.ReportData[i].reportLink = "<a href='data:application/vnd.ms-excel;base64,"+base64Str+ "' download='download'>"+rptName+"</a>";
+        tw.local.ReportData[i].reportLink = "<a href='data:application/vnd.ms-excel;base64,"+base64Str+ "' download='"+rptName+"'><u>download</u></a>";
+        tw.local.ReportData[i].creationTimeStr = tw.local.ReportData[i].creationTime.format("MM/dd/yyyy HH:mm:ss");
+    }
+}
+
+var out = new java.io.BufferedWriter(new java.io.FileWriter(rptUrl, true));
+out.write(tw.local.excelStr);
+out.close();
+out=null;
+
+/************** save report info********************/
+tw.local.newReportData = new tw.object.ReportBO();
+tw.local.newReportData.reportName = rptName;
+tw.local.newReportData.status = "Ready";
+tw.local.newReportData.userName = tw.system.user_fullName;
+
+
+if(tw.local.reportContent != null && tw.local.reportContent != "") {    
+    tw.local.reportContent = tw.local.reportContent.replace(/[\n\r]/g, '\r\n');
+    tw.local.reportContent = encodeURIComponent(tw.local.reportContent);
+    var dir = tw.local.reportFile.split("/");
+    var fileName = dir[dir.length-1];
+    tw.local.exportButton = "<a href='data:text/plain;charset=utf-8,"+tw.local.reportContent+"' download='"+fileName+"'><u><button type='button' class='BPMButton BPMButtonBorder'>Export</button></u></a>";
+}
+
+tw.local.addMessage="";
+
+
+String.prototype.replaceAll = function(target, replacement) {
+    return this.split(target).join(replacement);
+  };
+
+
+
+  var options = this.context.options,
+	leftValue1 = options.leftValue1.get("value"),
+	leftValue2 = options.leftValue2.get("value"),
+	leftValue3 = options.leftValue3.get("value"),
+
+	operator1 = options.operator1.get("value"),
+	operator2 = options.operator2.get("value"),
+	operator3 = options.operator3.get("value"),
+    
+	rightValue1 = options.rightValue1.get("value"),
+	rightValue2 = options.rightValue2.get("value"),
+	rightValue3 = options.rightValue3.get("value"),
+	
+	setVariable = options.setVariable.get("value"),
+	toValue = options.toValue.get("value"),
+	defaultValue = options.defaultValue.get("value")
+
+if(typeof leftValue1 != "string") {
+	rightValue1 = eval(rightValue1)
+}
+
+if(typeof leftValue2 != "string") {
+	rightValue2 = eval(rightValue2)
+}
+if(typeof leftValue3 != "string") {
+	rightValue3 = eval(rightValue3)
+}
+//alert(' leftValue1: '+leftValue1+' rightValue1: '+rightValue1 +' OR '+ ' leftValue2: 'leftValue2+' rightValue2: '+rightValue2);
+
+if(operations[operator1](leftValue1, rightValue1) || operations[operator2](leftValue2, rightValue2) || operations[operator3](leftValue3, rightValue3)) {
+	if(setVariable != toValue) {
+		options.setVariable.set("value", toValue)
+	}
+} else {
+	if(defaultValue && setVariable != defaultValue) {
+		options.setVariable.set("value", defaultValue)
+	}
+}
+
+
+const array1 = [1, 2, 3];
+
+console.log(array1.includes(2));
+// Expected output: true
+
+
+
+
+
+
+function checkElementInArray(arr, element) {
+    if (arr.includes(element)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function splitStringByComma(str) {
+    return str.split("/");
+}
+
+
+var operations = {
+	'==': function(a,b) { return a == b; },
+	'<' : function(a,b) { return a < b; },
+	'<=': function(a,b) { return a <= b; },
+	'>=': function(a,b) { return a >= b; },
+	'>' : function(a,b) { return a > b; },
+	'!=': function(a,b) { return a != b; },
+	'includes': function(a,b) { 
+
+        let resultArray = splitStringByComma(a);
+        var bool = checkElementInArray(resultArray, 'A') ;
+
+       if(bool == true)   {return true }
+       else  return false 
+      
+    }
+}
+
+//if((operations[operator1](leftValue1, rightValue1)
+operations['includes'] ('A/B/C',2)
+password
+
+
+SELECT CODE_1 , DESC_2 FROM  PARAMETER_LINK  WHERE PARAM_ID_1= 6202
+
+AND  DATE(CURRENT TIMESTAMP) > START_DATE 
+AND DATE(CURRENT TIMESTAMP) < END_DATE
+
+SELECT CODE_2 AS CUSTOMER_CLASS , CODE_1 AS SECTOR_CATOGRY FROM  PARAMETER_LINK  WHERE PARAM_ID_1= 6203
+
+AND  DATE(CURRENT TIMESTAMP) > START_DATE 
+AND DATE(CURRENT TIMESTAMP) < END_DATE
+
+FRESH/EXISTING WITH LEGAL DOC/EXISTING WITHOUT LEGAL DOC/EXISTING WITH REDUCTION/EXISTING WITH ADDITIONAL/
+CANCEL
+
+
+tw.local.v1 = String(tw.epv.CCPT_FACILITY_EXCLUDE.facility);
+
+
+tw.local.v2 =  String(tw.epv.CCPT_BORROWER_EXCLUDED.borrower);
+
+
+tw.local.v3 =  String(tw.epv.CCPT_STATUS_EXCLUDE.facility_status);
+
+
+
+tw.local.result = new tw.object.listOf.ProcessInstance();
+
+if(tw.local.snapshotId != ""){
+var snapshot = tw.system.model.findProcessAppByAcronym(tw.system.model.processApp.acronym).findSnapshotByID(tw.local.snapshotId);
+var snapshotName = snapshot.name;
+
+var colProcessId = new TWSearchColumn();
+colProcessId.type = TWSearchColumn.Types.ProcessInstance;
+colProcessId.name = TWSearchColumn.ProcessInstanceColumns.ID;
+
+var colProcName = new TWSearchColumn();
+colProcName.type = TWSearchColumn.Types.ProcessInstance;
+colProcName.name = TWSearchColumn.ProcessInstanceColumns.Name;
+
+var colProcStatus = new TWSearchColumn();
+colProcStatus.type = TWSearchColumn.Types.ProcessInstance;
+colProcStatus.name = TWSearchColumn.ProcessInstanceColumns.Status;
+
+var colSnapshotName = new TWSearchColumn();
+colSnapshotName.type = TWSearchColumn.Types.ProcessInstance;
+colSnapshotName.name = TWSearchColumn.ProcessInstanceColumns.Snapshot;
+
+var cond1 = new TWSearchCondition();
+cond1.column = colProcStatus;
+cond1.operator = TWSearchCondition.Operations.Equals
+cond1.value = "Active";
+
+var cond2 = new TWSearchCondition();
+cond2.column = colSnapshotName;
+cond2.operator = TWSearchCondition.Operations.Equals
+cond2.value = snapshotName;
+
+
+var search = new TWSearch();
+search.columns = new Array(colProcessId,colProcName,colProcStatus,colSnapshotName);
+search.organizedBy = TWSearch.OrganizeByTypes.ProcessInstance;
+//search.orderBy = new Array(order1,order2);
+search.conditions = new Array(cond1,cond2);
+
+var results = search.execute();
+if(results.rows.length>0){
+        for(var i=0;i<results.rows.length;i++){
+             var row = results.rows[i];
+             tw.local.result[i] = new tw.object.ProcessInstance();
+             tw.local.result[i].id = row.values[0].toString();
+             tw.local.result[i].name = row.values[1];
+             tw.local.result[i].status = row.values[2];
+             tw.local.result[i].snapshotName = snapshotName;
+        }
+}
+}
+
+var processApp = tw.system.model.findProcessAppByAcronym(tw.local.processAppAcronym);
+
+
+if (processApp != null){
+    if(processApp.snapshots != null){
+    var snapshots =processApp.snapshots;
+    if(snapshots != null){ 
+        for(var i=0;snapshots[i] != null;i++){
+            tw.local.snapshots[i] = new tw.object.Snapshots();
+            tw.local.snapshots[i].id = snapshots[i].id;
+            tw.local.snapshots[i].name = snapshots[i].name;
+        }
+    }
+}
+}
+
+var toTheSnapshot = tw.system.model.findProcessAppByAcronym(tw.local.processAppAcronym).findSnapshotByID(tw.local.toSnapshotId);
+
+for (var i = 0; i < tw.local.liveInstancesToMigrate.listLength; i++ ){
+    log.info("tw.local.liveInstancesToMigrate[i].id " + tw.local.liveInstancesToMigrate[i].id);
+    var instance = tw.system.findProcessInstanceByID(tw.local.liveInstancesToMigrate[i].id);
+    instance.migrateTo(toTheSnapshot);
+}
+
+
+var activeInstances = tw.system.model.findProcessAppByAcronym(tw.local.processAppAcronym).findSnapshotByID(tw.local.fromSnapshotId).activeInstances;
+var instanceToMigrate;
+var toTheSnapshot = tw.system.model.findProcessAppByAcronym(tw.local.processAppAcronym).findSnapshotByID(tw.local.toSnapshotId);
+
+for (var i = 0; i < tw.local.liveInstancesToMigrate.listLength; i++ ){
+    for(var j = 0; activeInstances[j] != null; j++){
+        if(tw.local.liveInstancesToMigrate[i].id == activeInstances[j].id){
+            
+            var message = activeInstances[j].validateMigrationTo(toTheSnapshot);
+            if (message != null){
+                tw.local.validationList[tw.local.validationList.listLength] = new tw.object.Validation();
+                tw.local.validationList[tw.local.validationList.listLength].instanceId = tw.local.liveInstancesToMigrate[i].id;
+                tw.local.validationList[tw.local.validationList.listLength].toSnapshot = toTheSnapshot.name;
+                tw.local.validationList[tw.local.validationList.listLength].message = message.toString();
+            }    
+        }
+    }
+}
+
+
+function retrieveUserEmailByLoginName(userLoginName){
+    var userEmail = ""; 
+    if (!userLoginName) return "";     
+    var userObj = tw.system.org.findUserByName(userLoginName);
+    if ( userObj && userObj.attributes){
+        userEmail = userObj.attributes["Task Email Address"];
+    } 
+    return userEmail;
+}
+
+tw.local.emailAdd = retrieveUserEmailByLoginName(tw.local.userName);
+
+
+
+<style>
+    .invis{
+        visibility:hidden;
+    }
+    </style>
+    <script>
+    var count=45; //NEED TO COME BACK AND MAKE THIS 100, 20 IS FOR TESTING IN BPM ONLY
+    var counter=setInterval(timer, 1000); 
+    
+    function timer()
+    {
+      count=count-1;
+      if (count <= 0)
+      {
+          clearInterval(counter);
+          document.getElementById("timer").innerHTML = "Proceed, or call your system adminstrator at ";
+          var btn = dojo.query("[data-viewid='Button1']")[0];      
+        dojo.removeClass(btn,"invis") ;
+          return;
+      }
+    
+    document.getElementById("timer").innerHTML="You may retry in " + count + " seconds, or contact your system adminstrator at "; 
+    }
+    </script>
+    <span id="timer"></span>
