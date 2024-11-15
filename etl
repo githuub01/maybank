@@ -1,0 +1,1036 @@
+/*tw.local.documentContentWrapper = {};
+tw.local.documentContentWrapper.selectedDocument = tw.local.selectedDocument;*/
+//tw.local.applNo = "6723631234";
+debugger;
+// init script;
+tw.local.jsErrorText = "";
+tw.local.relationshipList = [];
+tw.local.relationshipList[0] = {};
+tw.local.relationshipList[0].value = "Self";
+tw.local.relationshipList[0].name = "Self";
+tw.local.validateStr = [];
+if (tw.local.ingeniumDataEntryError) {
+
+    tw.local.validateStr[tw.local.validateStr.length] = tw.local.ingeniumDataEntryError;
+}
+
+//BPMIF-434 commented as it is getting reset everytime
+/*
+if (tw.local.annuity && tw.local.annuity.primaryAnnuitant && tw.local.annuity.primaryAnnuitant.relationship) {
+    tw.local.annuity.primaryAnnuitant.relationship.value = "Self";
+    tw.local.annuity.primaryAnnuitant.relationship.name = "Self";
+}*/
+
+tw.local.verifiedMsg = tw.resource.QualityCheck.VISIBILITY_NONE;
+tw.local.validationVisibility = tw.resource.QualityCheck.VISIBILITY_NONE;
+if (tw.local.verifiedApplicationTabs && !tw.local.verifiedApplicationTabs.tab1) {
+    checkFieldValidation();
+    if (tw.local.validateStr.length > 0) {
+        tw.local.validationVisibility = tw.resource.QualityCheck.VISIBILITY_REQUIRED;
+    }
+}
+
+function isEmpty(str) {
+    if (str == null || str == "" || str == "undefined") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function validatePanNum(txtpan) {
+
+    console.log("pancard value is" + txtpan);
+    var regpan = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/;
+    if (regpan.test(txtpan)) {
+
+        return false;
+
+    } else {
+        return true;
+    }
+}
+
+function IsMobileNumber(txtMobNum) {
+    var mob = /^[1-9]{1}[0-9]{9}$/;
+    if (mob.test(txtMobNum)) {
+
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function validateEmail(email) {
+
+    var emailreg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+    if (emailreg.test(email)) {
+
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function checkFieldValidation() {
+    if (isEmpty(tw.local.annuity.forOfficialUseOnly.isPhotographAvailable && tw.local.annuity.forOfficialUseOnly.isPhotographAvailable.value || tw.local.annuity.forOfficialUseOnly.isPhotographAvailable && tw.local.annuity.forOfficialUseOnly.isPhotographAvailable.name)) {
+        tw.local.validateStr[length] = "PrimaryAnnuitant \"Photograph\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.name.firstName)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"First Name\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.name.lastName)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Last Name\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.dob)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Date of Birth\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.gender && tw.local.annuity.primaryAnnuitant.gender.value || tw.local.annuity.primaryAnnuitant.gender && tw.local.annuity.primaryAnnuitant.gender.name)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Gender\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.maritalStatus && tw.local.annuity.primaryAnnuitant.maritalStatus.value || tw.local.annuity.primaryAnnuitant.maritalStatus && tw.local.annuity.primaryAnnuitant.maritalStatus.name)) {
+        tw.local.validateStr[tw.local.validateStr.length] = " PrimaryAnnuitant \ Marital Status\" is missing or in incorrect format.";
+    }
+
+    if (tw.local.annuity.primaryAnnuitant.maritalStatus && tw.local.annuity.primaryAnnuitant.maritalStatus.value == "Married" || tw.local.annuity.primaryAnnuitant.maritalStatus && tw.local.annuity.primaryAnnuitant.maritalStatus.name == "Married") {
+        if (isEmpty(tw.local.annuity.primaryAnnuitant.maidenName)) {
+            tw.local.validateStr[tw.local.validateStr.length] = " PrimaryAnnuitant \"Maiden Name\" is missing or in incorrect format";
+        }
+    }
+
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.panCardNumber) || validatePanNum(tw.local.annuity.primaryAnnuitant.panCardNumber)) {
+        tw.local.validateStr[tw.local.validateStr.length] = " PrimaryAnnuitant \"PAN Card Number\" is missing or in incorrect format";
+    }
+
+    if (tw.local.annuity.primaryAnnuitant.isPanValidated == false) {
+        tw.local.validateStr[tw.local.validateStr.length] = " Please validate  PAN";
+    }
+
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.nationality && tw.local.annuity.primaryAnnuitant.nationality.name || tw.local.annuity.primaryAnnuitant.nationality && tw.local.annuity.primaryAnnuitant.nationality.value)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Nationality\" is missing or in incorrect format.";
+    }
+    if (tw.local.annuity.primaryAnnuitant.nationality && tw.local.annuity.primaryAnnuitant.nationality.value == "Others") {
+        if (isEmpty(tw.local.annuity.primaryAnnuitant.nationalityOthers)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Nationality - Others\" is missing or in incorrect format.";
+        }
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.ageProof && tw.local.annuity.primaryAnnuitant.ageProof.value || tw.local.annuity.primaryAnnuitant.ageProof && tw.local.annuity.primaryAnnuitant.ageProof.name)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Age Proof\" is missing or in incorrect format.";
+    }
+
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.correspondenceAddress.addressLine1)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Correspondence Address Line 1\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.correspondenceAddress.addressLine2)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Correspondence Address Line 2\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.correspondenceAddress.city)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Correspondence Address City\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.correspondenceAddress.pinCode)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Correspondence Address Pin code\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.correspondenceAddress.state)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Correspondence Address State\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.contact.phoneMobile) || IsMobileNumber(tw.local.annuity.primaryAnnuitant.contact.phoneMobile)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Contact Details Phone (M)\" is missing or in incorrect format.";
+    }
+    if (isEmpty(tw.local.annuity.primaryAnnuitant.contact.emailId) || validateEmail(tw.local.annuity.primaryAnnuitant.contact.emailId)) {
+        tw.local.validateStr[tw.local.validateStr.length] = "PrimaryAnnuitant \"Contact Details Email ID\" is missing or in incorrect format.";
+    }
+    if (tw.local.annuity.annuityVisibility.lifeAssuredProposerEqual != true) {
+        if (isEmpty(tw.local.annuity.proposer.salutation && tw.local.annuity.proposer.salutation.value || tw.local.annuity.proposer.salutation && tw.local.annuity.proposer.salutation.name)) {
+            tw.local.validateStr[length] = "Proposer \"Salutation\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.name.firstName)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"First Name\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.name.lastName)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Last Name\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.dob)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Date of Birth\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.gender && tw.local.annuity.proposer.gender.value || tw.local.annuity.proposer.gender && tw.local.annuity.proposer.gender.name)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Gender\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.maritalStatus && tw.local.annuity.proposer.maritalStatus.value || tw.local.annuity.proposer.maritalStatus && tw.local.annuity.proposer.maritalStatus.name)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Marital Status\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.panCardNumber)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"PAN Card Number\" is missing or in incorrect format.";
+        }
+        if (validatePanNum(tw.local.annuity.proposer.panCardNumber) || isEmpty(tw.local.annuity.proposer.panCardNumber)) {
+            tw.local.validateStr[tw.local.validateStr.length] = " Proposer \"PAN Card Number\" is missing or in incorrect format";
+        }
+
+        if (tw.local.annuity.proposer.isPanValidated == false) {
+            tw.local.validateStr[tw.local.validateStr.length] = " Please validate  PAN";
+        }
+
+        if (isEmpty(tw.local.annuity.proposer.nationality && tw.local.annuity.proposer.nationality.value || tw.local.annuity.proposer.nationality && tw.local.annuity.proposer.nationality.name)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Nationality\" is missing or in incorrect format.";
+        }
+        if (tw.local.annuity.proposer.nationality && tw.local.annuity.proposer.nationality.value == "Others") {
+            if (isEmpty(tw.local.annuity.proposer.nationalityOthers)) {
+                tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Nationality - Others\" is missing or in incorrect format.";
+            }
+        }
+        if (isEmpty(tw.local.annuity.proposer.ageProof && tw.local.annuity.proposer.ageProof.value || tw.local.annuity.proposer.ageProof && tw.local.annuity.proposer.ageProof.name)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Age Proof\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.maritalStatus && tw.local.annuity.proposer.maritalStatus.value || tw.local.annuity.proposer.maritalStatus && tw.local.annuity.proposer.maritalStatus.name)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Marital Status\" is missing or in incorrect format.";
+        }
+
+        if (tw.local.annuity.proposer.maritalStatus && tw.local.annuity.proposer.maritalStatus.value == "Married" || tw.local.annuity.proposer.maritalStatus && tw.local.annuity.proposer.maritalStatus.name == "Married") {
+            if (isEmpty(tw.local.annuity.proposer.maidenName)) {
+                tw.local.validateStr[tw.local.validateStr.length] = " Proposer \"Maiden Name\" is missing or in incorrect format";
+            }
+        }
+        if (isEmpty(tw.local.annuity.proposer.correspondenceAddress.addressLine1)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Correspondence Address Line 1\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.correspondenceAddress.addressLine2)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Correspondence Address Line 2\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.correspondenceAddress.city)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Correspondence Address City\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.correspondenceAddress.pinCode)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Correspondence Address Pin code\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.correspondenceAddress.state)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Correspondence Address State\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.contact.emailId) || validateEmail(tw.local.annuity.proposer.contact.emailId)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Contact Details Email ID\" is missing or in incorrect format.";
+        }
+        if (isEmpty(tw.local.annuity.proposer.contact.phoneMobile) || IsMobileNumber(tw.local.annuity.proposer.contact.phoneMobile)) {
+            tw.local.validateStr[tw.local.validateStr.length] = "Proposer \"Contact Details Phone (M)\" is missing or in incorrect format.";
+        }
+    }
+}
+
+tw.local.formTab = "annuityPersonal";
+
+
+   var img = this.context.element.querySelector('.validationImg');
+   console.log(img);
+   var imgSrc = com_ibm_bpm_coach.getManagedAssetUrl('errorImg.png',com_ibm_bpm_coach.assetType_WEB);
+   img.src = imgSrc;
+   
+    document.querySelector('.validation').style.display = 'NONE';
+    
+	
+	
+	console.log("changevalidation");
+console.log(event);
+console.log(this.context.binding.get("value"));
+    
+ /*if(this.context.binding != undefined && this.context.binding.get("value").length() == 0){
+ if(document.querySelector('.showValid')){
+ 	document.querySelector('.showValid').style.setProperty("display","none","important");
+ 	}
+  if(document.querySelector('.showValidSec')){
+ 	document.querySelector('.showValidSec').style.setProperty("display","none","important");
+ 	}	
+ }	*/
+
+
+
+if(event.property=="validateStr" ){
+        document.querySelector('.Validation_CV').style.setProperty("display","none","important");
+    document.querySelector('.validation').style.setProperty("display","none","important");
+   
+         if(this.context.binding != undefined && this.context.binding.get("value").items.length>0){
+          console.log("inside Loop")
+  /* document.getElementsByClassName('Validation_CV')[0].className = 'showValid';
+   document.getElementsByClassName('validation')[0].className ='showValidSec';*/
+    if(document.querySelectorAll('.split').length>0){  
+    document.querySelectorAll('.split')[0].scrollTop=0;
+    } 
+     document.querySelector('.Validation_CV').style.setProperty("display","block","important");
+    document.querySelector('.validation').style.setProperty("display","block","important");
+    //document.querySelector('.validation').setAttribute("disabled","disabled");
+     var length = document.querySelectorAll('.errorMsg .control-group .input-container .bpmtextarea').length;
+	for(var i =0;i< length;i++){
+	 document.querySelectorAll('.errorMsg .control-group .input-container .bpmtextarea')[i].setAttribute("disabled","disabled");
+	}
+    
+  }
+  
+   
+}
+
+   
+   
+   // debugger;
+ console.log("loadvalidation");
+console.log(this.context.binding.get("value"));
+
+ console.log("loadvalidation end");
+ 
+ document.querySelector('.Validation_CV').style.display = 'NONE';
+   document.querySelector('.validation').style.display = 'NONE';
+ if(this.context.binding != undefined && this.context.binding.get("value")  && this.context.binding.get("value").items.length> 0 && this.context.binding.get("value").items[0] != ""){
+     //document.getElementsByClassName('Validation_CV ')[0].className='showValid';
+    /* document.getElementsByClassName('Validation_CV ')[0].className ='showValid';
+     document.getElementsByClassName('validation')[0].className ='showValidSec';*/
+    document.querySelector('.Validation_CV').style.setProperty("display","block","important");
+    document.querySelector('.validation').style.setProperty("display","block","important");
+     var length = document.querySelectorAll('.errorMsg .control-group .input-container .bpmtextarea').length;
+	for(var i =0;i< length;i++){
+	 document.querySelectorAll('.errorMsg .control-group .input-container .bpmtextarea')[i].setAttribute("disabled","disabled");
+	}
+  // document.querySelector('.validation').setAttribute("disabled","disabled");
+ }
+ 
+   
+   
+   
+   	console.log("agent details Change in CV**********************")
+	console.log(event.property);
+	var agentD;
+	var ajaxError=false;
+	var dmcode;
+	var channelType;
+	var flag=false;
+	//console.log("disable/enable flags....for off use chng start");
+	//console.log(this.context.options.disableForPrintQC.get("value"));
+	var _this = this;
+
+    function setVisibility(subviewid1 , visibProp1)
+	{
+    var subCode=_this.context.getSubview(subviewid1, true)[0];
+	subCode.context.options._metadata.visibility.set("value", visibProp1);
+	}
+		
+	if(this.context.binding && this.context.binding.get("value")  && 
+	  (this.context.binding.get("value").get("agentId") ||
+   	  this.context.binding.get("value").get("agentDetails").get("dmcaCode"))
+	  )
+	{		
+		var agentDetails = this.context.binding.get("value") ;	
+		var agentId = this.context.binding.get("value").get("agentId");	
+		var dmcode = this.context.binding.get("value").get("agentDetails").get("dmcaCode");
+		
+		 console.log("Agent ID "+agentId);
+		console.log("DM code"+dmcode);
+		/*console.log("Agent details"); */
+		
+		this.context.options.getAgentService(
+		{	
+			params :{
+				'agentId' : agentId,
+				'dmCode' : dmcode
+	                 },
+			load:function(output){
+		/* 	console.log('output--'); */
+			
+			 agentD= output.agentDetails;
+			 
+			 console.log(agentDetails);
+			console.log("dmcode"+output.agentDetails.dmcaCode); 
+			console.log(output.agentDetails);
+			channelType = output.agentDetails.source;
+			agentDetails.set("agentDetails",output.agentDetails);
+			flag=true;
+		/* 	console.log(flag); */
+	//Added TF_Dummy changes for Fin care AM track changes 24July2018
+	              console.log(_this.context.binding.get("value").get("agentDetails").get("source"));
+			  if(_this.context.binding.get("value").get("agentDetails").get("source").get("value")=="TB_DUMMY"  || _this.context.binding.get("value").get("agentDetails").get("source").get("value")=="TF_DUMMY" )
+					{
+						setVisibility("brokerBranchCode1","EDITABLE");
+						setVisibility("caCode1","REQUIRED");
+						setVisibility("subCode1","NONE");	
+						flag=false;
+					
+						if(_this.context.binding.get("value").get("agentDetails").get("corporateBrokerBranchcode")==undefined)
+						{
+							//_this.context.binding.get("value").get("agentDetails").set("dmcaCode","");
+							_this.context.binding.get("value").get("agentDetails").bind("dmcaCode", _this.change, _this);
+						}		
+					}
+					else if(_this.context.binding.get("value").get("agentDetails").get("source").get("value")=="EB" )
+						{
+						setVisibility("subCode1","REQUIRED");	
+						setVisibility("brokerBranchCode1","NONE");
+						setVisibility("caCode1","READONLY");
+						flag=false;
+						}else{	
+							setVisibility("subCode1","NONE");				
+							setVisibility("brokerBranchCode1","NONE");
+							setVisibility("caCode1","READONLY");
+							flag=false;
+							}
+			},
+			error: function(e) {
+			console.log("service call failed: ");
+		     ajaxError=true;
+		     console.log("ninside error ajax"+ajaxError);
+			//var warnmsg = _this.context.element.querySelector('.warning1');
+//warnmsg.style.visibility = "visible";	
+			}
+		});	
+		
+	//	var warnmsg = _this.context.element.querySelector('.warning1');
+//warnmsg.style.visibility = "hidden";	
+		
+/*		debugger;
+		if(ajaxError){
+		var warnmsg = _this.context.element.querySelector('.warning1');
+warnmsg.style.visibility = "visible";
+		}else{
+		var warnmsg = _this.context.element.querySelector('.warning1');
+warnmsg.style.visibility = "hidden";		
+		}
+	*/	
+	
+			}
+			
+			
+			
+			
+			
+			function searchTask(id) {
+  var col0 = new TWSearchColumn();
+  col0.type = TWSearchColumn.Types.ProcessInstance;
+  col0.name = TWSearchColumn.ProcessInstanceColumns.ID;
+
+  var col1 = new TWSearchColumn();
+  col1.type = TWSearchColumn.Types.Task;
+  col1.name = TWSearchColumn.TaskColumns.Subject;
+  
+  var col2 = new TWSearchColumn();
+  col2.type = TWSearchColumn.Types.Task;
+  col2.name = TWSearchColumn.TaskColumns.Status;
+  
+  var col3 = new TWSearchColumn();
+  col3.type = TWSearchColumn.Types.Task;
+  col3.name = TWSearchColumn.TaskColumns.ID;
+  
+  var col4 = new TWSearchColumn();
+  col4.type = TWSearchColumn.Types.Task;
+  col4.name = TWSearchColumn.TaskColumns.AssignedToUser;
+  
+  var col5 = new TWSearchColumn();
+  col5.type = TWSearchColumn.Types.Task;
+  col5.name = TWSearchColumn.TaskColumns.AssignedToRole;
+
+  var cond1 = new TWSearchCondition();
+  cond1.column = col0;
+  cond1.operator = TWSearchCondition.Operations.Equals;
+  cond1.value = id;
+  
+  var cond2 = new TWSearchCondition();
+  cond2.column = col2;
+  cond2.operator = TWSearchCondition.Operations.Equals;
+  cond2.value = TWTask.Statuses.Received;
+  
+  var order1 = new TWSearchOrdering();
+  order1.column = col3;
+  order1.order = TWSearchOrdering.Orders.Ascending;
+
+  var search = new TWSearch();
+  search.columns = new Array(col1, col2, col3, col4, col5);
+  search.conditions = new Array(cond1, cond2);
+  search.organizedBy = TWSearch.OrganizeByTypes.Task;
+  search.orderBy = new Array(order1);
+
+  var tasks = new tw.object.listOf.TaskList();
+  var results = search.execute();
+  for(var i = 0; i < results.rows.length; i++) {
+    var row = results.rows[i];
+    var y = tasks.listLength;
+    tasks[y] = new tw.object.TaskList();
+    tasks[y].taskId = row.values[2];
+    tasks[y].taskSubject = row.values[0];
+    tasks[y].taskAssignedTo = new tw.object.TaskAssignedTo();
+    var val;
+    if (row.values[3] == null) { val = row.values[4] } else { val = row.values[3] }
+    tasks[y].taskAssignedTo.who = val;
+  }
+  return tasks;
+}
+tw.local.results = searchTask(tw.local.instanceId);
+
+
+
+		var currentDate = new Date();
+			tw.system.coachValidation = {};
+			tw.system.coachValidation.validationErrors = [];
+			
+	if(tw.local.annuity && tw.local.annuity.declarationConsent){
+		if(tw.local.annuity.declarationConsent.date && tw.local.annuity.declarationConsent.date  > currentDate){
+					tw.system.coachValidation.addValidationError ("tw.local.annuity.declarationConsent.date","Future Date is not allowed !");
+					tw.local.annuity.declarationConsent.date = "";
+			}
+		if(tw.local.annuity.declarationConsent.dateAnnuitant && tw.local.annuity.declarationConsent.dateAnnuitant > currentDate){
+					tw.system.coachValidation.addValidationError ("tw.local.annuity.declarationConsent.dateAnnuitant","Future Date is not allowed !");
+					tw.local.annuity.declarationConsent.dateAnnuitant = "";
+			}
+		if(tw.local.annuity.declarationConsent.dateSecondaryAnnuitant && tw.local.annuity.declarationConsent.dateSecondaryAnnuitant > currentDate){
+					tw.system.coachValidation.addValidationError ("tw.local.annuity.declarationConsent.dateSecondaryAnnuitant","Future Date is not allowed !");
+					tw.local.annuity.declarationConsent.dateSecondaryAnnuitant = "";
+			}
+		if(tw.local.annuity.declarationConsent.datePFA && tw.local.annuity.declarationConsent.datePFA > currentDate){
+					tw.system.coachValidation.addValidationError ("tw.local.annuity.declarationConsent.datePFA","Future Date is not allowed !");
+					tw.local.annuity.declarationConsent.datePFA = "";
+			}
+		}
+	if(tw.local.annuity && tw.local.annuity.confidentialReport){
+		if(tw.local.annuity.confidentialReport.date && tw.local.annuity.confidentialReport.date > currentDate){
+					tw.system.coachValidation.addValidationError ("tw.local.annuity.confidentialReport.date","Future Date is not allowed !");
+					tw.local.annuity.confidentialReport.date = "";
+			}
+		if(tw.local.annuity.confidentialReport.since && tw.local.annuity.confidentialReport.since > currentDate){
+					tw.system.coachValidation.addValidationError ("tw.local.annuity.confidentialReport.since","Future Date is not allowed !");
+					tw.local.annuity.confidentialReport.since = "";
+			}
+            }
+			
+			
+			//  This JavaScript will run within the browser and must use the client-side JavaScript syntax supported by the browser. For example,
+//	      - To instantiate a complex object:					- To instantiate a list:
+//				tw.local.customer = {};								tw.local.addresses = [];
+//				tw.local.customer.name = "Jane";				tw.local.addresses[0] = {};
+function getAge(birth) {
+   var today = new Date();
+   var curr_date = today.getDate();
+   var curr_month = today.getMonth() + 1;
+   var curr_year = today.getFullYear();
+
+   var pieces = birth.split                         ('/');
+   var birth_date = pieces[0];
+   var birth_month = pieces[1];
+   var birth_year = pieces[2];
+
+   if (curr_month == birth_month && curr_date >= birth_date) return parseInt(curr_year-birth_year);
+   if (curr_month == birth_month && curr_date < birth_date) return parseInt(curr_year-birth_year-1);
+   if (curr_month > birth_month) return parseInt(curr_year-birth_year);
+   if (curr_month < birth_month) return parseInt(curr_year-birth_year-1);
+}
+tw.local.age= getAge(tw.local.dob);
+
+
+tw.local.grpNames = new tw.object.listOf.userGroupName();
+tw.local.errorMessage = '';
+tw.local.noOfGroups = '';
+tw.local.tableVisibilityGroup = 'NONE';
+tw.local.summa = tw.local.userName.trim();
+if (tw.local.userName && tw.local.userName.trim() != '') {
+    try {
+        tw.local.noOfGroups = "" + tw.system.org.findUserByName(tw.local.summa).teams.listLength; //gets length of team
+        if (tw.local.noOfGroups > 0) {
+            for (var i = 0; i < tw.local.noOfGroups; i++) {
+                tw.local.grpNames[i] = new tw.object.userGroupName();
+                tw.local.grpNames[i].groupName = "" + tw.system.org.findUserByName(tw.local.summa).teams[i].name;
+                tw.local.grpNames[i].slNo = String(i + 1);
+            }
+            tw.local.tableVisibilityGroup = 'EDITABLE';
+        } else {
+            tw.local.errorMessage = 'User is not present in any group';
+        }
+    } catch (e) {
+        tw.local.errorMessage = 'Enter a valid user name';
+    }
+} else{
+    tw.local.errorMessage = 'Enter a user name';
+}
+
+
+var userList;  
+
+tw.local.tableVisibility = 'NONE';
+tw.local.noOfUsers = '0';
+tw.local.validationMessage = '';
+if(tw.local.groupName && tw.local.groupName.trim() != ''){
+	tw.local.groupMembers = new tw.object.listOf.UserBo();
+	try{
+	userList = tw.system.org.findRoleByName(tw.local.groupName.trim()).allUsers;
+	} catch(error){
+	    tw.local.validationMessage = 'Group name is incorrect';
+	}
+	if(tw.local.validationMessage == ''){
+    	if(userList.length>0){
+    		for(var i=0; i < userList.length; i++){
+        		tw.local.groupMembers[i] = new tw.object.UserBo();
+    			tw.local.groupMembers[i].userName = userList[i].name;
+    			tw.local.groupMembers[i].fullName = userList[i].fullName;
+    			tw.local.groupMembers[i].phoneNumber = ""+(i+1); // used for serial number;
+    			tw.local.noOfUsers = ""+(i+1);
+    		}
+    		tw.local.tableVisibility = 'EDITABLE';	
+    	} else {
+    		tw.local.validationMessage = 'No users present in group';
+    	}
+	}
+} else {
+	tw.local.validationMessage = 'Group Name cannot be empty';
+}
+
+
+
+console.log("dedupe ctrl load pre");
+ var _this;
+ _this = this;
+//debugger;
+ console.log("Chk"+ _this.context.getSubview("PayorBtn", true))
+ var buttonHandlePayor = _this.context.getSubview("PayorBtn", true)[0];
+ var buttonHandlePriAnnuity = _this.context.getSubview("PriAnnuitantBtn", true)[0];
+ var buttonHandleSecAnnuity = _this.context.getSubview("SecAnnuitantBtn", true)[0];
+ var buttonHandleProposer= _this.context.getSubview("ProposerBtn", true)[0];
+ var buttonHandleLifeAssured = _this.context.getSubview("LifeAssuredBtn", true)[0];
+ var buttonHandleViewImage = this.context.getSubview("ViewImageTab", true)[0];
+
+ buttonHandlePayor.context.element.style.display = "none";
+  buttonHandlePriAnnuity.context.element.style.display = "none";
+ buttonHandleSecAnnuity.context.element.style.display = "none";
+ buttonHandleProposer.context.element.style.display = "none";
+ buttonHandleLifeAssured.context.element.style.display = "none";
+ buttonHandleViewImage.context.element.style.display = "none";
+var options = _this.context.options;
+if(options.dedupeTab && options.dedupeTab.get("value") && options.dedupeTab.get("value").get("laTab")){
+    showField(buttonHandleLifeAssured);
+}
+if(options.dedupeTab && options.dedupeTab.get("value") && options.dedupeTab.get("value").get("proposerTab")){
+    showField(buttonHandleProposer);
+}
+if(options.dedupeTab && options.dedupeTab.get("value") && options.dedupeTab.get("value").get("payorTab")){
+    showField(buttonHandlePayor);
+}
+if(options.dedupeTab && options.dedupeTab.get("value") && options.dedupeTab.get("value").get("priAnnuitantTab")){
+    showField(buttonHandlePriAnnuity);
+}
+if(options.dedupeTab && options.dedupeTab.get("value") && options.dedupeTab.get("value").get("secAnnuitantTab")){
+    showField(buttonHandleSecAnnuity);
+}
+
+var temp = this.context.getSubview("LifeAssuredBtn")[0].context.element.getElementsByTagName("button")[0];
+if (this.context.binding.get("value") == "laTab") {
+	
+       temp.className = "currentTab";
+}
+else{
+     temp.className = "inactiveTabs";
+}
+var temp = this.context.getSubview("ProposerBtn")[0].context.element.getElementsByTagName("button")[0];
+if (this.context.binding.get("value") == "proposerTab") {
+	
+       temp.className = "currentTab";
+
+}
+else{
+      temp.className = "inactiveTabs";
+}
+var temp = this.context.getSubview("PayorBtn")[0].context.element.getElementsByTagName("button")[0];
+if (this.context.binding.get("value") == "payorTab") {
+	
+	temp.className = 'currentTab'
+}
+else{
+      temp.className = "inactiveTabs";
+}
+var temp = this.context.getSubview("PriAnnuitantBtn")[0].context.element.getElementsByTagName("button")[0];
+if (this.context.binding.get("value") == "priAnnuitantTab") {
+	
+       temp.className = "currentTab";
+}
+else{
+       temp.className = "inactiveTabs";
+}
+var temp = this.context.getSubview("SecAnnuitantBtn")[0].context.element.getElementsByTagName("button")[0];
+if (this.context.binding.get("value") == "secAnnuitantTab") {
+	
+       temp.className = "currentTab";
+
+}
+else{
+       temp.className = "inactiveTabs";
+}
+var temp = this.context.getSubview("ViewImageTab", "true")[0].context.element.getElementsByTagName("button")[0];
+if (this.context.binding.get("value") == "viewImageTab") {
+	
+       temp.className = "currentTab";
+         showField(buttonHandleViewImage);
+
+}
+else{
+      temp.className = "inactiveTabs";
+}
+console.log("dedupe ctrl load post");
+
+
+
+
+this.onLoad = function() {
+  this._visitChildren(this);
+}
+
+/**
+ * Walk recursively over all child subviews and call visitor on them.
+ */
+this._visitChildren = function(view) {
+  var rootView = this;
+  if (view && view.context && view.context.subview) {
+    if (rootView !== view) {
+      rootView._visitor(view);
+    }
+    var viewIds = Object.keys(view.context.subview);
+    viewIds.forEach( function(id) {
+      var subviews = view.context.getSubview(id);
+      subviews.forEach( function(sv) {
+        rootView._visitChildren(sv);
+      });
+    });
+  }
+};
+
+/**
+ * On each subview replace trigger() and createView() functions
+ * with own wrappers (proxies). Trigger wrapper asks root view to 
+ * send boundary event. Create view wrapper makes sure that any
+ * view created AFTER onLoad() will be traversed (recursively with 
+ * its children either).
+ */
+this._visitor = function(subview) {
+  if (subview._bec_proxified) {
+    return;
+  }
+  subview._bec_proxified = true;
+  
+  console.log("Proxying " + subview.context.viewid);
+  var rootView = this;
+
+  var trigger = subview.context.trigger;
+  subview.context.trigger = function(callback, options) {
+    console.log("trigger() proxy called for " + subview.context.viewid);
+    //trigger.call(subview, callback, options); //original trigger call
+    rootView.context.binding.set("value", subview.context.viewid);
+    rootView.context.trigger(callback, options);
+  };
+
+  var createView = subview.context.createView;
+  subview.context.createView = function(domNode, index, parentView) {
+    console.log("createView() proxy called for " + subview.context.viewid);
+    createView.call(subview.context, domNode, index, parentView);
+    // createView on subview could recursively create multiple views
+    rootView._visitChildren(subview);
+  };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+var vobjErrorDetails = tw.local.error;
+var vsFaultMsg = "";
+var errorCode = "";
+if(vobjErrorDetails && vobjErrorDetails.getElementByTagName("fault") && vobjErrorDetails.getElementByTagName("fault").length > 0 &&
+
+    vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("faultCodeAsName") &&
+    
+        vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("faultCodeAsName").length > 0 &&
+        
+            vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("faultCodeAsName")[0].getElementByTagName("localName") &&
+            
+                vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("faultCodeAsName")[0].getElementByTagName("localName").length > 0) {
+                
+    vsFaultMsg = vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("faultCodeAsName")[0].getElementByTagName("localName")[0].getText();
+    errorCode = vsFaultMsg;
+}
+
+if(vobjErrorDetails && vobjErrorDetails.getElementByTagName("fault") && vobjErrorDetails.getElementByTagName("fault").length > 0 &&
+
+    vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("detail") &&
+    
+        vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("detail").length > 0 &&
+        
+            vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("detail")[0].getElementByTagName("textContent") &&
+            
+                vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("detail")[0].getElementByTagName("textContent").length > 0) {
+                
+    vsFaultMsg = vsFaultMsg + " - " + vobjErrorDetails.getElementByTagName("fault")[0].getElementByTagName("detail")[0].getElementByTagName("textContent")[0].getText();
+}
+
+tw.local.errorResponse = new tw.object.ResponseBO();
+tw.local.errorResponse.responseCode = errorCode;
+if(vsFaultMsg == null || vsFaultMsg == "") {
+    tw.local.errorResponse.message = "Rules connector failed";
+} else {
+    tw.local.errorResponse.message = vsFaultMsg;
+//    log.info('System Error'+vobjErrorDetails);
+}
+
+
+
+try
+{
+
+var xhr = new XMLHttpRequest();
+tw.local.ds = "inprogress";
+var base64='{"base64":"'+tw.local.commentsInBase64+' "}';   
+xhr.open("POST", "https://localhost:3443/sign",false);
+
+xhr.setRequestHeader("Content-type", "application/json");
+xhr.onreadystatechange = function()
+{ 	
+
+ 	if (xhr.readyState == 4 && xhr.status == 200)
+ 	{	  	    
+		    var resp = JSON.parse(xhr.responseText);
+		    tw.local.signedBase64String = resp.base64string;
+		    tw.local.statusCode = resp.statusCode;
+		   
+		   switch(tw.local.statusCode)
+		   {
+	   		case "100":
+				alert("This is not corporate issued certificate, Please use corporate issued valid certificate.");
+				break;	
+		   	case "101":
+//				alert("The Note Sheet has been signed successfully. Please click on OK  and then 'Send To' to send the File");                  	                   
+				break;	
+			case "102":
+				alert("This is not corporate issued certificate, Please use corporate issued valid certificate.");	
+				break;
+			case "103":
+				alert("Certificate Token used is not valid, please insert valid token.");		
+			       break;
+			case "104":
+				alert("Internal Server Error: Please try after sometime. If error continues, please contact helpdesk.");		
+			      break;
+			case  "105":
+				alert("Please insert a valid token.");		
+				break;	
+			case "106":
+				alert("Please contact your token provider.");
+				break;
+			case "107":
+				alert("Certificate Token used is not valid, please insert valid token.");
+				break;	
+			default:
+			tw.local.signedBase64String = "Unknown request";
+			alert("Something went wrong...Please try again");
+		  }
+		  tw.local.ds = null;
+		  
+	}
+	else if(xhr.readyState == 4 && xhr.status == 0){
+		tw.local.signedBase64String = "Server is not runnning";
+		alert("server is not running.");
+		tw.local.ds = null;
+		
+	}
+}
+xhr.send(base64);
+}
+catch(Exception)
+{
+	alert("server is not running.");
+}
+
+
+https://www.ibm.com/docs/en/bpm/8.6.0?topic=apis-javascript-api-in-process-designer#TWProcessInstance
+
+if(tw.local.xmlElement != undefined) {
+    
+    var xmlNode = tw.local.xmlElement.childNodes.length > 0 ? tw.local.xmlElement.childNodes[0] : undefined;
+    
+    if(xmlNode != undefined) {
+       // var ouId = xmlNode.xpath("record/column[@name='OU']")[0].getText();
+        var parent = xmlNode.xpath("record/column[@name='PARENT']")[0].getText();
+        log.info("EnteredUser-ParentOU :"+parent);
+        
+        tw.local.enteredUserPOUID1=parent;
+      
+        
+    }
+}
+
+
+
+
+if(tw.local.results && tw.local.results.listLength>0){
+   if(tw.local.results[0] && tw.local.results[0].rows && (tw.local.results[0].rows.listLength > 0)){
+   
+       tw.local.postScrutinyExpAppRejPrtnrSMS = new tw.object.NB_Post_Scruting_Exp_App_Rej_Partner_SMS();
+       tw.local.postScrutinyExpAppRejPrtnrSMS.agentName = tw.local.results[0].rows[0].indexedMap.AGENT_NAME ? tw.local.results[0].rows[0].indexedMap.AGENT_NAME : "";
+       tw.local.postScrutinyExpAppRejPrtnrSMS.proposalNumber = tw.local.results[0].rows[0].indexedMap.APPN_NBR ? tw.local.results[0].rows[0].indexedMap.APPN_NBR : "";
+       tw.local.postScrutinyExpAppRejPrtnrSMS.lifeAssuredName = tw.local.results[0].rows[0].indexedMap.LA_NAME ? tw.local.results[0].rows[0].indexedMap.LA_NAME : "";
+       tw.local.postScrutinyExpAppRejPrtnrSMS.rejectedAccepted = tw.local.results[0].rows[0].indexedMap.DECISION ? tw.local.results[0].rows[0].indexedMap.DECISION : "";
+    }
+}
+
+
+
+var today= new tw.object.Date();
+var date = today.getDate();
+if(date <10)
+{
+    date = "0"+date;
+}
+
+var month = today.getMonth()+1;
+if(month < 10)
+{
+    month = "0"+month;
+}
+var year = today.getFullYear();
+var hours = today.getHours();
+if(hours < 10)
+{
+    hours = "0"+hours;
+}
+var minutes = today.getMinutes();
+if(minutes < 10)
+{
+    minutes ="0"+minutes;
+}
+var seconds = today.getSeconds();
+if(seconds < 10)
+{
+    seconds ="0"+seconds;
+}
+
+tw.local.currentDate = date+"/"+month+"/"+year+"("+hours+":"+minutes+":"+seconds+")";
+
+
+
+
+var doc=tw.local.WordNotesheetID.split("idd_");
+var url=tw.env.EditClientURL+"{"+doc[1]+"}";
+var editWindow=window.open(url,"_blank","width=800,height=800,directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no");
+setTimeout(function(){
+   editWindow.close(); 
+}, 6000);
+
+
+var results = tw.local.fileNumber.split("/");
+var len = results.length;
+var instanceID = results[len-1];
+var processInstance = tw.system.findProcessInstanceByID(instanceID);
+var subject = processInstance.businessData.get("requirementsBO.subjectLine");
+
+if(subject == undefined || subject == null || subject == "")
+{
+    var subject = processInstance.businessData.get("requirementsBO.subject");
+}
+tw.local.fileSubject = subject;
+
+
+https://github.com/tirmizee
+https://github.com/asansanwal/dosvak
+https://gist.github.com/garyjoy/0eab33613f561eb89c6c
+
+
+
+var show = !!this.context.binding ? this.context.binding.get("value") : null;
+if (!!show) {
+    var message = (!!this.context.options.message) ? this.context.options.message.get("value") : null;
+    var details = (!!this.context.options.details) ? this.context.options.details.get("value") : null;
+    if (!!message){
+        ErrorDialog.showWarning(message,details);    
+     }
+    //console.log("Clearing warning message: "+message);
+    this.context.binding.set("value", false);
+}
+
+
+// If a config option is changed
+if (event.type == "config") {
+
+    if (event.property == "processInstanceDueDate") {            
+        // if we got here becase we programmatically set the Process Instance Date (eg when changing 
+        // the process instance) then this is not a user-invoked Process Due Date change. So don't consider
+        // this a change that makes Process Instance page "dirty".
+        if (this.context.options.programmaticProcessDueDateChange.get("value")) {
+            this.context.options.programmaticProcessDueDateChange.set("value", false);
+        } else { // user-invoked Process Due Date change
+            this.context.options.unsavedProcessDueDateChanges.set("value", true);        
+        }            
+    } else if (event.property == "unsavedProcessDueDateChanges") {
+        if (this.context.options.unsavedProcessDueDateChanges.get("value")) {
+            this.context.options.unsavedChangesOnProcessInstancePage.set("value", true);
+        }
+    } else if (event.property == "unsavedGanttChartChanges") {
+        if (this.context.options.unsavedGanttChartChanges.get("value")) {
+            this.context.options.unsavedChangesOnProcessInstancePage.set("value", true);
+        }
+    } else if (event.property == "unsavedProcessDiagramChanges") {
+        if (this.context.options.unsavedProcessDiagramChanges.get("value")) {
+            this.context.options.unsavedChangesOnProcessInstancePage.set("value", true);
+        }
+    } else if (event.property == "customPath") {
+        // If a custom path is set
+        var customPathLength = this.context.options.customPath.get("value").items.length;
+      
+        // If a custom path has been set
+        if (customPathLength > 0) {
+            // Hide the "Historical Path" label and selector
+            this.context.options.viewVisibility_HistoricalPath.set("value", "NONE");
+
+            // and show the "Clear Custom Path" button
+            this.context.options.viewVisibility_ClearCustomPath.set("value", "DEFAULT");
+          
+            // Make note that there are changes to the Process Diagram
+            this.context.options.unsavedProcessDiagramChanges.set("value", true)
+        } else {
+            // Hide the "Clear Custom Path" button
+            this.context.options.viewVisibility_ClearCustomPath.set("value", "NONE");
+
+            // and show the "Historical Path" label and selector
+            this.context.options.viewVisibility_HistoricalPath.set("value", "DEFAULT");
+        }      
+    } else if (event.property == "buttonClicked_Save") {
+        // If "Save" button was clicked
+        if (this.context.options.buttonClicked_Save.get("value")) {
+
+            // If there are unsaved changes to the Gantt chart
+            if (this.context.options.unsavedGanttChartChanges.get("value")) {
+                var timeoutFunc1 = function() {
+                    // If changes have not yet been saved, wait ....
+                    if (this.context.options.unsavedGanttChartChanges.get("value")) {
+                        setTimeout(lang.hitch(this, timeoutFunc1), 100);
+                    } 
+                    // otherwise trigger boundary event so other changes (to Process Due Date or Process Diagram) get saved.
+                    else {
+                        this.context.trigger(function() {});
+                    }
+                }
+            
+                // Set value of saveGanttChartChanges to true to trigger the Gantt Chart to saves changes
+                this.context.options.saveGanttChartChanges.set("value", true);
+
+                setTimeout(lang.hitch(this, timeoutFunc1), 300);
+            } 
+            // otherwise trigger boundary event so other changes (to Process Due Date or Process Diagram get saved).
+            else {
+                this.context.trigger(function() {});
+            }
+
+            // Set value of "buttonClicked_Save" to false so that we can know when "Save" button is clicked in future.
+            this.context.options.buttonClicked_Save.set("value", false);
+        }
+    }
+    
+    if ((event.property == "unsavedProcessDueDateChanges") ||
+        (event.property == "unsavedGanttChartChanges") ||
+        (event.property == "unsavedProcessDiagramChanges")) {
+        var unsavedChanges = this.context.options.unsavedGanttChartChanges.get("value") ||
+                             this.context.options.unsavedProcessDueDateChanges.get("value") ||
+                             this.context.options.unsavedProcessDiagramChanges.get("value");   
+        this.context.options.unsavedChangesOnProcessInstancePage.set("value", unsavedChanges);        
+    }
+}
+99
