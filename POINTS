@@ -1,0 +1,16 @@
+POINTS
+1)	view.getOption("BONAME").get("VarName");
+2)	me.context.binding.get("value");
+3)	view.context.binding.get("value").get("orderingCustomerDetails").get("creditValueDate");
+4)	view.getOption("varname");
+5)	var sql="select BANK_CODE as Name,BANK_NAME as value from sibawdb.TBL_RTGS_RCVR_BANK_DETAILS where BANK_CODE<>'OMBSHR'";
+tw.local.deptDetails=[];
+tw.local.deptDetails = tw.system.createFromSql("NameValuePair", tw.env.DataSource, sql);
+6)	"{{tw.local.swift.processData.nextStep}}"---Custom HTML
+7)	page.ui.get("/soharTemplate1/branchid").setEnabled(true);---Can be accessed in events and scripts in CSHS
+8)	${svsURL}.setData(${Signature3['+ me.ui.getIndex()+']}.getData());---To access repeating data in layout
+11)	tw.system.coachValidation.addValidationError("tw.local.detailsOfProduct.schemeCode", "Please select Schemecode.");
+12)	(tw.system.coachValidation.validationErrors.length != 0)
+13)	_this.context.options.typeOfCustomer.get("value");
+14)	_this.ui.get("/soharTemplate1/CASA_Corporate_Accounts_List_CV1/Table1").getSelectedIndex();
+15)	_this.context.options.retailCustomerAccountDetails.get("value").get(i).set("viewUpdatedDetailsButtonVisibility", "READONLY");
